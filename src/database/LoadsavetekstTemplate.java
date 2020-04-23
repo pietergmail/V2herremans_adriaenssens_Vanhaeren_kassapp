@@ -33,7 +33,7 @@ public abstract class LoadsavetekstTemplate implements StrategyLoadSave{
                     throw new DatabaseException(e.toString() + ": " + e.getMessage());
                 }
             }
-        } catch (FileAlreadyExistsException e) {
+        } catch (FileAlreadyExistsException | FileNotFoundException e) {
             e.printStackTrace();
         }
 
