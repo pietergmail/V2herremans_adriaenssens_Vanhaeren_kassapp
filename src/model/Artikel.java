@@ -83,4 +83,15 @@ public class Artikel implements Comparable{
     public void setVoorraad(int voorraad) {
         this.voorraad = voorraad;
     }
+
+    @Override
+    public String toString() {
+        return "Artikel{" +
+                "code='" + code + '\'' +
+                ", omschrijving='" + omschrijving + '\'' +
+                ", groep='" + groep + '\'' +
+                ", prijs=" + prijs +
+                ", voorraad=" + voorraad +
+                '}';
+    }
 }
