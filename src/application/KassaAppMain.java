@@ -11,6 +11,10 @@ import view.KlantView;
 
 import java.util.ArrayList;
 
+/**
+* @author Herremans Pieter
+*/
+
 public class KassaAppMain extends Application {
 	@Override
 	public void start(Stage primaryStage) {
