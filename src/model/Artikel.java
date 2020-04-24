@@ -3,7 +3,7 @@ package model;
 import java.util.Objects;
 
 /**
- * @author Herremans Pieter
+ * @author Herremans Pieter & Adriaenssens Zeno
  */
 public class Artikel implements Comparable{
     private String code, omschrijving, groep;
