@@ -9,6 +9,7 @@ import model.database.LoadsaveArtikeltekst;
 import view.KassaView;
 import view.KlantView;
 
+import javax.swing.text.TableView;
 import java.util.ArrayList;
 
 /**
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 */
 
 public class KassaAppMain extends Application {
+
 	@Override
 	public void start(Stage primaryStage) {
 		KassaView kassaView = new KassaView();

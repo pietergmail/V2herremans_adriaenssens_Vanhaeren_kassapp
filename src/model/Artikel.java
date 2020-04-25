@@ -86,12 +86,12 @@ public class Artikel implements Comparable{
 
     @Override
     public String toString() {
-        return "Artikel{" +
-                "code='" + code + '\'' +
-                ", omschrijving='" + omschrijving + '\'' +
-                ", groep='" + groep + '\'' +
-                ", prijs=" + prijs +
-                ", voorraad=" + voorraad +
-                '}';
+        String output = "Code: " + code + ",  ";
+        output += "Omschrijving: " + omschrijving + ",  ";
+        output += "Groep: " + groep + ",  ";
+        output += "Prijs: " + prijs + ",  ";
+        output += "Voorraad: " + voorraad;
+        return output;
     }
+
 }
