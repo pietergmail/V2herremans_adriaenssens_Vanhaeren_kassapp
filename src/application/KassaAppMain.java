@@ -20,10 +20,14 @@ public class KassaAppMain extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-		KassaView kassaView = new KassaView();
+		try {
+			KassaView kassaView = new KassaView();
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+		}
 		KlantView klantView = new KlantView();
 		LoadsaveArtikeltekst loadsaveArtikeltekst = new LoadsaveArtikeltekst();
-		try {
+		/*try {
 			ArrayList<Object> list = loadsaveArtikeltekst.load();
 			for (Object o: list) {
 				System.out.println("_________________________________");
@@ -34,8 +38,9 @@ public class KassaAppMain extends Application {
 			e.printStackTrace();
 			System.out.println("Database Not Found ERROR.");
 		}
+		*/
 	}
-	
+
 	public static void main(String[] args) {
 		launch(args);
 	}

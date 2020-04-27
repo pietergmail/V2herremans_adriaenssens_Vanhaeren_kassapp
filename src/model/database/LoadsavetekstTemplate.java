@@ -1,5 +1,7 @@
 package model.database;
 
+import model.Artikel;
+
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,8 +20,8 @@ public abstract class LoadsavetekstTemplate implements StrategyLoadSave{
     abstract Scanner getFile() throws FileAlreadyExistsException, FileNotFoundException;
     abstract Object getObject(Scanner scannerlijn);
 
-    public ArrayList<Object> load() throws DatabaseException {
-        ArrayList<Object> objecten = new ArrayList<>();
+    public ArrayList<Artikel> load() throws DatabaseException {
+        ArrayList<Artikel> artikelen = new ArrayList<>();
         try{
             Scanner scannerFile = getFile();
             scannerFile.useDelimiter("\n");
@@ -27,8 +29,8 @@ public abstract class LoadsavetekstTemplate implements StrategyLoadSave{
                 Scanner scannerLijn = new Scanner(scannerFile.nextLine());
                 scannerLijn.useDelimiter(",");
                 try{
-                    Object obj = getObject(scannerLijn);
-                    objecten.add(obj);
+                    Artikel obj = (Artikel) getObject(scannerLijn);
+                    artikelen.add(obj);
                 } catch (Exception e){
                     throw new DatabaseException(e.toString() + ": " + e.getMessage());
                 }
@@ -37,12 +39,12 @@ public abstract class LoadsavetekstTemplate implements StrategyLoadSave{
             e.printStackTrace();
         }
 
-        return objecten;
+        return artikelen;
     }
 
     abstract FileWriter getFileWriter() throws IOException;
 
-    public final void save(ArrayList<Object> objecten){
+    public final void save(ArrayList<Artikel> artikelen){
         PrintWriter print_line = null;
         try {
             FileWriter write = getFileWriter();

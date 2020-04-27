@@ -3,12 +3,13 @@ package view;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;	
+import javafx.stage.Stage;
+import model.database.DatabaseException;
 
 public class KassaView {
 	private Stage stage = new Stage();		
 		
-	public KassaView(){			
+	public KassaView() throws DatabaseException {
 		stage.setTitle("KASSA VIEW");
 		stage.setResizable(false);		
 		stage.setX(20);
