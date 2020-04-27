@@ -13,7 +13,7 @@ import javax.swing.text.TableView;
 import java.util.ArrayList;
 
 /**
-* @author Herremans Pieter
+* @author Zeno Adriaansen
 */
 
 public class KassaAppMain extends Application {
