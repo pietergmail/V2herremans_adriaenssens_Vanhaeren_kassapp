@@ -27,8 +27,8 @@ public class KassaAppMain extends Application {
 		}
 		KlantView klantView = new KlantView();
 		LoadsaveArtikeltekst loadsaveArtikeltekst = new LoadsaveArtikeltekst();
-		/*try {
-			ArrayList<Object> list = loadsaveArtikeltekst.load();
+		try {
+			ArrayList<Artikel> list = loadsaveArtikeltekst.load();
 			for (Object o: list) {
 				System.out.println("_________________________________");
 				System.out.println(o.toString());
@@ -38,7 +38,7 @@ public class KassaAppMain extends Application {
 			e.printStackTrace();
 			System.out.println("Database Not Found ERROR.");
 		}
-		*/
+
 	}
 
 	public static void main(String[] args) {
