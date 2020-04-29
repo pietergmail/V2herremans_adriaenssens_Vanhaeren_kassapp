@@ -4,7 +4,6 @@ import model.Artikel;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -37,16 +36,18 @@ public class LoadsaveArtikeltekst implements StrategyLoadSave{
     }
 
     @Override
-    public void save(ArrayList<Artikel> artikelen) throws IOException {
-        PrintWriter print_line = null;
+    public void save(ArrayList<Artikel> artikelen) throws DomainException {
+        String path = "src" + File.separator + "bestanden" + File.separator + "artikel.txt";
+        File file = new File(path);
         try {
-            FileWriter write = getFileWriter();
-            assert write != null;
-            print_line = new PrintWriter(write);
-        } catch (IOException e) {
-            e.printStackTrace();
+            PrintWriter writer = new PrintWriter(file);
+            for (Artikel artikel : artikelen) {
+                writer.println(artikel.getCode() + "," + artikel.getOmschrijving() + "," + artikel.getGroep() + "," + artikel.getPrijs() + "," + artikel.getVoorraad());
+            }
+            writer.close();
+        } catch (FileNotFoundException ex){
+            throw new DomainException("Fout bij wegschrijven", ex);
         }
-        Objects.requireNonNull(print_line).close();
     }
 
     private Scanner getFile() throws FileNotFoundException {
@@ -63,11 +64,6 @@ public class LoadsaveArtikeltekst implements StrategyLoadSave{
         int voorraad = Integer.parseInt(scannerlijn.next().replace(" ", ""));//anders error omdat er een spatie staat ipv. een integer
         return new Artikel(code, omschrijving, groep, prijs, voorraad);
     }
-
-    private FileWriter getFileWriter() throws IOException {
-        return null;
-    }
-
 }
 
 
