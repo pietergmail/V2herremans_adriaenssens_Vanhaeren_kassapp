@@ -21,7 +21,7 @@ public class LoadSaveArtikelExcel implements StrategyLoadSave {
 
     //laden in de arraylist werkt maar crasht als i = 10
     @Override
-    public ArrayList<Artikel> load() throws IOException, DatabaseException{
+    public ArrayList<Artikel> load() {
         ArrayList<Artikel> artikelen = new ArrayList<>();
         Workbook workbook = null;
 
@@ -29,7 +29,6 @@ public class LoadSaveArtikelExcel implements StrategyLoadSave {
              workbook = Workbook.getWorkbook(getFile());
              Sheet sheet = workbook.getSheet(0);//chooses first excel sheet
              int i = 0;
-             String test = sheet.getCell(1, i).getContents();
              while(sheet.getCell(1, i).getContents().length() != 0){//checkt of de volgende rij niet null moet in for lus gaan maar ik weet niet hoe dat moet
                  Cell code = sheet.getCell(0, i);
                  Cell omschrijving = sheet.getCell(1,i);
@@ -47,6 +46,7 @@ public class LoadSaveArtikelExcel implements StrategyLoadSave {
             }
             return artikelen;
         }
+
     }
 
     @Override
@@ -54,7 +54,7 @@ public class LoadSaveArtikelExcel implements StrategyLoadSave {
 
     }
 
-    File getFile() {
+    private File getFile() {
         return new File("src"+File.separator+"bestanden"+File.separator+"artikel.xls");
     }
 }
