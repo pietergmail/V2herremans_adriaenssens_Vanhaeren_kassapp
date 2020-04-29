@@ -1,11 +1,12 @@
 package model.database;
 
+import jxl.read.biff.BiffException;
 import model.Artikel;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 public interface StrategyLoadSave {
-    ArrayList<Artikel> load() throws IOException, DatabaseException;
+    ArrayList<Artikel> load() throws IOException, DatabaseException, BiffException;
     void save(ArrayList<Artikel> artikelen) throws IOException, DomainException;
 }
