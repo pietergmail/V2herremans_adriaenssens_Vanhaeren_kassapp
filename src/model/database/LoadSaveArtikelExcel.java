@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
-import jxl.read.*;
 
 /**
  * @author Pieter Herremans
@@ -19,6 +18,8 @@ import jxl.read.*;
 public class LoadSaveArtikelExcel implements StrategyLoadSave {
 
 
+
+    //laden in de arraylist werkt maar crasht als i = 10
     @Override
     public ArrayList<Artikel> load() throws IOException, DatabaseException{
         ArrayList<Artikel> artikelen = new ArrayList<>();
@@ -26,11 +27,10 @@ public class LoadSaveArtikelExcel implements StrategyLoadSave {
 
         try{
              workbook = Workbook.getWorkbook(getFile());
-
              Sheet sheet = workbook.getSheet(0);//chooses first excel sheet
-             Cell cell1 = sheet.getCell(0, 0);
              int i = 0;
-             while(sheet.getCell(0, i).getContents() != null){//checkt of de volgende rij niet null moet in for lus gaan maar ik weet niet hoe dat moet
+             String test = sheet.getCell(1, i).getContents();
+             while(sheet.getCell(1, i).getContents().length() != 0){//checkt of de volgende rij niet null moet in for lus gaan maar ik weet niet hoe dat moet
                  Cell code = sheet.getCell(0, i);
                  Cell omschrijving = sheet.getCell(1,i);
                  Cell groep = sheet.getCell(2, i);
@@ -45,8 +45,8 @@ public class LoadSaveArtikelExcel implements StrategyLoadSave {
             if (workbook != null){
                 workbook.close();
             }
+            return artikelen;
         }
-        return artikelen;
     }
 
     @Override

@@ -6,10 +6,12 @@ import jdk.nashorn.internal.codegen.types.ArrayType;
 import model.Artikel;
 import model.database.DatabaseException;
 import model.database.LoadsaveArtikeltekst;
+import model.database.LoadSaveArtikelExcel;
 import view.KassaView;
 import view.KlantView;
 
 import javax.swing.text.TableView;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -26,9 +28,9 @@ public class KassaAppMain extends Application {
 			e.printStackTrace();
 		}
 		KlantView klantView = new KlantView();
-		LoadsaveArtikeltekst loadsaveArtikeltekst = new LoadsaveArtikeltekst();
+		LoadSaveArtikelExcel loadsaveArtikelexcel = new LoadSaveArtikelExcel();
 		try {
-			ArrayList<Artikel> list = loadsaveArtikeltekst.load();
+			ArrayList<Artikel> list = loadsaveArtikelexcel.load();
 			for (Object o: list) {
 				System.out.println("_________________________________");
 				System.out.println(o.toString());
@@ -37,6 +39,8 @@ public class KassaAppMain extends Application {
 		} catch (DatabaseException e) {
 			e.printStackTrace();
 			System.out.println("Database Not Found ERROR.");
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 
 	}
