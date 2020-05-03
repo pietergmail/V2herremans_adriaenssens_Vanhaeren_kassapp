@@ -1,6 +1,11 @@
 package model.database;
 
+import jxl.demo.Write;
 import jxl.read.biff.BiffException;
+import jxl.write.Label;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
 import model.Artikel;
 
 import java.io.File;
@@ -51,7 +56,41 @@ public class LoadSaveArtikelExcel implements StrategyLoadSave {
 
     @Override
     public void save(ArrayList<Artikel> artikelen) throws IOException, DomainException {
+        String path = "src" + File.separator + "bestanden" + File.separator + "artikel.xls";
+        WritableWorkbook workbook = null;
 
+        try {
+            workbook = Workbook.createWorkbook(new File(path));
+
+            WritableSheet sheet = workbook.createSheet("Sheet 1", 0);
+
+                int i = 0;
+            for(Artikel artikel : artikelen){
+                Label label = new Label(0, i, artikel.getCode());
+                sheet.addCell(label);
+                label = new Label(1, i, artikel.getOmschrijving());
+                sheet.addCell(label);
+                label = new Label(2, i, artikel.getGroep());
+                sheet.addCell(label);
+                label = new Label(3, i, String.valueOf(artikel.getPrijs()));
+                sheet.addCell(label);
+                label = new Label(4, i, String.valueOf(artikel.getVoorraad()));
+                sheet.addCell(label);
+
+                workbook.write();
+            }
+
+        } catch (WriteException e) {
+            e.printStackTrace();
+        } finally {
+            if( workbook != null) {
+                try {
+                    workbook.close();
+                } catch (WriteException e){
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     private File getFile() {
