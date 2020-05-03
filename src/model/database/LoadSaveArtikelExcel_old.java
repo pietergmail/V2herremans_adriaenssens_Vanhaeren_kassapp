@@ -20,7 +20,7 @@ import jxl.Workbook;
  * @author Pieter Herremans
  */
 
-public class LoadSaveArtikelExcel implements StrategyLoadSave {
+public class LoadSaveArtikelExcel_old implements StrategyLoadSave {
 
 
 

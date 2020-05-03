@@ -2,15 +2,12 @@ package application;
 	
 import javafx.application.Application;
 import javafx.stage.Stage;
-import jdk.nashorn.internal.codegen.types.ArrayType;
 import model.Artikel;
 import model.database.DatabaseException;
-import model.database.LoadsaveArtikeltekst;
-import model.database.LoadSaveArtikelExcel;
+import model.database.LoadSaveArtikelExcel_old;
 import view.KassaView;
 import view.KlantView;
 
-import javax.swing.text.TableView;
 import java.util.ArrayList;
 
 /**
@@ -27,7 +24,7 @@ public class KassaAppMain extends Application {
 			e.printStackTrace();
 		}
 		KlantView klantView = new KlantView();
-		LoadSaveArtikelExcel loadsaveArtikelexcel = new LoadSaveArtikelExcel();
+		LoadSaveArtikelExcel_old loadsaveArtikelexcel = new LoadSaveArtikelExcel_old();
 			ArrayList<Artikel> list = loadsaveArtikelexcel.load();
 			for (Object o: list) {
 				System.out.println("_________________________________");
