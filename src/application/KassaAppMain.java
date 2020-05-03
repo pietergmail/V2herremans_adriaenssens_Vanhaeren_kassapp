@@ -5,7 +5,7 @@ import javafx.stage.Stage;
 import jxl.read.biff.BiffException;
 import model.Artikel;
 import model.database.DatabaseException;
-import model.database.ExcelPluginAdapter;
+import model.database.ExcelLoadSaveStrategy;
 import view.KassaView;
 import view.KlantView;
 
@@ -26,7 +26,7 @@ public class KassaAppMain extends Application {
 			e.printStackTrace();
 		}
 		KlantView klantView = new KlantView();
-		ExcelPluginAdapter loadsaveArtikelexcel = new ExcelPluginAdapter();
+		ExcelLoadSaveStrategy loadsaveArtikelexcel = new ExcelLoadSaveStrategy();
 		ArrayList<Artikel> list = null;
 		try {
 			list = loadsaveArtikelexcel.load();
