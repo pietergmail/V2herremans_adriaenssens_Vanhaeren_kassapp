@@ -30,13 +30,10 @@ public class KassaAppMain extends Application {
 		ArrayList<Artikel> list = null;
 		try {
 			list = loadsaveArtikelexcel.load();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (DatabaseException e) {
-			e.printStackTrace();
-		} catch (BiffException e) {
+		} catch (IOException | BiffException | DatabaseException e) {
 			e.printStackTrace();
 		}
+		assert list != null;
 		for (Object o: list) {
 				System.out.println("_________________________________");
 				System.out.println(o.toString());
