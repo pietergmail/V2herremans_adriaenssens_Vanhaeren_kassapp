@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author Pieter Herremans
  */
 
-public class ExcelPluginAdapter implements StrategyLoadSave {
+public class ExcelLoadSaveStrategy  implements StrategyLoadSave {
     @Override
     public ArrayList<Artikel> load() throws IOException, DatabaseException, BiffException {
         File file = getFile();

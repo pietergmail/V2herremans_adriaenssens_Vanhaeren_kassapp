@@ -2,12 +2,14 @@ package application;
 	
 import javafx.application.Application;
 import javafx.stage.Stage;
+import jxl.read.biff.BiffException;
 import model.Artikel;
 import model.database.DatabaseException;
-import model.database.LoadSaveArtikelExcel_old;
+import model.database.ExcelPluginAdapter;
 import view.KassaView;
 import view.KlantView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -24,9 +26,18 @@ public class KassaAppMain extends Application {
 			e.printStackTrace();
 		}
 		KlantView klantView = new KlantView();
-		LoadSaveArtikelExcel_old loadsaveArtikelexcel = new LoadSaveArtikelExcel_old();
-			ArrayList<Artikel> list = loadsaveArtikelexcel.load();
-			for (Object o: list) {
+		ExcelPluginAdapter loadsaveArtikelexcel = new ExcelPluginAdapter();
+		ArrayList<Artikel> list = null;
+		try {
+			list = loadsaveArtikelexcel.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+		} catch (BiffException e) {
+			e.printStackTrace();
+		}
+		for (Object o: list) {
 				System.out.println("_________________________________");
 				System.out.println(o.toString());
 				System.out.println("_________________________________");
