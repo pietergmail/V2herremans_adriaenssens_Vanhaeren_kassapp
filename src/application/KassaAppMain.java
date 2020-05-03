@@ -33,6 +33,7 @@ public class KassaAppMain extends Application {
 		} catch (IOException | BiffException | DatabaseException e) {
 			e.printStackTrace();
 		}
+
 		assert list != null;
 		for (Object o: list) {
 				System.out.println("_________________________________");
