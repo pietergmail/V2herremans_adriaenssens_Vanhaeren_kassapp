@@ -1,9 +1,11 @@
 package application;
 	
+import controller.KassaviewController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import jxl.read.biff.BiffException;
 import model.Artikel;
+import model.KassaVerkoop;
 import model.database.DatabaseException;
 import model.database.ExcelLoadSaveStrategy;
 import view.KassaView;
@@ -13,7 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
-* @author Zeno Adriaansen
+* @author Zeno Adriaansen, Vanhaeren Corentin
 */
 
 public class KassaAppMain extends Application {
@@ -21,7 +23,10 @@ public class KassaAppMain extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			KassaView kassaView = new KassaView();
+			KassaVerkoop kassaVerkoop = new KassaVerkoop();
+			KassaviewController kassaviewController = new KassaviewController(kassaVerkoop);
+			kassaVerkoop.addObserver(kassaviewController);
+			KassaView kassaView = new KassaView(kassaviewController);
 		} catch (DatabaseException e) {
 			e.printStackTrace();
 		}
