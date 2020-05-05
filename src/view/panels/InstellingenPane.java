@@ -76,7 +76,7 @@ public class InstellingenPane  extends GridPane implements EventHandler<javafx.e
             e.getMessage();
         }
     }
-
+/*
     public String getProperty(String key){
         String value = null;
         try(InputStream input = new FileInputStream(new File(path))) {
@@ -94,4 +94,6 @@ public class InstellingenPane  extends GridPane implements EventHandler<javafx.e
             }
 
 
+
+ */
 }

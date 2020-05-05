@@ -5,9 +5,7 @@ import model.Artikel;
 import model.KassaVerkoop;
 import model.Observer;
 
-import model.database.DatabaseException;
-import model.database.LoadsaveArtikeltekst;
-import model.database.StrategyLoadSave;
+import model.database.*;
 import view.KassaView;
 import view.KlantView;
 
@@ -21,6 +19,9 @@ public class KassaviewController implements Observer{
     private KassaView kassaView;
     private KassaVerkoop kassaVerkoop;
     private LoadsaveArtikeltekst loadsaveArtikeltekst;
+    LoadSaveContext loadSaveContext = new LoadSaveContext();
+    //LoadSaveFactory loadSaveFactory;
+    //StrategyLoadSave strategyLoadSave;
 /*
     public KassaviewController(KassaVerkoop kassaVerkoop, KassaView kassaView){
         this.kassaVerkoop = kassaVerkoop;
@@ -39,8 +40,8 @@ public class KassaviewController implements Observer{
         kassaVerkoop.addArtikelWinkelkar(artikel);
     }
 
-    public Artikel getArtikel(String code) throws DatabaseException {
-        for (Artikel a :loadsaveArtikeltekst.load()){
+    public Artikel getArtikel(String code) throws DatabaseException, IOException, BiffException {
+        for (Artikel a :loadSaveContext.load()){
             if (a.getCode().equals(code)){
                 return a;
             }

@@ -83,6 +83,10 @@ public class KassaPane extends GridPane {
             updateTotaalPrijs(kassaviewController);
         }catch (IllegalArgumentException e){
             new Alert(Alert.AlertType.WARNING, e.getMessage()).showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (BiffException e) {
+            e.printStackTrace();
         }
     }
 

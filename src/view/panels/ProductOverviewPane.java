@@ -14,6 +14,7 @@ import javafx.scene.text.Font;
 import jxl.read.biff.BiffException;
 import model.Artikel;
 import model.database.DatabaseException;
+import model.database.LoadSaveContext;
 import model.database.LoadsaveArtikeltekst;
 import model.database.StrategyLoadSave;
 
@@ -28,12 +29,12 @@ import static javafx.scene.input.KeyCode.O;
 
 public class ProductOverviewPane extends GridPane {
 	private TableView<Artikel> table;
-	private StrategyLoadSave loadsaveArtikeltekst;
-	
+	private LoadSaveContext loadSaveContext = new LoadSaveContext();
+
 	public ProductOverviewPane() throws DatabaseException, IOException, BiffException {
 
-		loadsaveArtikeltekst = new InstellingenPane().setLoadStrategy();
-		ObservableList<Artikel> producten = FXCollections.observableArrayList(new ArrayList<>(loadsaveArtikeltekst.load()));
+
+		ObservableList<Artikel> producten = FXCollections.observableArrayList(new ArrayList<>(loadSaveContext.load()));
 		VBox p1 = new VBox(5);
 		this.setPadding(new Insets(5, 5, 5, 5));
         this.setVgap(5);
