@@ -28,7 +28,7 @@ public class LoadsaveArtikeltekst implements StrategyLoadSave{
                     throw new DatabaseException(e.toString() + ": " + e.getMessage());
                 }
             }
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

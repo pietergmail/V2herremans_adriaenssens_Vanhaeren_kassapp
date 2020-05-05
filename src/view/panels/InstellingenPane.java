@@ -1,5 +1,10 @@
 package view.panels;
 
+
+/**
+ * @author Sateur Maxime
+ */
+
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
@@ -14,6 +19,9 @@ import javax.xml.crypto.Data;
 import java.awt.datatransfer.FlavorEvent;
 import java.io.*;
 import javafx.event.ActionEvent;
+import model.database.LoadSaveFactory;
+import model.database.StrategyLoadSave;
+
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -79,6 +87,11 @@ public class InstellingenPane  extends GridPane implements EventHandler<javafx.e
         }
         return value;
     }
+
+    public StrategyLoadSave setLoadStrategy(){
+        LoadSaveEnum saveStrategy = LoadSaveEnum.valueOf(getProperty("property.filetype"));
+        return new LoadSaveFactory().ChooseSaveType(saveStrategy);
+            }
 
 
 }
