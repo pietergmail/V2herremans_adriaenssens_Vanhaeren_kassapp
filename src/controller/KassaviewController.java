@@ -76,4 +76,12 @@ public class KassaviewController implements Observer{
     public ArrayList<Artikel> getWinkelmandje(){
         return kassaVerkoop.getWinkelmandje();
     }
+
+    public KassaVerkoop getKassaVerkoop() {
+        return kassaVerkoop;
+    }
+
+    public void setKassaVerkoop(KassaVerkoop kassaVerkoop) {
+        this.kassaVerkoop = kassaVerkoop;
+    }
 }

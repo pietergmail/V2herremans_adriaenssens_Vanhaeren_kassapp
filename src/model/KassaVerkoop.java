@@ -3,6 +3,7 @@ package model;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author Pieter Herremans, Vanhaeren Corentin
@@ -10,20 +11,16 @@ import java.util.ArrayList;
 
 public class KassaVerkoop implements Subject{
 
-    private ArrayList<Artikel> winkelmandje;
     private ArrayList<Artikel> hold;
     private ArrayList<Observer> observers = new ArrayList<>();
+    private HashMap<Artikel, Integer> winkelmandje;
 
     public KassaVerkoop() {
-        this.winkelmandje = new ArrayList<>();
-    }
-
-    public ArrayList<Artikel> getWinkelmandje() {
-        return winkelmandje;
+        this.winkelmandje = new HashMap<>();
     }
 
     public void setWinkelmandje(ArrayList<Artikel> winkelmandje) {
-        this.winkelmandje = winkelmandje;
+        getWinkelmandje();
     }
 
     public ArrayList<Artikel> getHold() {
@@ -40,7 +37,7 @@ public class KassaVerkoop implements Subject{
 
     public double getTotalPrijs(){
         double total = 0;
-        for(Artikel artikel : winkelmandje){
+        for(Artikel artikel : getWinkelmandje()){
             if(artikel != null) total+=artikel.getPrijs();
         }
         return total;
@@ -48,23 +45,26 @@ public class KassaVerkoop implements Subject{
 
     public void addArtikelWinkelkar(Artikel artikel){
         if (artikelAlreadyAdded(artikel)){
-
+            winkelmandje.replace(artikel,  winkelmandje.get(artikel)+1);
         }
         else{
-            winkelmandje.add(artikel);
+            winkelmandje.put(artikel, 1);
             notifyObservers("add_product_winkelkar", artikel);
         }
-        //System.out.println(winkelmandje);
     }
 
     public boolean artikelAlreadyAdded(Artikel artikel){
         boolean containsArtikel = false;
-        for (Artikel a: winkelmandje) {
+        for (Artikel a: getWinkelmandje()) {
             if (a.getCode().equals(artikel.getCode())){
                 containsArtikel = true;
             }
         }
         return containsArtikel;
+    }
+
+    public int getAantal(Artikel artikel){
+        return winkelmandje.get(artikel);
     }
 
     @Override
@@ -83,5 +83,13 @@ public class KassaVerkoop implements Subject{
             Observer observer = observers.get(i);;
             observer.update(eventType, artikel);
         }
+    }
+
+    public ArrayList<Artikel> getWinkelmandje(){
+        ArrayList<Artikel> list = new ArrayList();
+        for (Artikel a:winkelmandje.keySet()) {
+            list.add(a);
+        }
+        return list;
     }
 }

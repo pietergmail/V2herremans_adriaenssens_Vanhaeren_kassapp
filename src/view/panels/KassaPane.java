@@ -26,7 +26,6 @@ public class KassaPane extends GridPane {
     private Button voegartikelToe;
     private Label totaleprijs;
     private TableView table;
-    private int aantal;
 
     public KassaPane(KassaviewController kassaviewController){
         HBox p2 = new HBox(10);
@@ -54,9 +53,9 @@ public class KassaPane extends GridPane {
         columnPrijs.setMinWidth(100);
         columnPrijs.setCellValueFactory(new PropertyValueFactory<Artikel, Double>("prijs"));
 
-        TableColumn<Artikel, Double> columnAantal = new TableColumn<>("Aantal");
+        TableColumn<Artikel, Integer> columnAantal = new TableColumn<>("Aantal");
         columnAantal.setMinWidth(50);
-        columnAantal.setCellValueFactory(new PropertyValueFactory<Artikel, Double>("Aantal"));
+        columnAantal.setCellValueFactory(new PropertyValueFactory<Artikel, Integer>("Aantal"));
 
         table.getColumns().addAll(columnOmschrijving, columnPrijs, columnAantal);
 
@@ -100,6 +99,8 @@ public class KassaPane extends GridPane {
         double prijs = kassaviewController.totaalPrijs();
         totaleprijs.setText("totaal: " + prijs);
     }
+
+
 
     public void update(KassaviewController kassaviewController){
         //table.refresh();
