@@ -20,7 +20,7 @@ public class KassaMainPane extends BorderPane {
         Tab kassaTab = new Tab("Kassa", kassaPane);
         ProductOverviewPane productOverviewPane = new ProductOverviewPane();
         Tab artikelTab = new Tab("Artikelen",productOverviewPane);
-        InstellingenPane instellingenPane = new InstellingenPane();
+        InstellingenPane instellingenPane = new InstellingenPane(kassaviewController);
         Tab instellingTab = new Tab("Instellingen",instellingenPane);
         Tab logTab = new Tab("Log");
         tabPane.getTabs().add(kassaTab);

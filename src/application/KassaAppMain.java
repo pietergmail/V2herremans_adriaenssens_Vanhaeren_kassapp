@@ -1,5 +1,6 @@
 package application;
 	
+import controller.InstellingController;
 import controller.KassaviewController;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -24,7 +25,8 @@ public class KassaAppMain extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			KassaVerkoop kassaVerkoop = new KassaVerkoop();
-			KassaviewController kassaviewController = new KassaviewController(kassaVerkoop);
+			InstellingController instellingController = new InstellingController();
+			KassaviewController kassaviewController = new KassaviewController(kassaVerkoop, instellingController);
 			kassaVerkoop.addObserver(kassaviewController);
 			KassaView kassaView = new KassaView(kassaviewController);
 		} catch (DatabaseException e) {

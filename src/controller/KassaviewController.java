@@ -21,6 +21,7 @@ public class KassaviewController implements Observer{
     private KassaView kassaView;
     private KassaVerkoop kassaVerkoop;
     private LoadsaveArtikeltekst loadsaveArtikeltekst;
+    private InstellingController instellingen;
 /*
     public KassaviewController(KassaVerkoop kassaVerkoop, KassaView kassaView){
         this.kassaVerkoop = kassaVerkoop;
@@ -28,8 +29,9 @@ public class KassaviewController implements Observer{
     }
 
  */
-    public KassaviewController(KassaVerkoop kassaVerkoop) throws DatabaseException {
+    public KassaviewController(KassaVerkoop kassaVerkoop, InstellingController instellingen) throws DatabaseException {
         this.kassaVerkoop = kassaVerkoop;
+        this.instellingen = instellingen;
         loadsaveArtikeltekst = new LoadsaveArtikeltekst();
         //kassaView = new KassaView(this);
     }
@@ -66,4 +68,13 @@ public class KassaviewController implements Observer{
             System.out.println("Product " + artikel.getOmschrijving() + " is toegevoegd.");
         }
     }
+
+    public void setProperty(String key,String value) {
+        instellingen.setProperty(key, value);
+    }
+
+    public String getProperty(String key){
+        return instellingen.getProperty(key);
+    }
+
 }
