@@ -10,6 +10,7 @@ import view.KassaView;
 import view.KlantView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * @author Vanhaeren Corentin
@@ -72,4 +73,7 @@ public class KassaviewController implements Observer{
         return instellingController.getProperty(key);
     }
 
+    public ArrayList<Artikel> getWinkelmandje(){
+        return kassaVerkoop.getWinkelmandje();
+    }
 }

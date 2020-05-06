@@ -1,5 +1,7 @@
 package model;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import java.util.ArrayList;
 
 /**
@@ -44,10 +46,25 @@ public class KassaVerkoop implements Subject{
         return total;
     }
 
-    //
     public void addArtikelWinkelkar(Artikel artikel){
-        winkelmandje.add(artikel);
-        notifyObservers("add_product_winkelkar", artikel);
+        if (artikelAlreadyAdded(artikel)){
+
+        }
+        else{
+            winkelmandje.add(artikel);
+            notifyObservers("add_product_winkelkar", artikel);
+        }
+        //System.out.println(winkelmandje);
+    }
+
+    public boolean artikelAlreadyAdded(Artikel artikel){
+        boolean containsArtikel = false;
+        for (Artikel a: winkelmandje) {
+            if (a.getCode().equals(artikel.getCode())){
+                containsArtikel = true;
+            }
+        }
+        return containsArtikel;
     }
 
     @Override
@@ -67,5 +84,4 @@ public class KassaVerkoop implements Subject{
             observer.update(eventType, artikel);
         }
     }
-
 }

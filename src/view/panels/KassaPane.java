@@ -26,6 +26,7 @@ public class KassaPane extends GridPane {
     private Button voegartikelToe;
     private Label totaleprijs;
     private TableView table;
+    private int aantal;
 
     public KassaPane(KassaviewController kassaviewController){
         HBox p2 = new HBox(10);
@@ -53,7 +54,11 @@ public class KassaPane extends GridPane {
         columnPrijs.setMinWidth(100);
         columnPrijs.setCellValueFactory(new PropertyValueFactory<Artikel, Double>("prijs"));
 
-        table.getColumns().addAll(columnOmschrijving, columnPrijs);
+        TableColumn<Artikel, Double> columnAantal = new TableColumn<>("Aantal");
+        columnAantal.setMinWidth(50);
+        columnAantal.setCellValueFactory(new PropertyValueFactory<Artikel, Double>("Aantal"));
+
+        table.getColumns().addAll(columnOmschrijving, columnPrijs, columnAantal);
 
         VBox p1 = new VBox(10);
         p1.getChildren().addAll(p2, p3);
@@ -79,7 +84,8 @@ public class KassaPane extends GridPane {
     public void voegProductToe(KassaviewController kassaviewController) throws DatabaseException{
         try {
             kassaviewController.addProductKassaVerkoop(kassaviewController.getArtikel(artikelcode.getText()));
-            table.getItems().add(kassaviewController.getArtikel(artikelcode.getText()));
+            table.getItems().clear();
+            table.getItems().addAll(kassaviewController.getWinkelmandje());
             updateTotaalPrijs(kassaviewController);
         }catch (IllegalArgumentException e){
             new Alert(Alert.AlertType.WARNING, e.getMessage()).showAndWait();
