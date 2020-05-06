@@ -18,6 +18,7 @@ import java.io.IOException;
 public class KassaviewController implements Observer{
     private KassaView kassaView;
     private KassaVerkoop kassaVerkoop;
+    private InstellingController instellingController;
     private LoadsaveArtikeltekst loadsaveArtikeltekst;
     LoadSaveContext loadSaveContext = new LoadSaveContext();
     //LoadSaveFactory loadSaveFactory;
@@ -29,8 +30,9 @@ public class KassaviewController implements Observer{
     }
 
  */
-    public KassaviewController(KassaVerkoop kassaVerkoop) throws DatabaseException {
+    public KassaviewController(KassaVerkoop kassaVerkoop, InstellingController instellingController) throws DatabaseException {
         this.kassaVerkoop = kassaVerkoop;
+        this.instellingController = instellingController;
         loadsaveArtikeltekst = new LoadsaveArtikeltekst();
         //kassaView = new KassaView(this);
     }
@@ -53,12 +55,6 @@ public class KassaviewController implements Observer{
         return kassaVerkoop.getTotalPrijs();
     }
 
-
-
-
-
-
-    //
     @Override
     public void update(String eventType, Artikel artikel) {
         if(eventType.equals("add_product_winkelkar")){
@@ -67,4 +63,13 @@ public class KassaviewController implements Observer{
             System.out.println("Product " + artikel.getOmschrijving() + " is toegevoegd.");
         }
     }
+
+    public void setProperty(String key,String value){
+        instellingController.setProperty(key,value);
+    }
+
+    public String getProperty(String key){
+        return instellingController.getProperty(key);
+    }
+
 }
