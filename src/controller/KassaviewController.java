@@ -2,6 +2,7 @@ package controller;
 
 import jxl.read.biff.BiffException;
 import model.Artikel;
+import model.ArtikelWinkelmand;
 import model.KassaVerkoop;
 import model.Observer;
 
@@ -11,6 +12,7 @@ import view.KlantView;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * @author Vanhaeren Corentin
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 public class KassaviewController implements Observer{
     private KassaView kassaView;
     private KassaVerkoop kassaVerkoop;
+    private ArtikelWinkelmand artikelWinkelmand;
     private InstellingController instellingController;
     private LoadsaveArtikeltekst loadsaveArtikeltekst;
     LoadSaveContext loadSaveContext = new LoadSaveContext();
@@ -54,6 +57,20 @@ public class KassaviewController implements Observer{
 
     public double totaalPrijs(){
         return kassaVerkoop.getTotalPrijs();
+    }
+
+    public ArrayList<ArtikelWinkelmand> getWinkelmandMetAantal(){
+        ArrayList<ArtikelWinkelmand> winkelmand = new ArrayList<>();
+        for (Map.Entry<Artikel, Integer> entry: kassaVerkoop.getWinkelmandMap().entrySet()) {
+            ArtikelWinkelmand  artikel = new ArtikelWinkelmand();
+            artikel.setCode(entry.getKey().getCode());
+            artikel.setOmschrijving((entry.getKey().getOmschrijving()));
+            artikel.setGroep(entry.getKey().getGroep());
+            artikel.setPrijs(entry.getKey().getPrijs());
+            artikel.setAantal(entry.getValue());
+            winkelmand.add(artikel);
+        }
+        return winkelmand;
     }
 
     @Override

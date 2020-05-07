@@ -23,16 +23,21 @@ public class KassaAppMain extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
+		KassaVerkoop kassaVerkoop = new KassaVerkoop();
+
 		try {
-			KassaVerkoop kassaVerkoop = new KassaVerkoop();
+
 			InstellingController instellingController = new InstellingController();
 			KassaviewController kassaviewController = new KassaviewController(kassaVerkoop, instellingController);
-			kassaVerkoop.addObserver(kassaviewController);
 			KassaView kassaView = new KassaView(kassaviewController);
+			KlantView klantView = new KlantView(kassaviewController);
+			kassaVerkoop.addObserver(kassaviewController);
+			kassaVerkoop.addObserver(klantView);
+
 		} catch (DatabaseException e) {
 			e.printStackTrace();
 		}
-		KlantView klantView = new KlantView();
+
 		ExcelLoadSaveStrategy loadsaveArtikelexcel = new ExcelLoadSaveStrategy();
 		ArrayList<Artikel> list = null;
 		try {

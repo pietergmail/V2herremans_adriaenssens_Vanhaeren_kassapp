@@ -104,4 +104,8 @@ public class KassaVerkoop implements Subject{
         //System.out.println(winkelmandje + " winkelmand map");
         return list;
     }
+
+    public HashMap<Artikel, Integer> getWinkelmandMap(){
+        return winkelmandje;
+    }
 }
