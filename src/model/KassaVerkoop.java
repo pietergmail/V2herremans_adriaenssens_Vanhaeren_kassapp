@@ -49,8 +49,8 @@ public class KassaVerkoop implements Subject{
         }
         else{
             winkelmandje.put(artikel, 1);
-            notifyObservers("add_product_winkelkar", artikel);
         }
+        notifyObservers("add_product_winkelkar", artikel);
     }
 
     public boolean artikelAlreadyAdded(Artikel artikel){
@@ -60,6 +60,7 @@ public class KassaVerkoop implements Subject{
                 containsArtikel = true;
             }
         }
+        //System.out.println(containsArtikel + " bevat?");
         return containsArtikel;
     }
 
@@ -88,8 +89,19 @@ public class KassaVerkoop implements Subject{
     public ArrayList<Artikel> getWinkelmandje(){
         ArrayList<Artikel> list = new ArrayList();
         for (Artikel a:winkelmandje.keySet()) {
-            list.add(a);
+            int aantal = winkelmandje.get(a);
+            //System.out.println(aantal + " aantal");
+            if(aantal > 1){
+                for(int i = 0; i < aantal; i++){
+                    list.add(a);
+                }
+            }
+            else{
+                list.add(a);
+            }
         }
+        //System.out.println(list + " winkelmand list");
+        //System.out.println(winkelmandje + " winkelmand map");
         return list;
     }
 }
