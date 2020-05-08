@@ -1,7 +1,5 @@
 package model;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -80,14 +78,13 @@ public class KassaVerkoop implements Subject{
 
     @Override
     public void notifyObservers(String eventType, Artikel artikel) {
-        for (int i = 0; i < observers.size(); i++) {
-            Observer observer = observers.get(i);;
+        for (Observer observer : observers) {
             observer.update(eventType, artikel);
         }
     }
 
     public ArrayList<Artikel> getWinkelmandje(){
-        ArrayList<Artikel> list = new ArrayList();
+        ArrayList<Artikel> list = new ArrayList<>();
         for (Artikel a:winkelmandje.keySet()) {
             int aantal = winkelmandje.get(a);
             //System.out.println(aantal + " aantal");
