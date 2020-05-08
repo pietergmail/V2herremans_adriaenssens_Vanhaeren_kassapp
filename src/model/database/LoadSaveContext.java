@@ -19,7 +19,7 @@ import java.util.Properties;
 public class LoadSaveContext {
     private StrategyLoadSave strategyLoadSave;
     private Properties properties = new Properties();
-    private String path = "src" + File.separator + "bestanden" + File.separator + "Save.properties";
+    private String path = "src" + File.separator + "bestanden" + File.separator + "KassaApp.properties";
 
 
     public LoadSaveContext(){

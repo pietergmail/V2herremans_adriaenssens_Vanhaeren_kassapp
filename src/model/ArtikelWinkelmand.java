@@ -1,5 +1,9 @@
 package model;
 
+/**
+ * @author Vanhaeren Corentin
+ */
+
 public class ArtikelWinkelmand {
     private String code, omschrijving, groep;
     private double prijs;

@@ -1,5 +1,6 @@
 package view.panels;
 
+import controller.KassaviewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import jxl.read.biff.BiffException;
 import model.Artikel;
+import model.ModelFacade;
 import model.database.DatabaseException;
 import model.database.LoadSaveContext;
 import model.database.LoadsaveArtikeltekst;
@@ -29,12 +31,13 @@ import static javafx.scene.input.KeyCode.O;
 
 public class ProductOverviewPane extends GridPane {
 	private TableView<Artikel> table;
-	private LoadSaveContext loadSaveContext = new LoadSaveContext();
-
-	public ProductOverviewPane() throws DatabaseException, IOException, BiffException {
+	//private LoadSaveContext loadSaveContext = new LoadSaveContext();
 
 
-		ObservableList<Artikel> producten = FXCollections.observableArrayList(new ArrayList<>(loadSaveContext.load()));
+	public ProductOverviewPane(KassaviewController kassaviewController) throws DatabaseException, IOException, BiffException {
+
+
+		//ObservableList<Artikel> producten = FXCollections.observableArrayList(new ArrayList<>(loadSaveContext.load()));
 		VBox p1 = new VBox(5);
 		this.setPadding(new Insets(5, 5, 5, 5));
         this.setVgap(5);
@@ -46,7 +49,8 @@ public class ProductOverviewPane extends GridPane {
 		//this.add(new Label("Producten:"), 0, 0, 1, 1);
 
 		table = new TableView<Artikel>();
-		table.setItems(producten);
+		//table.setItems(producten);
+		table.getItems().addAll(kassaviewController.loadinMemory());
 
 		TableColumn<Artikel, String> columnCode = new TableColumn<>("Code");
 		columnCode.setMinWidth(50);

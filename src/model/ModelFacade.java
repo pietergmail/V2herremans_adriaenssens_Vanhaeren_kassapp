@@ -1,11 +1,11 @@
-package controller;
+package model;
 
+import controller.InstellingController;
 import jxl.read.biff.BiffException;
-import model.*;
-
-import model.database.*;
+import model.database.DatabaseException;
+import model.database.LoadSaveContext;
+import model.database.LoadsaveArtikeltekst;
 import view.KassaView;
-import view.KlantView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,86 +15,37 @@ import java.util.Map;
  * @author Vanhaeren Corentin
  */
 
-public class KassaviewController implements Observer {
+public class ModelFacade{
 
-    private ModelFacade modelFacade;
-
-    public KassaviewController(ModelFacade modelFacade) {
-        this.modelFacade = modelFacade;
-    }
-
-    public void addProductKassaVerkoop(Artikel artikel) {
-        modelFacade.addProductKassaVerkoop(artikel);
-    }
-
-    public Artikel getArtikel(String code) throws DatabaseException, IOException, BiffException {
-        return modelFacade.getArtikel(code);
-    }
-
-    public double totaalPrijs() {
-        return modelFacade.totaalPrijs();
-    }
-
-    public ArrayList<ArtikelWinkelmand> getWinkelmandMetAantal() {
-        return modelFacade.getWinkelmandMetAantal();
-    }
-
-
-    @Override
-    public void update(String eventType, Artikel artikel) {
-        modelFacade.update(eventType, artikel);
-    }
-
-    public void setProperty(String key, String value) {
-        modelFacade.setProperty(key, value);
-    }
-
-    public String getProperty(String key) {
-        return modelFacade.getProperty(key);
-    }
-
-    public ArrayList<Artikel> getWinkelmandje() {
-        return modelFacade.getWinkelmandje();
-    }
-
-    public KassaVerkoop getKassaVerkoop() {
-        return modelFacade.getKassaVerkoop();
-    }
-
-    public void setKassaVerkoop(KassaVerkoop kassaVerkoop) {
-        modelFacade.setKassaVerkoop(kassaVerkoop);
-    }
-
-    public ArrayList<Artikel> load() throws IOException, DatabaseException, BiffException {
-        return modelFacade.load();
-    }
-
-    public ArrayList<Artikel> loadinMemory() throws IOException, DatabaseException, BiffException {
-        return modelFacade.loadinMemory();
-    }
-
-/*
     private KassaView kassaView;
     private KassaVerkoop kassaVerkoop;
     private ArtikelWinkelmand artikelWinkelmand;
     private InstellingController instellingController;
     private LoadsaveArtikeltekst loadsaveArtikeltekst;
     LoadSaveContext loadSaveContext = new LoadSaveContext();
+    ArrayList<Artikel> producten = new ArrayList<>();
+    //LoadSaveFactory loadSaveFactory;
+    //StrategyLoadSave strategyLoadSave;
+/*
+    public KassaviewController(KassaVerkoop kassaVerkoop, KassaView kassaView){
+        this.kassaVerkoop = kassaVerkoop;
+        this.kassaView = kassaView;
+    }
 
-    public KassaviewController(KassaVerkoop kassaVerkoop, InstellingController instellingController) throws DatabaseException {
+ */
+    public ModelFacade(KassaVerkoop kassaVerkoop, InstellingController instellingController) throws DatabaseException {
         this.kassaVerkoop = kassaVerkoop;
         this.instellingController = instellingController;
-        loadsaveArtikeltekst = new LoadsaveArtikeltekst();
         //kassaView = new KassaView(this);
     }
 
-//methodes voor view
+    //methodes voor view
     public void addProductKassaVerkoop(Artikel artikel){
         kassaVerkoop.addArtikelWinkelkar(artikel);
     }
 
     public Artikel getArtikel(String code) throws DatabaseException, IOException, BiffException {
-        for (Artikel a :loadSaveContext.load()){
+        for (Artikel a :this.loadinMemory()){
             if (a.getCode().equals(code)){
                 return a;
             }
@@ -120,7 +71,7 @@ public class KassaviewController implements Observer {
         return winkelmand;
     }
 
-    @Override
+
     public void update(String eventType, Artikel artikel) {
         if(eventType.equals("add_product_winkelkar")){
             //code te laten uitvoeren
@@ -149,5 +100,17 @@ public class KassaviewController implements Observer {
         this.kassaVerkoop = kassaVerkoop;
     }
 
- */
+    public ArrayList<Artikel> load() throws IOException, DatabaseException, BiffException {
+        return loadSaveContext.load();
+    }
+
+    public ArrayList<Artikel> loadinMemory() throws IOException, DatabaseException, BiffException {
+        if (producten.isEmpty()){
+            producten = this.load();
+        }
+        else {
+            return producten;
+        }
+        return producten;
+    }
 }

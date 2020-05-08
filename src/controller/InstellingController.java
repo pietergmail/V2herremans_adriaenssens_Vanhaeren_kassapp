@@ -21,7 +21,7 @@ public class InstellingController {
         file = new File(path);
     }
 
-    void setProperty(String key, String value){
+    public void setProperty(String key, String value){
         try (OutputStream output = new FileOutputStream(new File(path))) {
             properties.setProperty(key, value);
             properties.store(output, "properties");
@@ -30,7 +30,7 @@ public class InstellingController {
         }
     }
 
-    String getProperty(String key){
+    public String getProperty(String key){
         String value = null;
         try (InputStream input = new FileInputStream(new File(path))) {
             properties.load(input);

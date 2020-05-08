@@ -23,7 +23,7 @@ public class KassaMainPane extends BorderPane {
         Tab kassaTab = new Tab("Kassa", kassaPane);
         ProductOverviewPane productOverviewPane = null;
         try {
-            productOverviewPane = new ProductOverviewPane();
+            productOverviewPane = new ProductOverviewPane(kassaviewController);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (BiffException e) {
