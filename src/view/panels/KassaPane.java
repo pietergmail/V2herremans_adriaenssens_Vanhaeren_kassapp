@@ -2,10 +2,8 @@ package view.panels;
 
 
 import controller.KassaviewController;
-import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
@@ -13,15 +11,14 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.util.Callback;
 import jxl.read.biff.BiffException;
 import model.Artikel;
 import model.database.DatabaseException;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -39,7 +36,7 @@ public class KassaPane extends GridPane {
     private Button verwijderartikel;
     private TextField verwijderartikelcode;
     //private Scene scene = new Scene(this);
-    private List<Artikel> winkelmand = new ArrayList<>();
+    //private List<Artikel> winkelmand = new ArrayList<>();
 
     public KassaPane(KassaviewController kassaviewController){
         HBox p2 = new HBox(10);
@@ -50,6 +47,7 @@ public class KassaPane extends GridPane {
         p2.setAlignment(Pos.CENTER);
         p2.setPadding(new Insets(10));
 
+        /*
         HBox p4 = new HBox(20);
         verwijder = new Label("voeg artikelcode in:");
         verwijderartikelcode = new TextField();
@@ -58,8 +56,10 @@ public class KassaPane extends GridPane {
         p4.setAlignment(Pos.CENTER);
         p4.setPadding(new Insets(10));
 
+         */
+
         VBox p3 = new VBox(10);
-        table = new TableView<Artikel>();
+        table = new TableView<>();
         totaleprijs = new Label("Totale prijs:");
         p3.getChildren().addAll(table, totaleprijs);
         p3.setAlignment(Pos.CENTER);
@@ -75,6 +75,9 @@ public class KassaPane extends GridPane {
         columnPrijs.setMinWidth(100);
         columnPrijs.setCellValueFactory(new PropertyValueFactory<Artikel, Double>("prijs"));
 
+        table.getColumns().addAll(columnOmschrijving, columnPrijs);
+
+        addVerwijderButtonToTable(kassaviewController);
         /*
         TableColumn<Artikel, Integer> columnAantal = new TableColumn<>("Aantal");
         columnAantal.setMinWidth(50);
@@ -83,7 +86,7 @@ public class KassaPane extends GridPane {
          */
 
         //table.getColumns().addAll(columnOmschrijving, columnPrijs, columnAantal);
-        table.getColumns().addAll(columnOmschrijving, columnPrijs);
+
 
         VBox p1 = new VBox(10);
         p1.getChildren().addAll(p2, p3);
@@ -112,6 +115,7 @@ public class KassaPane extends GridPane {
             }
         });
 
+
         voegartikelToe.setOnKeyPressed((KeyEvent keyEvent) -> {
             if (keyEvent.getCode() == KeyCode.ENTER) {
                 try {
@@ -137,7 +141,7 @@ public class KassaPane extends GridPane {
         });
 
 
-
+/*
         verwijderartikel.setOnAction(e -> {
             try {
                 verwijderProduct(kassaviewController);
@@ -148,6 +152,10 @@ public class KassaPane extends GridPane {
             }
         });
 
+ */
+
+        //kan niet werken
+        /*
         verwijderartikel.setOnKeyPressed((KeyEvent keyEvent) -> {
             if (keyEvent.getCode() == KeyCode.ENTER) {
                 try {
@@ -172,6 +180,8 @@ public class KassaPane extends GridPane {
             }
         });
 
+         */
+
 
 
     }
@@ -180,9 +190,9 @@ public class KassaPane extends GridPane {
         try {
             kassaviewController.addProductKassaVerkoop(kassaviewController.getArtikel(artikelcode.getText()));
             table.getItems().clear();
-            winkelmand.add(kassaviewController.getArtikel(artikelcode.getText()));
-            table.getItems().addAll(winkelmand);
-            //table.getItems().addAll(kassaviewController.getWinkelmandje());
+            //winkelmand.add(kassaviewController.getArtikel(artikelcode.getText()));
+            //table.getItems().addAll(winkelmand);
+            table.getItems().addAll(kassaviewController.getWinkelmandje());
             updateTotaalPrijs(kassaviewController);
         }catch (IllegalArgumentException e){
             new Alert(Alert.AlertType.WARNING, e.getMessage()).showAndWait();
@@ -193,7 +203,7 @@ public class KassaPane extends GridPane {
         }
     }
 
-
+/*
     public void verwijderProduct(KassaviewController kassaviewController) throws DatabaseException{
         try {
             kassaviewController.removeProductKassaVerkoop(kassaviewController.getArtikel(verwijderartikelcode.getText()));
@@ -210,12 +220,55 @@ public class KassaPane extends GridPane {
             e.printStackTrace();
         }
     }
+*/
 
     public void updateTotaalPrijs(KassaviewController kassaviewController){
         double prijs = kassaviewController.totaalPrijs();
         totaleprijs.setText("totaal: " + prijs);
     }
 
+    private void addVerwijderButtonToTable(KassaviewController kassaviewController) {
+        TableColumn<Artikel, Void> colBtn = new TableColumn("Verwijder");
+
+        Callback<TableColumn<Artikel, Void>, TableCell<Artikel, Void>> cellFactory = new Callback<TableColumn<Artikel, Void>, TableCell<Artikel, Void>>() {
+            @Override
+            public TableCell<Artikel, Void> call(final TableColumn<Artikel, Void> param) {
+                final TableCell<Artikel, Void> cell = new TableCell<Artikel, Void>() {
+
+                    private final Button btn = new Button("verwijder");
+
+                    {
+                        btn.setOnAction((k) -> {
+                                kassaviewController.removeProductKassaVerkoop(getTableView().getItems().get(getIndex()));
+                                //table.getItems().clear();
+                                //winkelmand.remove(getTableView().getItems().get(getIndex()));
+                                //table.getItems().addAll(winkelmand);
+                                //table.getItems().addAll(kassaviewController.getWinkelmandje());
+                            table.getItems().remove(getIndex());
+                                updateTotaalPrijs(kassaviewController);
+                        });
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+
+        colBtn.setMinWidth(50);
+        colBtn.setCellFactory(cellFactory);
+
+        table.getColumns().add(colBtn);
+
+    }
 
 
     public void update(KassaviewController kassaviewController){

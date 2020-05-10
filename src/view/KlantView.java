@@ -29,6 +29,7 @@ public class KlantView implements Observer {
 	KassaviewController kassaviewController;
 	TableView table = new TableView();
 	ArrayList<ArtikelWinkelmand> winkelmand;
+	Label totaleprijs;
 
 		
 	public KlantView(KassaviewController kassaviewController){
@@ -66,7 +67,17 @@ public class KlantView implements Observer {
 		table.getColumns().addAll(columnOmschrijving, columnPrijs, columnAantal);
 
 		VBox p1 = new VBox();
-		p1.getChildren().addAll(table);
+
+
+
+		VBox p2 = new VBox(10);
+		totaleprijs = new Label("Totale prijs:");
+		p2.getChildren().addAll(totaleprijs);
+		p2.setAlignment(Pos.CENTER);
+		p2.setPadding(new Insets(10));
+
+		p1.getChildren().addAll(table, p2);
+
 		root.getChildren().addAll(p1);
 
 
@@ -83,6 +94,12 @@ public class KlantView implements Observer {
 		winkelmand = new ArrayList<>();
 		winkelmand = kassaviewController.getWinkelmandMetAantal();
 		table.getItems().addAll(winkelmand);
-		System.out.println("test");
+		//System.out.println("test");
+		updateTotaalPrijs(kassaviewController);
+	}
+
+	public void updateTotaalPrijs(KassaviewController kassaviewController){
+		double prijs = kassaviewController.totaalPrijs();
+		totaleprijs.setText("totaal: " + prijs);
 	}
 }
