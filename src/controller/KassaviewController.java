@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 /**
- * @author Vanhaeren Corentin
+ * @author Vanhaeren Corentin, Sateur Maxime
  */
 
 public class KassaviewController implements Observer {
@@ -26,6 +26,8 @@ public class KassaviewController implements Observer {
     public void addProductKassaVerkoop(Artikel artikel) {
         modelFacade.addProductKassaVerkoop(artikel);
     }
+
+    public void removeProductKassaVerkoop(Artikel artikel) { modelFacade.removeProductKassaVerkoop(artikel);}
 
     public Artikel getArtikel(String code) throws DatabaseException, IOException, BiffException {
         return modelFacade.getArtikel(code);

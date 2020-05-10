@@ -25,7 +25,7 @@ import java.util.Map;
 
 
 /**
- * @author Vanhaeren Corentin
+ * @author Vanhaeren Corentin, Sateur Maxime
  */
 
 public class KassaPane extends GridPane {
@@ -34,6 +34,10 @@ public class KassaPane extends GridPane {
     private Button voegartikelToe;
     private Label totaleprijs;
     private TableView table;
+
+    private Label verwijder;
+    private Button verwijderartikel;
+    private TextField verwijderartikelcode;
     //private Scene scene = new Scene(this);
     private List<Artikel> winkelmand = new ArrayList<>();
 
@@ -45,6 +49,14 @@ public class KassaPane extends GridPane {
         p2.getChildren().addAll(voegtoe, artikelcode, voegartikelToe);
         p2.setAlignment(Pos.CENTER);
         p2.setPadding(new Insets(10));
+
+        HBox p4 = new HBox(20);
+        verwijder = new Label("voeg artikelcode in:");
+        verwijderartikelcode = new TextField();
+        verwijderartikel = new Button("Verwijder");
+        p2.getChildren().addAll(verwijder, verwijderartikelcode, verwijderartikel);
+        p4.setAlignment(Pos.CENTER);
+        p4.setPadding(new Insets(10));
 
         VBox p3 = new VBox(10);
         table = new TableView<Artikel>();
@@ -126,6 +138,42 @@ public class KassaPane extends GridPane {
 
 
 
+        verwijderartikel.setOnAction(e -> {
+            try {
+                verwijderProduct(kassaviewController);
+                artikelcode.clear();
+                artikelcode.requestFocus();
+            } catch (DatabaseException databaseException) {
+                databaseException.printStackTrace();
+            }
+        });
+
+        verwijderartikel.setOnKeyPressed((KeyEvent keyEvent) -> {
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                try {
+                    verwijderProduct(kassaviewController);
+                    artikelcode.clear();
+                    artikelcode.requestFocus();
+                } catch (DatabaseException databaseException) {
+                    databaseException.printStackTrace();
+                }
+            }
+        });
+
+        artikelcode.setOnKeyPressed((KeyEvent keyEvent) -> {
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                try {
+                    verwijderProduct(kassaviewController);
+                    artikelcode.clear();
+                    artikelcode.requestFocus();
+                } catch (DatabaseException databaseException) {
+                    databaseException.printStackTrace();
+                }
+            }
+        });
+
+
+
     }
 
     public void voegProductToe(KassaviewController kassaviewController) throws DatabaseException{
@@ -133,6 +181,24 @@ public class KassaPane extends GridPane {
             kassaviewController.addProductKassaVerkoop(kassaviewController.getArtikel(artikelcode.getText()));
             table.getItems().clear();
             winkelmand.add(kassaviewController.getArtikel(artikelcode.getText()));
+            table.getItems().addAll(winkelmand);
+            //table.getItems().addAll(kassaviewController.getWinkelmandje());
+            updateTotaalPrijs(kassaviewController);
+        }catch (IllegalArgumentException e){
+            new Alert(Alert.AlertType.WARNING, e.getMessage()).showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (BiffException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void verwijderProduct(KassaviewController kassaviewController) throws DatabaseException{
+        try {
+            kassaviewController.removeProductKassaVerkoop(kassaviewController.getArtikel(verwijderartikelcode.getText()));
+            table.getItems().clear();
+            winkelmand.remove(kassaviewController.getArtikel(verwijderartikelcode.getText()));
             table.getItems().addAll(winkelmand);
             //table.getItems().addAll(kassaviewController.getWinkelmandje());
             updateTotaalPrijs(kassaviewController);

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * @author Pieter Herremans, Vanhaeren Corentin
+ * @author Pieter Herremans, Vanhaeren Corentin, Sateur Maxime
  */
 
 public class KassaVerkoop implements Subject{
@@ -49,6 +49,15 @@ public class KassaVerkoop implements Subject{
             winkelmandje.put(artikel, 1);
         }
         notifyObservers("add_product_winkelkar", artikel);
+    }
+
+    public void removeArtikelWinkelkar(Artikel artikel){
+        if(winkelmandje.get(artikel) > 1){
+            winkelmandje.replace(artikel, winkelmandje.get(artikel)-1);
+        }else{
+            winkelmandje.remove(artikel);
+        }
+        notifyObservers("remove_product_winkelkar", artikel);
     }
 
     public boolean artikelAlreadyAdded(Artikel artikel){

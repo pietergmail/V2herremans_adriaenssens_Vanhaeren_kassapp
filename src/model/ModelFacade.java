@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 /**
- * @author Vanhaeren Corentin
+ * @author Vanhaeren Corentin, Sateur Maxime
  */
 
 public class ModelFacade{
@@ -43,6 +43,8 @@ public class ModelFacade{
     public void addProductKassaVerkoop(Artikel artikel){
         kassaVerkoop.addArtikelWinkelkar(artikel);
     }
+
+    public void removeProductKassaVerkoop(Artikel artikel) {kassaVerkoop.removeArtikelWinkelkar(artikel);}
 
     public Artikel getArtikel(String code) throws DatabaseException, IOException, BiffException {
         for (Artikel a :this.loadinMemory()){
