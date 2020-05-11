@@ -97,6 +97,15 @@ public class KlantView implements Observer {
 		updateTotaalPrijs(kassaviewController);
 	}
 
+	@Override
+	public void update(String eventype) {
+		table.getItems().removeAll(this.winkelmand);
+		winkelmand = new ArrayList<>();
+		winkelmand = kassaviewController.getWinkelmandMetAantal();
+		table.getItems().addAll(winkelmand);
+		totaleprijs.setText("totaal: ");
+	}
+
 	public void updateTotaalPrijs(KassaviewController kassaviewController){
 		double prijs = kassaviewController.totaalPrijs();
 		totaleprijs.setText("totaal: " + prijs);

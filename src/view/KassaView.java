@@ -28,8 +28,6 @@ public class KassaView {
 		stage.show();		
 	}
 
-	public void updateTableview(KassaviewController kassaviewController){
 
-	}
 
 }

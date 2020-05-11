@@ -29,7 +29,7 @@ public class KassaVerkoop implements Subject{
 
     //public void addToWinkelmandje(Artikel artikel){ this.winkelmandje.add(artikel);}
 
-    public void removeFromWinkelMandje(int index) { this.winkelmandje.remove(index);}
+    //public void removeFromWinkelMandje(int index) { this.winkelmandje.remove(index);}
 
     public double getTotalPrijs(){
         double total = 0;
@@ -38,6 +38,7 @@ public class KassaVerkoop implements Subject{
         }
         return total;
     }
+
 
     public void addArtikelWinkelkar(Artikel artikel){
         if (artikelAlreadyAdded(artikel)){
@@ -49,6 +50,7 @@ public class KassaVerkoop implements Subject{
         notifyObservers("add_product_winkelkar", artikel);
     }
 
+
     public void removeArtikelWinkelkar(Artikel artikel){
         if(winkelmandje.get(artikel) > 1){
             winkelmandje.replace(artikel, winkelmandje.get(artikel)-1);
@@ -58,9 +60,11 @@ public class KassaVerkoop implements Subject{
         notifyObservers("remove_product_winkelkar", artikel);
     }
 
+
     public void setKassaState(KassaVerkoopState kassaState){
         this.kassaState = kassaState;
     }
+
 
     public void setOnHold() {
       //testing  System.out.println(winkelmandje.size());
@@ -69,8 +73,9 @@ public class KassaVerkoop implements Subject{
         winkelmandjeOnHold= new HashMap<>(winkelmandje);
         winkelmandje.clear();
         //testing System.out.println(winkelmandje.size());
-
+        notifyObservers("setOnHold");
     }
+
 
 
     public void setOffHold(){
@@ -84,7 +89,10 @@ public class KassaVerkoop implements Subject{
         setKassaState(new KassaVerkoopNew(this));
         winkelmandjeOnHold = new HashMap<>();
         System.out.println(winkelmandje.size());
+        notifyObservers("setOffHold");
     }
+
+
 
     public boolean artikelAlreadyAdded(Artikel artikel){
         boolean containsArtikel = false;
@@ -97,9 +105,12 @@ public class KassaVerkoop implements Subject{
         return containsArtikel;
     }
 
+/*
     public int getAantal(Artikel artikel){
         return winkelmandje.get(artikel);
     }
+
+ */
 
     @Override
     public void addObserver(Observer observer) {
@@ -118,6 +129,14 @@ public class KassaVerkoop implements Subject{
         }
     }
 
+    @Override
+    public void notifyObservers(String eventType) {
+        for (Observer observer : observers) {
+            observer.update(eventType);
+        }
+    }
+
+
     public ArrayList<Artikel> getWinkelmandje(){
         ArrayList<Artikel> list = new ArrayList<>();
         for (Artikel a:winkelmandje.keySet()) {
@@ -132,12 +151,15 @@ public class KassaVerkoop implements Subject{
                 list.add(a);
             }
         }
-        //System.out.println(list + " winkelmand list");
-        //System.out.println(winkelmandje + " winkelmand map");
+        System.out.println(list + " winkelmand list");
+        System.out.println(winkelmandje + " winkelmand map");
         return list;
     }
 
+
     public HashMap<Artikel, Integer> getWinkelmandMap(){
+        //System.out.println(winkelmandje);
         return winkelmandje;
     }
+
 }

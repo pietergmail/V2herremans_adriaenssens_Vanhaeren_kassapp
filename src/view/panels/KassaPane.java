@@ -162,13 +162,13 @@ public class KassaPane extends GridPane {
         onhold.setOnAction(e ->{
             System.out.println("onhold");
             restoreonhold.setDisable(false);
-            kassaviewController.setOnHold();
+            setOnhold(kassaviewController);
         });
 
         restoreonhold.setOnAction(e -> {
             System.out.println("restore on hold");
             restoreonhold.setDisable(true);
-            kassaviewController.setOffHold();
+            setRestoreonhold(kassaviewController);
         });
 
 
@@ -274,8 +274,18 @@ public class KassaPane extends GridPane {
 
     }
 
-
-    public void update(KassaviewController kassaviewController){
-        //table.refresh();
+    private void setOnhold(KassaviewController kassaviewController){
+        kassaviewController.setOnHold();
+        table.getItems().clear();
+        table.getItems().addAll(kassaviewController.getWinkelmandje());
+        totaleprijs.setText("totaal: ");
     }
+
+    private void setRestoreonhold(KassaviewController kassaviewController){
+        kassaviewController.setOffHold();
+        table.getItems().clear();
+        table.getItems().addAll(kassaviewController.getWinkelmandje());
+    }
+
+
 }
