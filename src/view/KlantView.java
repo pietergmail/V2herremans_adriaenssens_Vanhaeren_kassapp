@@ -65,7 +65,6 @@ public class KlantView implements Observer {
 
 
 		table.getColumns().addAll(columnOmschrijving, columnPrijs, columnAantal);
-
 		VBox p1 = new VBox();
 
 
@@ -77,7 +76,7 @@ public class KlantView implements Observer {
 		p2.setPadding(new Insets(10));
 
 		p1.getChildren().addAll(table, p2);
-
+		p1.setPadding(new Insets(10));
 		root.getChildren().addAll(p1);
 
 

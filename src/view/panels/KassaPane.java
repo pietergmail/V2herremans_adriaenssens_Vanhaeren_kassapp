@@ -31,6 +31,8 @@ public class KassaPane extends GridPane {
     private Button voegartikelToe;
     private Label totaleprijs;
     private TableView table;
+    private Button onhold;
+    private Button restoreonhold;
 
     private Label verwijder;
     private Button verwijderartikel;
@@ -44,7 +46,7 @@ public class KassaPane extends GridPane {
         artikelcode = new TextField();
         voegartikelToe = new Button("voeg toe");
         p2.getChildren().addAll(voegtoe, artikelcode, voegartikelToe);
-        p2.setAlignment(Pos.CENTER);
+        //p2.setAlignment(Pos.CENTER);
         p2.setPadding(new Insets(10));
 
         /*
@@ -57,7 +59,6 @@ public class KassaPane extends GridPane {
         p4.setPadding(new Insets(10));
 
          */
-
         VBox p3 = new VBox(10);
         table = new TableView<>();
         totaleprijs = new Label("Totale prijs:");
@@ -65,6 +66,24 @@ public class KassaPane extends GridPane {
         p3.setAlignment(Pos.CENTER);
         p3.setPadding(new Insets(10));
         //table.setItems(producten);
+
+        VBox p5 = new VBox(10);
+        onhold = new Button("zet on hold");
+        restoreonhold = new Button("restore on hold");
+        restoreonhold.setDisable(true);
+        //restoreonhold.setVisible(false);
+        onhold.setPrefWidth(100);
+        restoreonhold.setPrefWidth(100);
+        p5.getChildren().addAll(onhold, restoreonhold);
+        p5.setAlignment(Pos.CENTER);
+        p5.setPadding(new Insets(10));
+
+        HBox p4 = new HBox(10);
+        p4.getChildren().addAll(p3, p5);
+        p4.setAlignment(Pos.CENTER);
+        p4.setPadding(new Insets(10));
+
+
 
 
         TableColumn<Artikel, String> columnOmschrijving = new TableColumn<>("Omschrijving");
@@ -89,7 +108,7 @@ public class KassaPane extends GridPane {
 
 
         VBox p1 = new VBox(10);
-        p1.getChildren().addAll(p2, p3);
+        p1.getChildren().addAll(p2, p4);
         p1.setAlignment(Pos.CENTER);
         p1.setPadding(new Insets(10));
 
@@ -140,6 +159,16 @@ public class KassaPane extends GridPane {
             }
         });
 
+        onhold.setOnAction(e ->{
+            System.out.println("onhold");
+            restoreonhold.setDisable(false);
+        });
+
+        restoreonhold.setOnAction(e -> {
+            System.out.println("restore on hold");
+            restoreonhold.setDisable(true);
+        });
+
 
 /*
         verwijderartikel.setOnAction(e -> {
@@ -154,33 +183,6 @@ public class KassaPane extends GridPane {
 
  */
 
-        //kan niet werken
-        /*
-        verwijderartikel.setOnKeyPressed((KeyEvent keyEvent) -> {
-            if (keyEvent.getCode() == KeyCode.ENTER) {
-                try {
-                    verwijderProduct(kassaviewController);
-                    artikelcode.clear();
-                    artikelcode.requestFocus();
-                } catch (DatabaseException databaseException) {
-                    databaseException.printStackTrace();
-                }
-            }
-        });
-
-        artikelcode.setOnKeyPressed((KeyEvent keyEvent) -> {
-            if (keyEvent.getCode() == KeyCode.ENTER) {
-                try {
-                    verwijderProduct(kassaviewController);
-                    artikelcode.clear();
-                    artikelcode.requestFocus();
-                } catch (DatabaseException databaseException) {
-                    databaseException.printStackTrace();
-                }
-            }
-        });
-
-         */
 
 
 
