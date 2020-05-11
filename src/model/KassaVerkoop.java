@@ -73,7 +73,8 @@ public class KassaVerkoop implements Subject{
         winkelmandjeOnHold= new HashMap<>(winkelmandje);
         winkelmandje.clear();
         //testing System.out.println(winkelmandje.size());
-        notifyObservers("setOnHold");
+        //notifyObservers("setOnHold");
+        notifyObservers("setOnHold", null);
     }
 
 
@@ -88,8 +89,9 @@ public class KassaVerkoop implements Subject{
         }
         setKassaState(new KassaVerkoopNew(this));
         winkelmandjeOnHold = new HashMap<>();
-        System.out.println(winkelmandje.size());
-        notifyObservers("setOffHold");
+        //System.out.println(winkelmandje.size());
+        //notifyObservers("setOffHold");
+        notifyObservers("setOffHold", null);
     }
 
 
@@ -128,13 +130,15 @@ public class KassaVerkoop implements Subject{
             observer.update(eventType, artikel);
         }
     }
-
+/*
     @Override
     public void notifyObservers(String eventType) {
         for (Observer observer : observers) {
             observer.update(eventType);
         }
     }
+
+ */
 
 
     public ArrayList<Artikel> getWinkelmandje(){
@@ -151,8 +155,8 @@ public class KassaVerkoop implements Subject{
                 list.add(a);
             }
         }
-        System.out.println(list + " winkelmand list");
-        System.out.println(winkelmandje + " winkelmand map");
+        //System.out.println(list + " winkelmand list");
+        //System.out.println(winkelmandje + " winkelmand map");
         return list;
     }
 

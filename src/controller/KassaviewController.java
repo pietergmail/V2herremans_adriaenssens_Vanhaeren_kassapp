@@ -55,10 +55,13 @@ public class KassaviewController implements Observer {
         modelFacade.update(eventType, artikel);
     }
 
+    /*
     @Override
     public void update(String eventype) {
         modelFacade.update(eventype);
     }
+
+     */
 
     public void setProperty(String key, String value) {
         modelFacade.setProperty(key, value);

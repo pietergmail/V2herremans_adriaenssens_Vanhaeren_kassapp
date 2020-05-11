@@ -39,6 +39,7 @@ public class KassaAppMain extends Application {
 			e.printStackTrace();
 		}
 
+		/*
 		ExcelLoadSaveStrategy loadsaveArtikelexcel = new ExcelLoadSaveStrategy();
 		ArrayList<Artikel> list = null;
 		try {
@@ -53,6 +54,8 @@ public class KassaAppMain extends Application {
 				System.out.println(o.toString());
 				System.out.println("_________________________________");
 			}
+
+		 */
 	}
 
 	public static void main(String[] args) {

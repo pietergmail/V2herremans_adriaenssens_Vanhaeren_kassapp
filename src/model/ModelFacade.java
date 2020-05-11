@@ -91,11 +91,23 @@ public class ModelFacade {
             //kassaView.updateTableview(this);
             System.out.println("Product " + artikel.getOmschrijving() + " is toegevoegd.");
         }
+        if(eventType.equals("remove_product_winkelkar")){
+            System.out.println("Product " + artikel.getOmschrijving() + " is verwijdert.");
+        }
+        if(eventType.equals("setOnHold")){
+            System.out.println("Winkelkar on hold gezet.");
+        }
+        if(eventType.equals("setOffHold")){
+            System.out.println("Winkelkar off hold gezet.");
+        }
     }
 
+    /*
     public void update(String eventType) {
 
     }
+
+     */
 
     public void setProperty(String key, String value) {
         instellingController.setProperty(key, value);
