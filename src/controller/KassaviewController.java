@@ -29,6 +29,14 @@ public class KassaviewController implements Observer {
 
     public void removeProductKassaVerkoop(Artikel artikel) { modelFacade.removeProductKassaVerkoop(artikel);}
 
+    public void setOnHold(){
+        modelFacade.setOnHold();
+    }
+
+    public void setOffHold(){
+        modelFacade.setOffHold();
+    }
+
     public Artikel getArtikel(String code) throws DatabaseException, IOException, BiffException {
         return modelFacade.getArtikel(code);
     }

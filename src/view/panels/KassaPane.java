@@ -162,11 +162,13 @@ public class KassaPane extends GridPane {
         onhold.setOnAction(e ->{
             System.out.println("onhold");
             restoreonhold.setDisable(false);
+            kassaviewController.setOnHold();
         });
 
         restoreonhold.setOnAction(e -> {
             System.out.println("restore on hold");
             restoreonhold.setDisable(true);
+            kassaviewController.setOffHold();
         });
 
 

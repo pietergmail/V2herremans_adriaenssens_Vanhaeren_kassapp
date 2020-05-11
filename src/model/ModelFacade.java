@@ -46,6 +46,10 @@ public class ModelFacade{
 
     public void removeProductKassaVerkoop(Artikel artikel) {kassaVerkoop.removeArtikelWinkelkar(artikel);}
 
+    public void setOnHold(){kassaVerkoop.setOnHold();}
+
+    public void setOffHold(){kassaVerkoop.setOffHold();}
+
     public Artikel getArtikel(String code) throws DatabaseException, IOException, BiffException {
         for (Artikel a :this.loadinMemory()){
             if (a.getCode().equals(code)){

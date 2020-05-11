@@ -1,5 +1,9 @@
 package model;
 
+import model.KassaState.KassaVerkoopNew;
+import model.KassaState.KassaVerkoopOnHold;
+import model.KassaState.KassaVerkoopState;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -9,9 +13,10 @@ import java.util.HashMap;
 
 public class KassaVerkoop implements Subject{
 
-    private ArrayList<Artikel> hold;
+    private HashMap<Artikel, Integer> winkelmandjeOnHold;
     private ArrayList<Observer> observers = new ArrayList<>();
     private HashMap<Artikel, Integer> winkelmandje;
+    private KassaVerkoopState kassaState;
 
     public KassaVerkoop() {
         this.winkelmandje = new HashMap<>();
@@ -21,13 +26,6 @@ public class KassaVerkoop implements Subject{
         getWinkelmandje();
     }
 
-    public ArrayList<Artikel> getHold() {
-        return hold;
-    }
-
-    public void setHold(ArrayList<Artikel> hold) {
-        this.hold = hold;
-    }
 
     //public void addToWinkelmandje(Artikel artikel){ this.winkelmandje.add(artikel);}
 
@@ -58,6 +56,34 @@ public class KassaVerkoop implements Subject{
             winkelmandje.remove(artikel);
         }
         notifyObservers("remove_product_winkelkar", artikel);
+    }
+
+    public void setKassaState(KassaVerkoopState kassaState){
+        this.kassaState = kassaState;
+    }
+
+    public void setOnHold() {
+      //testing  System.out.println(winkelmandje.size());
+        new KassaVerkoopNew(this).setOnHold();
+        setKassaState(new KassaVerkoopOnHold(this));
+        winkelmandjeOnHold= new HashMap<>(winkelmandje);
+        winkelmandje.clear();
+        //testing System.out.println(winkelmandje.size());
+
+    }
+
+
+    public void setOffHold(){
+        winkelmandje = new HashMap<>();
+        try{
+            winkelmandje.putAll(winkelmandjeOnHold);
+            new KassaVerkoopOnHold(this).setOffHold();
+        } catch (Exception e) {
+            new KassaVerkoopNew(this).setOffHold();
+        }
+        setKassaState(new KassaVerkoopNew(this));
+        winkelmandjeOnHold = new HashMap<>();
+        System.out.println(winkelmandje.size());
     }
 
     public boolean artikelAlreadyAdded(Artikel artikel){
