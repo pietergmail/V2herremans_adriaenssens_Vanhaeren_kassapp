@@ -22,7 +22,7 @@ public class KassaVerkoopOnHold implements KassaVerkoopState {
     }
 
     public void setOffHold(){
-
+        kassaVerkoop.setKassaState(new KassaVerkoopNew(kassaVerkoop));
     }
 
     public void Done(){
