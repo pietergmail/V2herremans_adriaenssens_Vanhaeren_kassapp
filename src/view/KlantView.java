@@ -190,7 +190,8 @@ public class KlantView implements Observer {
 		//kassaviewController.setOnHold();
 		table.getItems().clear();
 		//table.getItems().addAll(kassaviewController.getWinkelmandje());
-		winkelmandonhold = winkelmand;
+		winkelmandonhold.addAll(winkelmand);
+		winkelmand.clear();
 		totaleprijs.setText("totaal: ");
 	}
 
@@ -198,7 +199,7 @@ public class KlantView implements Observer {
 		//kassaviewController.setOffHold();
 		table.getItems().clear();
 		//table.getItems().addAll(kassaviewController.getWinkelmandje());
-		winkelmand = winkelmandonhold;
+		winkelmand.addAll(winkelmandonhold);
 		table.getItems().addAll(winkelmand);
 
 	}

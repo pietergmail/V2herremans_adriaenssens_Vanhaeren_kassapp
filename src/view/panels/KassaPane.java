@@ -278,17 +278,23 @@ public class KassaPane extends GridPane {
         kassaviewController.setOnHold();
         table.getItems().clear();
         //table.getItems().addAll(kassaviewController.getWinkelmandje());
-        winkelmandonhold = winkelmand;
+        winkelmandonhold.addAll(winkelmand);
+        winkelmand.clear();
         totaleprijs.setText("totaal: ");
+        //System.out.println(winkelmandonhold);
     }
 
     private void setRestoreonhold(KassaviewController kassaviewController) {
         kassaviewController.setOffHold();
         table.getItems().clear();
         //table.getItems().addAll(kassaviewController.getWinkelmandje());
-        winkelmand = winkelmandonhold;
+        winkelmand.addAll(winkelmandonhold);
         table.getItems().addAll(winkelmand);
         updateTotaalPrijs(kassaviewController);
+    }
+
+    private void copyList(ArrayList<Artikel> list1, ArrayList<Artikel> list2){
+
     }
 
 
