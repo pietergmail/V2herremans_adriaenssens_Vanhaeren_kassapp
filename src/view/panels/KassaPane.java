@@ -288,13 +288,10 @@ public class KassaPane extends GridPane {
         kassaviewController.setOffHold();
         table.getItems().clear();
         //table.getItems().addAll(kassaviewController.getWinkelmandje());
+        winkelmand.clear();
         winkelmand.addAll(winkelmandonhold);
         table.getItems().addAll(winkelmand);
         updateTotaalPrijs(kassaviewController);
-    }
-
-    private void copyList(ArrayList<Artikel> list1, ArrayList<Artikel> list2){
-
     }
 
 

@@ -199,6 +199,7 @@ public class KlantView implements Observer {
 		//kassaviewController.setOffHold();
 		table.getItems().clear();
 		//table.getItems().addAll(kassaviewController.getWinkelmandje());
+		winkelmand.clear();
 		winkelmand.addAll(winkelmandonhold);
 		table.getItems().addAll(winkelmand);
 
