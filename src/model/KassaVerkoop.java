@@ -1,9 +1,13 @@
 package model;
 
+import javafx.collections.FXCollections;
 import model.KassaState.KassaVerkoopNew;
 import model.KassaState.KassaVerkoopOnHold;
 import model.KassaState.KassaVerkoopState;
+import model.korting.KortingStrategy;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -17,6 +21,7 @@ public class KassaVerkoop implements Subject{
     private ArrayList<Observer> observers = new ArrayList<>();
     private HashMap<Artikel, Integer> winkelmandje;
     private KassaVerkoopState kassaState;
+    private KortingStrategy korting;
 
     public KassaVerkoop() {
         this.winkelmandje = new HashMap<>();
@@ -166,4 +171,18 @@ public class KassaVerkoop implements Subject{
         return winkelmandje;
     }
 
+    public void setKorting(KortingStrategy korting){
+        this.korting = korting;
+    }
+
+
+    public double getKorting(){
+        if(winkelmandje.size() == 0) return 0;
+        else {
+            double kortingbedrag = korting.getKorting(FXCollections.observableArrayList(this.getWinkelmandje()));
+            BigDecimal round = BigDecimal.valueOf(kortingbedrag);
+            round = round.setScale(2, RoundingMode.HALF_UP);
+            return round.doubleValue();
+        }
+    }
 }
