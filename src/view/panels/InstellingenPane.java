@@ -17,7 +17,6 @@ import model.database.LoadSaveEnum;
 
 import java.io.*;
 import javafx.event.ActionEvent;
-import model.korting.KortingEnum;
 
 import java.util.Properties;
 
@@ -53,37 +52,13 @@ public class InstellingenPane  extends GridPane implements EventHandler<javafx.e
 
         saveButton.setOnAction(this);
 
-        this.add(new Label("Kies welke korting u wilt aanmaken:"),0,6,1,1);
-
-        /*combo = new ComboBox();
-        combo.getItems().addAll(KortingEnum.values());
-        this.add(combo,0,7,1,1);
-        if(controller.getProperty("prop.typekorting").equals("DUURSTEKORTING")){
-            combo.setValue(KortingEnum.DUURSTEKORTING);
-            showCorrectBoxes();
-        }
-        switch (controller.getProperty("prop.typekorting")){
-            case "DUURSTEKORTING":
-                combo.setValue(KortingEnum.DUURSTEKORTING);
-                break;
-            case "DREMPELKORTING":
-                combo.setValue(KortingEnum.DREMPELKORTING);
-                break;
-            case "GROEPSKORTING":
-                combo.setValue(KortingEnum.GROEPSKORTING);
-                break;
-        }
-        showCorrectBoxes();*/
-
     }
 
     @Override
     public void handle(ActionEvent event) {
-        try {
-            LoadSaveEnum loadSaveEnum = LoadSaveEnum.valueOf(combobox.getValue().toString());
-            controller.setLoadSaveStrategy(loadSaveEnum);
-        } catch (Exception e){
-            throw new IllegalArgumentException(e.getMessage());
+        if (event.getSource() == saveButton) {
+            controller.setProperty("property.filetype", combobox.getValue().toString());
+            System.out.println(combobox.getValue().toString());
         }
     }
 }
