@@ -16,13 +16,11 @@ import java.util.Map;
  */
 
 public class KassaviewController implements Observer {
-    private InstellingController instellingController;
 
     private ModelFacade modelFacade;
 
     public KassaviewController(ModelFacade modelFacade) {
         this.modelFacade = modelFacade;
-        this.instellingController = new InstellingController();
     }
 
     public void addProductKassaVerkoop(Artikel artikel) {
@@ -51,8 +49,6 @@ public class KassaviewController implements Observer {
         return modelFacade.getWinkelmandMetAantal();
     }
 
-    public void setLoadSaveStrategy(LoadSaveEnum loadsave){ instellingController.setLoadSaveStrategy(loadsave);}
-
 
     @Override
     public void update(String eventType, Artikel artikel) {
@@ -68,11 +64,11 @@ public class KassaviewController implements Observer {
      */
 
     public void setProperty(String key, String value) {
-        instellingController.setProperty(key, value);
+        modelFacade.setProperty(key, value);
     }
 
     public String getProperty(String key) {
-        return instellingController.getProperty(key);
+        return modelFacade.getProperty(key);
     }
 
     public ArrayList<Artikel> getWinkelmandje() {
