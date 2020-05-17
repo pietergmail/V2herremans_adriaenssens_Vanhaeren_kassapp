@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import model.Artikel;
 import model.Observer;
+import model.database.LoadSaveEnum;
 
 import java.io.*;
 import java.util.Properties;
@@ -39,6 +40,12 @@ public class InstellingController {
             e.getMessage();
         }
         return value;
+    }
+
+    public void setLoadSaveStrategy(LoadSaveEnum loadsave){
+        if(loadsave == null) throw new IllegalArgumentException("De LoadSave keuze was niet correct.");
+        System.out.println("Input: " + loadsave.toString());
+        this.setProperty("prop.filetype", loadsave.toString());
     }
 }
 
