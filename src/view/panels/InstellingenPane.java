@@ -30,6 +30,7 @@ public class InstellingenPane  extends GridPane implements EventHandler<javafx.e
     private ObjectProperty<KortingEnum> kortingchoice = new SimpleObjectProperty<>();
     private Properties properties = new Properties();
     private Button saveButton;
+    private Button KortingButton;
     private KassaviewController controller;
     private String path = "src" + File.separator + "bestanden" + File.separator + "Save.properties";
 
@@ -85,27 +86,27 @@ public class InstellingenPane  extends GridPane implements EventHandler<javafx.e
 
         kortingchoice.set(KortingEnum.GROEPSKORTING);
 
-        Button btn = new Button("Print Choice");
-        btn.setOnAction( (evt) -> SetKorting(kortingchoice));
+        KortingButton = new Button("Print Choice");
 
         this.add(Drempelkorting, 0,3,2,2);
         this.add(Duurstekorting, 0,5,2,2);
         this.add(GroepKorting, 0,7,2,2);
-        this.add(btn, 0, 9,2,2);
+        this.add(KortingButton, 0, 9,2,2);
+
+        KortingButton.setOnAction(this);
 
 
     }
 
     @Override
     public void handle(ActionEvent event) {
+        //zit nog een bug in dat wanneer er naar KassaApp.properties wordt geschreven deze leeg maakt, dit kan bij volgende restart voor bugs zorgen.
         if (event.getSource() == saveButton) {
             controller.setProperty("property.filetype", combobox.getValue().toString());
             System.out.println(combobox.getValue().toString());
+        } else if(event.getSource() == KortingButton){
+            controller.setProperty("property.typekorting", kortingchoice.get().toString());
+            System.out.println(kortingchoice.get());
         }
-    }
-
-    public void SetKorting(ObjectProperty<KortingEnum> kortingchoice){
-        controller.setProperty("property.typekorting", kortingchoice.get().toString());
-        System.out.println(kortingchoice.get());
     }
 }
