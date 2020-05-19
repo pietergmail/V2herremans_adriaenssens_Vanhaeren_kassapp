@@ -5,22 +5,17 @@ import controller.KassaviewController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.util.Callback;
 import jxl.read.biff.BiffException;
 import model.Artikel;
 import model.database.DatabaseException;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +30,6 @@ public class KassaPane extends GridPane {
     private TextField artikelcode;
     private Button voegartikelToe;
     private Label totaleprijs;
-    private Label korting;
-    private Label tebetalen;
     private TableView table;
     private Button onhold;
     private Button restoreonhold;
@@ -91,10 +84,6 @@ public class KassaPane extends GridPane {
         p4.setAlignment(Pos.CENTER);
         p4.setPadding(new Insets(10));
 
-        this.LabelTotalePrijs();
-        this.LabelKorting();
-        this.LabelTeBetalen();
-
 
         TableColumn<Artikel, String> columnOmschrijving = new TableColumn<>("Omschrijving");
         columnOmschrijving.setMinWidth(200);
@@ -123,7 +112,6 @@ public class KassaPane extends GridPane {
         p1.setPadding(new Insets(10));
 
         this.getChildren().addAll(p1);
-
 
         /*
         Platform.runLater(new Runnable() {
@@ -307,33 +295,5 @@ public class KassaPane extends GridPane {
         updateTotaalPrijs(kassaviewController);
     }
 
-    private void LabelTotalePrijs(){
-        totaleprijs = new Label("Totaal: 0");
-        totaleprijs.setFont(new Font("Verdana", 16));
-        this.add(totaleprijs, 1, 2);
-    }
 
-    private void LabelKorting(){
-        korting = new Label("Korting: 0");
-        korting.setFont(new Font("Verdana", 16));
-        this.add(korting, 1, 3);
-    }
-
-    private void LabelTeBetalen(){
-        tebetalen = new Label("Te betalen: 0");
-        tebetalen.setFont(new Font("Verdana", 16));
-        this.add(tebetalen, 1, 4);
-    }
-
-    public void setTotaleprijs(double totaleprijs){
-        this.totaleprijs.setText("Totaal: €" + String.valueOf(totaleprijs));
-    }
-
-    public void setKorting(double korting){
-        this.korting.setText("Totale: €" + String.valueOf(korting));
-    }
-
-    public void setTebetalen(double betalen){
-        this.tebetalen.setText("Totale: € " + String.valueOf(betalen));
-    }
 }

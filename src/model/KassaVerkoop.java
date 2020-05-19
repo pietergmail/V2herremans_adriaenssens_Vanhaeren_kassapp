@@ -1,7 +1,6 @@
 package model;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import model.KassaState.KassaVerkoopNew;
 import model.KassaState.KassaVerkoopOnHold;
 import model.KassaState.KassaVerkoopState;
@@ -11,7 +10,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Observable;
 
 /**
  * @author Pieter Herremans, Vanhaeren Corentin, Sateur Maxime
@@ -45,6 +43,7 @@ public class KassaVerkoop implements Subject{
         }
         return total;
     }
+
 
     public void addArtikelWinkelkar(Artikel artikel){
         if (artikelAlreadyAdded(artikel)){
@@ -180,13 +179,10 @@ public class KassaVerkoop implements Subject{
     public double getKorting(){
         if(winkelmandje.size() == 0) return 0;
         else {
-            ObservableList<Artikel> observableList = (ObservableList<Artikel>) this.getWinkelmandje();
-            double kortingbedrag = korting.getKorting(this.getWinkelmandje());
+            double kortingbedrag = korting.getKorting(FXCollections.observableArrayList(this.getWinkelmandje()));
             BigDecimal round = BigDecimal.valueOf(kortingbedrag);
             round = round.setScale(2, RoundingMode.HALF_UP);
             return round.doubleValue();
         }
     }
-
-    public double getTeBetalen(){return getTotalPrijs() - getKorting();}
 }

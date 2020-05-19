@@ -6,7 +6,6 @@ import model.*;
 import model.database.*;
 import view.KassaView;
 import view.KlantView;
-import view.panels.KassaPane;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,6 +16,7 @@ import java.util.Map;
  */
 
 public class KassaviewController implements Observer {
+
     private ModelFacade modelFacade;
 
     public KassaviewController(ModelFacade modelFacade) {
@@ -43,14 +43,6 @@ public class KassaviewController implements Observer {
 
     public double totaalPrijs() {
         return modelFacade.totaalPrijs();
-    }
-
-    public double Korting(){
-        return modelFacade.Korting();
-    }
-
-    public double TeBetalen(){
-        return modelFacade.TeBetalen();
     }
 
     public ArrayList<ArtikelWinkelmand> getWinkelmandMetAantal() {
