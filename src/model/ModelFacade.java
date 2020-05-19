@@ -6,6 +6,7 @@ import model.database.DatabaseException;
 import model.database.LoadSaveContext;
 import model.database.LoadsaveArtikeltekst;
 import view.KassaView;
+import view.panels.KassaPane;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,8 +17,6 @@ import java.util.Map;
  */
 
 public class ModelFacade {
-
-    private KassaView kassaView;
     private KassaVerkoop kassaVerkoop;
     private ArtikelWinkelmand artikelWinkelmand;
     private InstellingController instellingController;
@@ -70,6 +69,10 @@ public class ModelFacade {
         return kassaVerkoop.getTotalPrijs();
     }
 
+    public double Korting(){return kassaVerkoop.getKorting();}
+
+    public double TeBetalen(){return kassaVerkoop.getTeBetalen();}
+
     public ArrayList<ArtikelWinkelmand> getWinkelmandMetAantal() {
         ArrayList<ArtikelWinkelmand> winkelmand = new ArrayList<>();
         for (Map.Entry<Artikel, Integer> entry : kassaVerkoop.getWinkelmandMap().entrySet()) {
@@ -86,6 +89,7 @@ public class ModelFacade {
 
 
     public void update(String eventType, Artikel artikel) {
+
         if (eventType.equals("add_product_winkelkar")) {
             //code te laten uitvoeren
             //kassaView.updateTableview(this);
@@ -141,4 +145,5 @@ public class ModelFacade {
         }
         return producten;
     }
+
 }

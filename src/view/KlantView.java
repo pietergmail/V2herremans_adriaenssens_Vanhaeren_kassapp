@@ -31,6 +31,8 @@ public class KlantView implements Observer {
 	ArrayList<ArtikelWinkelmand> winkelmand = new ArrayList<>();
 	ArrayList<ArtikelWinkelmand> winkelmandonhold = new ArrayList<>();
 	Label totaleprijs;
+	Label korting;
+	Label tebetalen;
 
 
 	public KlantView(KassaviewController kassaviewController){
@@ -72,10 +74,22 @@ public class KlantView implements Observer {
 
 
 		VBox p2 = new VBox(10);
-		totaleprijs = new Label("Totale prijs:");
+		totaleprijs = new Label("Totale prijs: ");
 		p2.getChildren().addAll(totaleprijs);
 		p2.setAlignment(Pos.CENTER);
 		p2.setPadding(new Insets(10));
+
+		VBox p3 = new VBox(10);
+		korting = new Label("korting: ");
+		p3.getChildren().addAll(korting);
+		p3.setAlignment(Pos.CENTER);
+		p3.setPadding(new Insets(10));
+
+		VBox p4 = new VBox(10);
+		tebetalen = new Label("tebetalen: ");
+		p4.getChildren().addAll(tebetalen);
+		p4.setAlignment(Pos.CENTER);
+		p4.setPadding(new Insets(10));
 
 		p1.getChildren().addAll(table, p2);
 		p1.setPadding(new Insets(10));
@@ -93,18 +107,26 @@ public class KlantView implements Observer {
 		if(eventType.equals("add_product_winkelkar")){
 			addProduct(kassaviewController, artikel);
 			updateTotaalPrijs(kassaviewController);
+			updateKorting(kassaviewController);
+			updatetebetalen(kassaviewController);
 			//System.out.println("test");
 		}
 		if(eventType.equals("remove_product_winkelkar")){
 			removeProduct(kassaviewController, artikel);
 			updateTotaalPrijs(kassaviewController);
+			updateKorting(kassaviewController);
+			updatetebetalen(kassaviewController);
 		}
 		if(eventType.equals("setOnHold")){
 			setOnhold(kassaviewController);
+			updateKorting(kassaviewController);
+			updatetebetalen(kassaviewController);
 		}
 		if(eventType.equals("setOffHold")){
 			setRestoreonhold(kassaviewController);
 			updateTotaalPrijs(kassaviewController);
+			updateKorting(kassaviewController);
+			updatetebetalen(kassaviewController);
 		}
 
 		//table = new TableView();
@@ -137,6 +159,16 @@ public class KlantView implements Observer {
 	public void updateTotaalPrijs(KassaviewController kassaviewController){
 		double prijs = kassaviewController.totaalPrijs();
 		totaleprijs.setText("totaal: " + prijs);
+	}
+
+	public void updateKorting(KassaviewController kassaviewController){
+		double kortingkost = kassaviewController.Korting();
+		korting.setText("korting: " + kortingkost);
+	}
+
+	public void updatetebetalen(KassaviewController kassaviewController){
+		double tebetalenkost = kassaviewController.TeBetalen();
+		tebetalen.setText("tebetalen: " + tebetalenkost);
 	}
 
 	public void addProduct(KassaviewController kassaviewController, Artikel artikel){
