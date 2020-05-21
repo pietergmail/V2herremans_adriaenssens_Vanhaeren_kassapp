@@ -1,15 +1,18 @@
 package model;
 
+import controller.KassaviewController;
 import javafx.collections.FXCollections;
 import model.KassaState.KassaVerkoopNew;
 import model.KassaState.KassaVerkoopOnHold;
 import model.KassaState.KassaVerkoopState;
+import model.korting.KortingContext;
 import model.korting.KortingStrategy;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author Pieter Herremans, Vanhaeren Corentin, Sateur Maxime
@@ -17,14 +20,19 @@ import java.util.HashMap;
 
 public class KassaVerkoop implements Subject{
 
-    private HashMap<Artikel, Integer> winkelmandjeOnHold;
+    //private HashMap<Artikel, Integer> winkelmandjeOnHold;
     private ArrayList<Observer> observers = new ArrayList<>();
-    private HashMap<Artikel, Integer> winkelmandje;
+    //private HashMap<Artikel, Integer> winkelmandje;
     private KassaVerkoopState kassaState;
     private KortingStrategy korting;
+    ArrayList<ArtikelWinkelmand> winkelmand = new ArrayList<>();
+    ArrayList<ArtikelWinkelmand> winkelmandonhold = new ArrayList<>();
+    private ArrayList<Artikel> winkelmandlist = new ArrayList<>();
+    private ArrayList<Artikel> winkelmandonholdlist = new ArrayList<>();
+    //private KortingContext kortingContext;
 
     public KassaVerkoop() {
-        this.winkelmandje = new HashMap<>();
+        //this.winkelmandje = new HashMap<>();
     }
 
     public void setWinkelmandje(ArrayList<Artikel> winkelmandje) {
@@ -44,7 +52,7 @@ public class KassaVerkoop implements Subject{
         return total;
     }
 
-
+/*
     public void addArtikelWinkelkar(Artikel artikel){
         if (artikelAlreadyAdded(artikel)){
             winkelmandje.replace(artikel,  winkelmandje.get(artikel)+1);
@@ -55,7 +63,24 @@ public class KassaVerkoop implements Subject{
         notifyObservers("add_product_winkelkar", artikel);
     }
 
+ */
+public void addArtikelWinkelkar(Artikel artikel){
+    if (artikelAlreadyAdded(artikel)){
+        for (ArtikelWinkelmand a: winkelmand) {
+            if (a.getCode().equals(artikel.getCode())){
+                a.setAantal(a.getAantal()+1);
+            }
+        }
+    }
+    else{
+        ArtikelWinkelmand artikelWinkelmand = new ArtikelWinkelmand(artikel.getCode(), artikel.getOmschrijving(), artikel.getGroep(), artikel.getPrijs(), 1);
+        winkelmand.add(artikelWinkelmand);
+    }
+    winkelmandlist.add(artikel);
+    notifyObservers("add_product_winkelkar", artikel);
+}
 
+/*
     public void removeArtikelWinkelkar(Artikel artikel){
         if(winkelmandje.get(artikel) > 1){
             winkelmandje.replace(artikel, winkelmandje.get(artikel)-1);
@@ -65,12 +90,34 @@ public class KassaVerkoop implements Subject{
         notifyObservers("remove_product_winkelkar", artikel);
     }
 
+ */
+
+public void removeArtikelWinkelkar(Artikel artikel){
+    for (int i = 0; i < winkelmand.size(); i++) {
+        ArtikelWinkelmand a = winkelmand.get(i);
+        if (a.getCode().equals(artikel.getCode())){
+            //System.out.println("test");
+            if(a.getAantal() > 1){
+                int aantal = a.getAantal();
+                aantal-=1;
+                a.setAantal(aantal);
+            }
+            else {
+                //winkelmand.remove(a);
+                winkelmand.remove(i);
+            }
+        }
+    }
+    winkelmandlist.remove(artikel);
+    notifyObservers("remove_product_winkelkar", artikel);
+}
+
 
     public void setKassaState(KassaVerkoopState kassaState){
         this.kassaState = kassaState;
     }
 
-
+/*
     public void setOnHold() {
       //testing  System.out.println(winkelmandje.size());
         new KassaVerkoopNew(this).setOnHold();
@@ -82,8 +129,20 @@ public class KassaVerkoop implements Subject{
         notifyObservers("setOnHold", null);
     }
 
+ */
+
+    public void setOnHold() {
+        winkelmandonhold.clear();
+        winkelmandonholdlist.clear();
+        winkelmandonhold.addAll(winkelmand);
+        winkelmandonholdlist.addAll(winkelmandlist);
+        winkelmand.clear();
+        winkelmandlist.clear();
+        notifyObservers("setOnHold", null);
+    }
 
 
+/*
     public void setOffHold(){
         winkelmandje = new HashMap<>();
         try{
@@ -99,11 +158,34 @@ public class KassaVerkoop implements Subject{
         notifyObservers("setOffHold", null);
     }
 
+ */
+
+    public void setOffHold() {
+        winkelmand.clear();
+        winkelmandlist.clear();
+        winkelmand.addAll(winkelmandonhold);
+        winkelmandlist.addAll(winkelmandonholdlist);
+        notifyObservers("setOffHold", null);
+    }
 
 
+/*
     public boolean artikelAlreadyAdded(Artikel artikel){
         boolean containsArtikel = false;
         for (Artikel a: getWinkelmandje()) {
+            if (a.getCode().equals(artikel.getCode())){
+                containsArtikel = true;
+            }
+        }
+        //System.out.println(containsArtikel + " bevat?");
+        return containsArtikel;
+    }
+
+ */
+
+    public boolean artikelAlreadyAdded(Artikel artikel){
+        boolean containsArtikel = false;
+        for (ArtikelWinkelmand a: winkelmand) {
             if (a.getCode().equals(artikel.getCode())){
                 containsArtikel = true;
             }
@@ -145,6 +227,7 @@ public class KassaVerkoop implements Subject{
 
  */
 
+/*
 
     public ArrayList<Artikel> getWinkelmandje(){
         ArrayList<Artikel> list = new ArrayList<>();
@@ -171,18 +254,45 @@ public class KassaVerkoop implements Subject{
         return winkelmandje;
     }
 
+ */
+
+    public ArrayList<Artikel> getWinkelmandje(){
+      return winkelmandlist;
+    }
+
+    public ArrayList<ArtikelWinkelmand> getWinkelmandMetAantal(){
+        return winkelmand;
+    }
+
+    /*
     public void setKorting(KortingStrategy korting){
         this.korting = korting;
     }
 
 
     public double getKorting(){
-        if(winkelmandje.size() == 0) return 0;
+        if(winkelmandlist.size() == 0) return 0;
         else {
-            double kortingbedrag = korting.getKorting(FXCollections.observableArrayList(this.getWinkelmandje()));
+            double kortingbedrag = korting.getKorting(this.getWinkelmandje());
             BigDecimal round = BigDecimal.valueOf(kortingbedrag);
             round = round.setScale(2, RoundingMode.HALF_UP);
             return round.doubleValue();
         }
     }
+
+     */
+
+    public double berekenPrijsMetKorting(KortingContext kortingContext){
+
+        if(winkelmandlist.size() == 0) return 0;
+
+        else {
+            double kortingbedrag = kortingContext.getKorting(this.getWinkelmandje());
+            BigDecimal round = BigDecimal.valueOf(kortingbedrag);
+            round = round.setScale(2, RoundingMode.HALF_UP);
+            return round.doubleValue();
+        }
+    }
+
+
 }

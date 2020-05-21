@@ -2,6 +2,7 @@ package application;
 	
 import controller.InstellingController;
 import controller.KassaviewController;
+import controller.KlantviewController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import jxl.read.biff.BiffException;
@@ -30,10 +31,14 @@ public class KassaAppMain extends Application {
 
 			InstellingController instellingController = new InstellingController();
 			KassaviewController kassaviewController = new KassaviewController(new ModelFacade(kassaVerkoop, instellingController));
+			KlantviewController klantviewController = new KlantviewController(new ModelFacade(kassaVerkoop, null));
+			ModelFacade modelFacade = new ModelFacade(kassaVerkoop, null);
 			KassaView kassaView = new KassaView(kassaviewController);
-			KlantView klantView = new KlantView(kassaviewController);
-			kassaVerkoop.addObserver(kassaviewController);
+			KlantView klantView = new KlantView(klantviewController);
+			//kassaVerkoop.addObserver(kassaviewController);
 			kassaVerkoop.addObserver(klantView);
+			//kassaVerkoop.addObserver(klantviewController);
+			kassaVerkoop.addObserver(modelFacade);
 
 		} catch (DatabaseException e) {
 			e.printStackTrace();

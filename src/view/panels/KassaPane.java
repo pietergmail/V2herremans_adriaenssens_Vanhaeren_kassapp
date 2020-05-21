@@ -33,13 +33,14 @@ public class KassaPane extends GridPane {
     private TableView table;
     private Button onhold;
     private Button restoreonhold;
+    private Label totaleprijskorting;
 
     private Label verwijder;
     private Button verwijderartikel;
     private TextField verwijderartikelcode;
     //private Scene scene = new Scene(this);
-    private List<Artikel> winkelmand = new ArrayList<>();
-    private List<Artikel> winkelmandonhold = new ArrayList<>();
+    //private List<Artikel> winkelmand = new ArrayList<>();
+    //private List<Artikel> winkelmandonhold = new ArrayList<>();
 
     public KassaPane(KassaviewController kassaviewController) {
         HBox p2 = new HBox(10);
@@ -63,7 +64,8 @@ public class KassaPane extends GridPane {
         VBox p3 = new VBox(10);
         table = new TableView<>();
         totaleprijs = new Label("Totale prijs:");
-        p3.getChildren().addAll(table, totaleprijs);
+        totaleprijskorting = new Label("Totale prijs met korting:");
+        p3.getChildren().addAll(table, totaleprijs, totaleprijskorting);
         p3.setAlignment(Pos.CENTER);
         p3.setPadding(new Insets(10));
         //table.setItems(producten);
@@ -191,9 +193,9 @@ public class KassaPane extends GridPane {
         try {
             kassaviewController.addProductKassaVerkoop(kassaviewController.getArtikel(artikelcode.getText()));
             table.getItems().clear();
-            winkelmand.add(kassaviewController.getArtikel(artikelcode.getText()));
-            table.getItems().addAll(winkelmand);
-            //table.getItems().addAll(kassaviewController.getWinkelmandje());
+            //winkelmand.add(kassaviewController.getArtikel(artikelcode.getText()));
+            //table.getItems().addAll(winkelmand);
+            table.getItems().addAll(kassaviewController.getWinkelmandje());
             updateTotaalPrijs(kassaviewController);
         } catch (IllegalArgumentException e) {
             new Alert(Alert.AlertType.WARNING, e.getMessage()).showAndWait();
@@ -225,7 +227,13 @@ public class KassaPane extends GridPane {
 
     public void updateTotaalPrijs(KassaviewController kassaviewController) {
         double prijs = kassaviewController.totaalPrijs();
-        totaleprijs.setText("totaal: " + prijs);
+        totaleprijs.setText("Totale prijs: " + prijs);
+        updateTotaalPrijsKorting(kassaviewController);
+    }
+
+    public void updateTotaalPrijsKorting(KassaviewController kassaviewController){
+        double prijs = kassaviewController.totaalPrijsKorting();
+        totaleprijskorting.setText("Totale prijs met korting: " + prijs);
     }
 
     private void addVerwijderButtonToTable(KassaviewController kassaviewController) {
@@ -241,14 +249,17 @@ public class KassaPane extends GridPane {
                     {
                         btn.setOnAction((k) -> {
                             kassaviewController.removeProductKassaVerkoop(getTableView().getItems().get(getIndex()));
+                            table.getItems().clear();
+                            table.getItems().addAll(kassaviewController.getWinkelmandje());
                             //table.getItems().clear();
                             //winkelmand.remove(getTableView().getItems().get(getIndex()));
                             //table.getItems().addAll(winkelmand);
                             //table.getItems().addAll(kassaviewController.getWinkelmandje());
-                            table.getItems().remove(getIndex());
-                            winkelmand = new ArrayList<>(table.getItems());
-                            table.getItems().clear();
-                            table.getItems().addAll(winkelmand);
+                            //
+                            //table.getItems().remove(getIndex());
+                            //winkelmand = new ArrayList<>(table.getItems());
+                            //table.getItems().clear();
+                            //table.getItems().addAll(winkelmand);
                             updateTotaalPrijs(kassaviewController);
                         });
                     }
@@ -277,21 +288,22 @@ public class KassaPane extends GridPane {
     private void setOnhold(KassaviewController kassaviewController) {
         kassaviewController.setOnHold();
         table.getItems().clear();
-        //table.getItems().addAll(kassaviewController.getWinkelmandje());
-        winkelmandonhold.clear();
-        winkelmandonhold.addAll(winkelmand);
-        winkelmand.clear();
-        totaleprijs.setText("totaal: ");
+        table.getItems().addAll(kassaviewController.getWinkelmandje());
+        updateTotaalPrijs(kassaviewController);
+        //winkelmandonhold.clear();
+        //winkelmandonhold.addAll(winkelmand);
+        //winkelmand.clear();
+        //totaleprijs.setText("totaal: ");
         //System.out.println(winkelmandonhold);
     }
 
     private void setRestoreonhold(KassaviewController kassaviewController) {
         kassaviewController.setOffHold();
         table.getItems().clear();
-        //table.getItems().addAll(kassaviewController.getWinkelmandje());
-        winkelmand.clear();
-        winkelmand.addAll(winkelmandonhold);
-        table.getItems().addAll(winkelmand);
+        table.getItems().addAll(kassaviewController.getWinkelmandje());
+        //winkelmand.clear();
+        //winkelmand.addAll(winkelmandonhold);
+        //table.getItems().addAll(winkelmand);
         updateTotaalPrijs(kassaviewController);
     }
 

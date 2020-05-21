@@ -3,10 +3,12 @@ package model.korting;
 import javafx.collections.ObservableList;
 import model.Artikel;
 
+import java.util.ArrayList;
+
 /**
- * @author Pieter Herremans
+ * @author Pieter Herremans, Vanhaeren Corentin
  */
 
 public interface KortingStrategy {
-    double getKorting(ObservableList<Artikel> list);
+    double getKorting(ArrayList<Artikel> list);
 }

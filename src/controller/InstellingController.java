@@ -9,7 +9,7 @@ import java.io.*;
 import java.util.Properties;
 
 /**
- * @author Pieter Herremans
+ * @author Pieter Herremans, Vanhaeren Corentin
  */
 public class InstellingController {
     private String path = "src" + File.separator + "bestanden" + File.separator + "KassaApp.properties";
@@ -20,6 +20,7 @@ public class InstellingController {
         this.properties = new Properties();
         file = new File(path);
     }
+/*
 
     public void setProperty(String key, String value){
         try (OutputStream output = new FileOutputStream(new File(path))) {
@@ -40,7 +41,7 @@ public class InstellingController {
         }
         return value;
     }
-
+*/
 
 }
 

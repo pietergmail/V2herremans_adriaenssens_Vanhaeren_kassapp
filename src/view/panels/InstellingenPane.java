@@ -33,7 +33,12 @@ public class InstellingenPane  extends GridPane implements EventHandler<javafx.e
     private Button KortingButton;
     private KassaviewController controller;
     private String path = "src" + File.separator + "bestanden" + File.separator + "Save.properties";
-
+    private Label percentage;
+    private TextField percentagetxt;
+    private Label bedarg;
+    private TextField bedargtxt;
+    private Label groep;
+    private TextField groeptxt;
 
     public InstellingenPane(KassaviewController controller) throws DatabaseException {
         this.controller = controller;
@@ -57,6 +62,9 @@ public class InstellingenPane  extends GridPane implements EventHandler<javafx.e
 
         saveButton.setOnAction(this);
 
+        RadioButton Geenkorting = new RadioButton( "Geen korting");
+        Geenkorting.getProperties().put( CHOICE_PROPERTY_NAME, KortingEnum.GEEN );
+
         RadioButton Drempelkorting = new RadioButton( "Drempelkorting");
         Drempelkorting.getProperties().put( CHOICE_PROPERTY_NAME, KortingEnum.DREMPELKORTING );
 
@@ -64,10 +72,10 @@ public class InstellingenPane  extends GridPane implements EventHandler<javafx.e
         Duurstekorting.getProperties().put( CHOICE_PROPERTY_NAME, KortingEnum.DUURSTEKORTING );
 
         RadioButton GroepKorting = new RadioButton( "GroepKorting" );
-        GroepKorting.getProperties().put( CHOICE_PROPERTY_NAME, KortingEnum.GROEPSKORTING );
+        GroepKorting.getProperties().put( CHOICE_PROPERTY_NAME, KortingEnum.GROEPKORTING );
 
         ToggleGroup tg = new ToggleGroup();
-        tg.getToggles().addAll(Drempelkorting, Duurstekorting, GroepKorting);
+        tg.getToggles().addAll(Geenkorting, Drempelkorting, Duurstekorting, GroepKorting);
 
         //code listener
 
@@ -84,14 +92,28 @@ public class InstellingenPane  extends GridPane implements EventHandler<javafx.e
             }
         });
 
-        kortingchoice.set(KortingEnum.GROEPSKORTING);
+        kortingchoice.set(KortingEnum.GROEPKORTING);
 
-        KortingButton = new Button("Print Choice");
+        KortingButton = new Button("Save Korting");
+
+        percentage = new Label("percentage");
+        percentagetxt = new TextField();
+        bedarg = new Label("bedarg");
+        bedargtxt = new TextField();
+        groep = new Label("groep");
+        groeptxt = new TextField();
 
         this.add(Drempelkorting, 0,3,2,2);
         this.add(Duurstekorting, 0,5,2,2);
         this.add(GroepKorting, 0,7,2,2);
-        this.add(KortingButton, 0, 9,2,2);
+        this.add(Geenkorting, 0, 9,2,2);
+        this.add(percentage, 0, 11, 2, 2);
+        this.add(percentagetxt, 1, 11, 2, 2);
+        this.add(bedarg, 0, 13,2,2);
+        this.add(bedargtxt, 1, 13,2,2);
+        this.add(groep, 0,15,2,2);
+        this.add(groeptxt, 1,15,2,2);
+        this.add(KortingButton, 0, 17,2,2);
 
         KortingButton.setOnAction(this);
 
@@ -106,6 +128,16 @@ public class InstellingenPane  extends GridPane implements EventHandler<javafx.e
             System.out.println(combobox.getValue().toString());
         } else if(event.getSource() == KortingButton){
             controller.setProperty("property.typekorting", kortingchoice.get().toString());
+            if(!percentagetxt.getText().isEmpty() && percentagetxt.getText() != null){
+                controller.setProperty("property.percentagekorting", percentagetxt.getText());
+            }
+            if(!bedargtxt.getText().isEmpty() && bedargtxt.getText() != null){
+                controller.setProperty("property.drempelbedragkorting", bedargtxt.getText());
+            }
+            if(!groeptxt.getText().isEmpty() && groeptxt.getText() != null){
+                controller.setProperty("property.groepkorting", groeptxt.getText());
+            }
+            controller.setKortingStrategy();
             System.out.println(kortingchoice.get());
         }
     }

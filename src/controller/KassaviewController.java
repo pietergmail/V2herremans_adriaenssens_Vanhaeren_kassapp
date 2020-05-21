@@ -4,6 +4,7 @@ import jxl.read.biff.BiffException;
 import model.*;
 
 import model.database.*;
+import model.korting.KortingContext;
 import view.KassaView;
 import view.KlantView;
 
@@ -15,7 +16,7 @@ import java.util.Map;
  * @author Vanhaeren Corentin, Sateur Maxime
  */
 
-public class KassaviewController implements Observer {
+public class KassaviewController {
 
     private ModelFacade modelFacade;
 
@@ -45,12 +46,14 @@ public class KassaviewController implements Observer {
         return modelFacade.totaalPrijs();
     }
 
+    /*
     public ArrayList<ArtikelWinkelmand> getWinkelmandMetAantal() {
         return modelFacade.getWinkelmandMetAantal();
     }
 
+     */
 
-    @Override
+
     public void update(String eventType, Artikel artikel) {
         modelFacade.update(eventType, artikel);
     }
@@ -71,6 +74,8 @@ public class KassaviewController implements Observer {
         return modelFacade.getProperty(key);
     }
 
+
+
     public ArrayList<Artikel> getWinkelmandje() {
         return modelFacade.getWinkelmandje();
     }
@@ -89,5 +94,13 @@ public class KassaviewController implements Observer {
 
     public ArrayList<Artikel> loadinMemory() throws IOException, DatabaseException, BiffException {
         return modelFacade.loadinMemory();
+    }
+
+    public void setKortingStrategy(){
+        modelFacade.setKortingStrategy();
+    }
+
+    public double totaalPrijsKorting(){
+        return modelFacade.totaalPrijsKorting();
     }
 }

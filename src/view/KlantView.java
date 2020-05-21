@@ -1,6 +1,7 @@
 package view;
 
 import controller.KassaviewController;
+import controller.KlantviewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -26,18 +27,21 @@ import java.util.Set;
 public class KlantView implements Observer {
 	private Stage stage = new Stage();
 	//KassaVerkoop kassaVerkoop = new KassaVerkoop();
-	KassaviewController kassaviewController;
+	//KassaviewController kassaviewController;
+	KlantviewController klantviewController;
 	TableView table = new TableView();
-	ArrayList<ArtikelWinkelmand> winkelmand = new ArrayList<>();
-	ArrayList<ArtikelWinkelmand> winkelmandonhold = new ArrayList<>();
+	//ArrayList<ArtikelWinkelmand> winkelmand = new ArrayList<>();
+	//ArrayList<ArtikelWinkelmand> winkelmandonhold = new ArrayList<>();
 	Label totaleprijs;
+	Label totaleprijskorting;
 
 
-	public KlantView(KassaviewController kassaviewController){
+	public KlantView(KlantviewController klantviewController){
 		//winkelmand = new ArrayList<>();
 		//winkelmandOnHold = new ArrayList<>();
 		//this.kassaVerkoop = kassaVerkoop;
-		this.kassaviewController = kassaviewController;
+		//this.kassaviewController = kassaviewController;
+		this.klantviewController = klantviewController;
 		stage.setTitle("KLANT VIEW");
 		stage.setResizable(false);
 		stage.setX(775);
@@ -73,7 +77,8 @@ public class KlantView implements Observer {
 
 		VBox p2 = new VBox(10);
 		totaleprijs = new Label("Totale prijs:");
-		p2.getChildren().addAll(totaleprijs);
+		totaleprijskorting = new Label("Totale prijs met korting:");
+		p2.getChildren().addAll(totaleprijs, totaleprijskorting);
 		p2.setAlignment(Pos.CENTER);
 		p2.setPadding(new Insets(10));
 
@@ -81,13 +86,75 @@ public class KlantView implements Observer {
 		p1.setPadding(new Insets(10));
 		root.getChildren().addAll(p1);
 
+	}
+
+	@Override
+	public void update(String eventType, Artikel artikel) {
+
+		if(eventType.equals("add_product_winkelkar")){
+			addProduct(klantviewController);
+			//updateTotaalPrijs(klantviewController);
+			//System.out.println("test");
+		}
+		if(eventType.equals("remove_product_winkelkar")){
+			removeProduct(klantviewController);
+			//updateTotaalPrijs(klantviewController);
+		}
+		if(eventType.equals("setOnHold")){
+			setOnhold(klantviewController);
+		}
+		if(eventType.equals("setOffHold")){
+			setRestoreonhold(klantviewController);
+			//updateTotaalPrijs(klantviewController);
+		}
 
 
+/*
+		table.getItems().clear();
+		table.getItems().addAll(klantviewController.getWinkelmandje());
+		//System.out.println(klantviewController.getWinkelmandje() + " winkelmand");
+		updateTotaalPrijs(klantviewController);
 
+ */
+	}
 
+	public void updateTotaalPrijs(KlantviewController klantviewController){
+		double prijs = klantviewController.totaalPrijs();
+		totaleprijs.setText("Totale prijs: " + prijs);
+		updateTotaalPrijsKorting(klantviewController);
+	}
+
+	public void updateTotaalPrijsKorting(KlantviewController klantviewController){
+		double prijs = klantviewController.totaalPrijsKorting();
+		totaleprijskorting.setText("Totale prijs met korting: " + prijs);
+	}
+
+	public void addProduct(KlantviewController klantviewController){
+		table.getItems().clear();
+		table.getItems().addAll(klantviewController.getWinkelmandje());
+		updateTotaalPrijs(klantviewController);
+	}
+
+	public void removeProduct(KlantviewController klantviewController){
+		table.getItems().clear();
+		table.getItems().addAll(klantviewController.getWinkelmandje());
+		updateTotaalPrijs(klantviewController);
 	}
 
 
+	private void setOnhold(KlantviewController klantviewController) {
+		table.getItems().clear();
+		table.getItems().addAll(klantviewController.getWinkelmandje());
+		updateTotaalPrijs(klantviewController);
+	}
+
+	private void setRestoreonhold(KlantviewController klantviewController) {
+		table.getItems().clear();
+		table.getItems().addAll(klantviewController.getWinkelmandje());
+		updateTotaalPrijs(klantviewController);
+	}
+
+/*
 	@Override
 	public void update(String eventType, Artikel artikel) {
 		if(eventType.equals("add_product_winkelkar")){
@@ -116,23 +183,6 @@ public class KlantView implements Observer {
 		//updateTotaalPrijs(kassaviewController);
 	}
 
-	/*
-	@Override
-	public void update(String eventype) {
-		if(eventype.equals("setOnHold")){
-
-		}
-		if(eventype.equals("setOffHold")){
-
-		}
-		table.getItems().removeAll(this.winkelmand);
-		winkelmand = new ArrayList<>();
-		winkelmand = kassaviewController.getWinkelmandMetAantal();
-		table.getItems().addAll(winkelmand);
-		totaleprijs.setText("totaal: ");
-	}
-
-	 */
 
 	public void updateTotaalPrijs(KassaviewController kassaviewController){
 		double prijs = kassaviewController.totaalPrijs();
@@ -216,4 +266,6 @@ public class KlantView implements Observer {
 		//System.out.println(containsArtikel + " bevat?");
 		return containsArtikel;
 	}
+
+ */
 }

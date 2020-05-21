@@ -3,16 +3,19 @@ package model.korting;
 import javafx.collections.ObservableList;
 import model.Artikel;
 
+import java.util.ArrayList;
+
 /**
- * @author Pieter Herremans
+ * @author Pieter Herremans, Vanhaeren Corentin
  */
 
 public class Drempelkorting implements KortingStrategy {
     private double percentage;
     private double kost;
 
+
     @Override
-    public double getKorting(ObservableList<Artikel> list) {
+    public double getKorting(ArrayList<Artikel> list) {
         double tot = 0;
         for (Artikel a: list){
             tot += a.getPrijs();
@@ -23,7 +26,7 @@ public class Drempelkorting implements KortingStrategy {
     }
 
     public Drempelkorting(double percentage, double kost){
-        this.percentage = percentage;
+        this.percentage = percentage/100;
         this.kost = kost;
     }
 }

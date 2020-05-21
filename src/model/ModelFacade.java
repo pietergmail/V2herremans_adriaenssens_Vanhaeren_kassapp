@@ -2,28 +2,34 @@ package model;
 
 import controller.InstellingController;
 import jxl.read.biff.BiffException;
-import model.database.DatabaseException;
-import model.database.LoadSaveContext;
-import model.database.LoadsaveArtikeltekst;
+import model.database.*;
+import model.korting.*;
 import view.KassaView;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Properties;
+
+import static model.korting.KortingEnum.GEEN;
 
 /**
  * @author Vanhaeren Corentin, Sateur Maxime
  */
 
-public class ModelFacade {
+public class ModelFacade implements Observer{
 
     private KassaView kassaView;
     private KassaVerkoop kassaVerkoop;
     private ArtikelWinkelmand artikelWinkelmand;
     private InstellingController instellingController;
-    private LoadsaveArtikeltekst loadsaveArtikeltekst;
+    //private LoadsaveArtikeltekst loadsaveArtikeltekst;
     LoadSaveContext loadSaveContext = new LoadSaveContext();
+    KortingContext kortingContext = new KortingContext();
     ArrayList<Artikel> producten = new ArrayList<>();
+
+    private Properties properties = new Properties();
+    private String path = "src" + File.separator + "bestanden" + File.separator + "KassaApp.properties";
 
     //LoadSaveFactory loadSaveFactory;
     //StrategyLoadSave strategyLoadSave;
@@ -37,6 +43,7 @@ public class ModelFacade {
     public ModelFacade(KassaVerkoop kassaVerkoop, InstellingController instellingController) throws DatabaseException {
         this.kassaVerkoop = kassaVerkoop;
         this.instellingController = instellingController;
+        setKortingStrategy();
         //kassaView = new KassaView(this);
     }
 
@@ -70,6 +77,7 @@ public class ModelFacade {
         return kassaVerkoop.getTotalPrijs();
     }
 
+    /*
     public ArrayList<ArtikelWinkelmand> getWinkelmandMetAantal() {
         ArrayList<ArtikelWinkelmand> winkelmand = new ArrayList<>();
         for (Map.Entry<Artikel, Integer> entry : kassaVerkoop.getWinkelmandMap().entrySet()) {
@@ -84,7 +92,9 @@ public class ModelFacade {
         return winkelmand;
     }
 
+     */
 
+@Override
     public void update(String eventType, Artikel artikel) {
         if (eventType.equals("add_product_winkelkar")) {
             //code te laten uitvoeren
@@ -108,7 +118,7 @@ public class ModelFacade {
     }
 
      */
-
+/*
     public void setProperty(String key, String value) {
         instellingController.setProperty(key, value);
     }
@@ -117,8 +127,40 @@ public class ModelFacade {
         return instellingController.getProperty(key);
     }
 
+ */
+    public void setProperty(String key, String value){
+        try (OutputStream output = new FileOutputStream(new File(path))) {
+            properties.setProperty(key, value);
+            properties.store(output, "properties");
+        } catch (IOException e) {
+            e.getMessage();
+        }
+    }
+
+    public String getProperty(String key){
+        String value = null;
+        try (InputStream input = new FileInputStream(new File(path))) {
+            properties.load(input);
+            value = properties.getProperty(key);
+        } catch (IOException e) {
+            e.getMessage();
+        }
+        return value;
+    }
+
+    ///
+    public void setLoadStrategy(String key){
+        LoadSaveEnum saveStrategy = LoadSaveEnum.valueOf(getProperty(key));
+        loadSaveContext.setStrategyLoadSave((new LoadSaveFactory().ChooseSaveType(saveStrategy)));
+    }
+
+
     public ArrayList<Artikel> getWinkelmandje() {
         return kassaVerkoop.getWinkelmandje();
+    }
+
+    public ArrayList<ArtikelWinkelmand> getWinkelmandMetAantal() {
+        return kassaVerkoop.getWinkelmandMetAantal();
     }
 
     public KassaVerkoop getKassaVerkoop() {
@@ -130,6 +172,7 @@ public class ModelFacade {
     }
 
     public ArrayList<Artikel> load() throws IOException, DatabaseException, BiffException {
+        setLoadStrategy("property.filetype");
         return loadSaveContext.load();
     }
 
@@ -140,5 +183,37 @@ public class ModelFacade {
             return producten;
         }
         return producten;
+    }
+
+    public void setKortingStrategy(){
+
+        String key = "property.typekorting";
+        ArrayList<Object> t = new ArrayList<>();
+        //slot1: percentage korting, slot2: drempelbedrag korting, slot3: groep korting
+        double percentage = Double.parseDouble(getProperty("property.percentagekorting"));
+        t.add(percentage);
+        double bedarg = Double.parseDouble(getProperty("property.drempelbedragkorting"));
+        t.add(bedarg);
+        String groep = getProperty("property.groepkorting");
+        t.add(groep);
+
+        KortingEnum kortingStrategy = KortingEnum.valueOf(getProperty(key));
+        //KortingStrategy kortingStrategy1 = new Geenkorting();
+        //kortingContext.setKortingStrategy(kortingStrategy);
+        //kortingContext.setKortingStrategy(new KortingFactory().kortingFactory(kortingStrategy));
+        kortingContext.setKortingStrategy(new KortingFactory().kortingFactory(kortingStrategy, t));
+        //KortingContext kortingContext = new KortingContext();
+        //kortingContext.setKortingStrategy(new Geenkorting());
+        //System.out.println(args + " korting array");
+        //System.out.println(KortingEnum.valueOf(getProperty(key)) + " enum");
+        //System.out.println(kortingStrategy + " test");
+        //KortingFactory kortingFactory = new KortingFactory();
+        //System.out.println(kortingFactory.KortingFactory(kortingStrategy, args) + " test factory");
+       // System.out.println(t.size() + " lenght t");
+        //System.out.println(kortingContext + " korting contect");
+    }
+
+    public double totaalPrijsKorting(){
+        return kassaVerkoop.berekenPrijsMetKorting(kortingContext);
     }
 }

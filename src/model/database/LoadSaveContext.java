@@ -18,14 +18,15 @@ import java.util.Properties;
 
 public class LoadSaveContext {
     private StrategyLoadSave strategyLoadSave;
-    private Properties properties = new Properties();
-    private String path = "src" + File.separator + "bestanden" + File.separator + "KassaApp.properties";
+    //private Properties properties = new Properties();
+    //private String path = "src" + File.separator + "bestanden" + File.separator + "KassaApp.properties";
 
 
     public LoadSaveContext(){
 
     }
 
+    /*
     public String getProperty(){
         String key = "property.filetype";
         String value = null;
@@ -38,16 +39,22 @@ public class LoadSaveContext {
         return value;
     }
 
+     */
+
     public void setStrategyLoadSave(StrategyLoadSave strategyLoadSave){
         this.strategyLoadSave = strategyLoadSave;
     }
 
+    /*
     public StrategyLoadSave setLoadStrategy(){
         LoadSaveEnum saveStrategy = LoadSaveEnum.valueOf(getProperty());
         return new LoadSaveFactory().ChooseSaveType(saveStrategy);
     }
 
+     */
 
+
+/*
     public ArrayList<Artikel> load() throws IOException, DatabaseException, BiffException {
         strategyLoadSave = setLoadStrategy();
         return strategyLoadSave.load();
@@ -55,6 +62,18 @@ public class LoadSaveContext {
 
     public void save(ArrayList<Artikel> artikelen) throws IOException, DomainException, WriteException, BiffException {
         strategyLoadSave = setLoadStrategy();
+        strategyLoadSave.save(artikelen);
+    }
+
+ */
+
+    public ArrayList<Artikel> load() throws IOException, DatabaseException, BiffException {
+        //strategyLoadSave = setLoadStrategy();
+        return strategyLoadSave.load();
+    }
+
+    public void save(ArrayList<Artikel> artikelen) throws IOException, DomainException, WriteException, BiffException {
+        //strategyLoadSave = setLoadStrategy();
         strategyLoadSave.save(artikelen);
     }
 }

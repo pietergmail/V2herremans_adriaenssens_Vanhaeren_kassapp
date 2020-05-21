@@ -5,7 +5,8 @@ package model.korting;
  */
 
 public enum KortingEnum {
-    GROEPSKORTING,
+    GEEN,
+    GROEPKORTING,
     DREMPELKORTING,
     DUURSTEKORTING;
 }
