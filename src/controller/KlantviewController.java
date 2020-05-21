@@ -3,7 +3,7 @@ package controller;
 import jxl.read.biff.BiffException;
 import model.Artikel;
 import model.ArtikelWinkelmand;
-import model.ModelFacade;
+import controller.*;
 import model.Observer;
 import model.database.DatabaseException;
 
@@ -15,27 +15,27 @@ import java.util.ArrayList;
  */
 
 public class KlantviewController {
-    private ModelFacade modelFacade;
+    private KassaController kassaController;
 
-    public KlantviewController(ModelFacade modelFacade) {
-        this.modelFacade = modelFacade;
+    public KlantviewController(KassaController kassaController) {
+        this.kassaController = kassaController;
     }
 
     public double totaalPrijs() {
-        return modelFacade.totaalPrijs();
+        return kassaController.totaalPrijs();
     }
 
 
     public ArrayList<ArtikelWinkelmand> getWinkelmandje() {
-        return modelFacade.getWinkelmandMetAantal();
+        return kassaController.getWinkelmandMetAantal();
     }
 
 
     public void update(String eventType, Artikel artikel) {
-        modelFacade.update(eventType, artikel);
+        kassaController.update(eventType, artikel);
     }
 
     public double totaalPrijsKorting(){
-        return modelFacade.totaalPrijsKorting();
+        return kassaController.totaalPrijsKorting();
     }
 }

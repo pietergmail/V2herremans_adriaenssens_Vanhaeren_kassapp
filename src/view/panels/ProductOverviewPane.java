@@ -14,7 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import jxl.read.biff.BiffException;
 import model.Artikel;
-import model.ModelFacade;
+
 import model.database.DatabaseException;
 import model.database.LoadSaveContext;
 import model.database.LoadsaveArtikeltekst;

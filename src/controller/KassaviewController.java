@@ -18,89 +18,89 @@ import java.util.Map;
 
 public class KassaviewController {
 
-    private ModelFacade modelFacade;
+    private KassaController kassaController;
 
-    public KassaviewController(ModelFacade modelFacade) {
-        this.modelFacade = modelFacade;
+    public KassaviewController(KassaController kassaController) {
+        this.kassaController = kassaController;
     }
 
     public void addProductKassaVerkoop(Artikel artikel) {
-        modelFacade.addProductKassaVerkoop(artikel);
+        kassaController.addProductKassaVerkoop(artikel);
     }
 
-    public void removeProductKassaVerkoop(Artikel artikel) { modelFacade.removeProductKassaVerkoop(artikel);}
+    public void removeProductKassaVerkoop(Artikel artikel) { kassaController.removeProductKassaVerkoop(artikel);}
 
     public void setOnHold(){
-        modelFacade.setOnHold();
+        kassaController.setOnHold();
     }
 
     public void setOffHold(){
-        modelFacade.setOffHold();
+        kassaController.setOffHold();
     }
 
     public Artikel getArtikel(String code) throws DatabaseException, IOException, BiffException {
-        return modelFacade.getArtikel(code);
+        return kassaController.getArtikel(code);
     }
 
     public double totaalPrijs() {
-        return modelFacade.totaalPrijs();
+        return kassaController.totaalPrijs();
     }
 
     /*
     public ArrayList<ArtikelWinkelmand> getWinkelmandMetAantal() {
-        return modelFacade.getWinkelmandMetAantal();
+        return kassaController.getWinkelmandMetAantal();
     }
 
      */
 
 
     public void update(String eventType, Artikel artikel) {
-        modelFacade.update(eventType, artikel);
+        kassaController.update(eventType, artikel);
     }
 
     /*
     @Override
     public void update(String eventype) {
-        modelFacade.update(eventype);
+        kassaController.update(eventype);
     }
 
      */
 
     public void setProperty(String key, String value) {
-        modelFacade.setProperty(key, value);
+        kassaController.setProperty(key, value);
     }
 
     public String getProperty(String key) {
-        return modelFacade.getProperty(key);
+        return kassaController.getProperty(key);
     }
 
 
 
     public ArrayList<Artikel> getWinkelmandje() {
-        return modelFacade.getWinkelmandje();
+        return kassaController.getWinkelmandje();
     }
 
     public KassaVerkoop getKassaVerkoop() {
-        return modelFacade.getKassaVerkoop();
+        return kassaController.getKassaVerkoop();
     }
 
     public void setKassaVerkoop(KassaVerkoop kassaVerkoop) {
-        modelFacade.setKassaVerkoop(kassaVerkoop);
+        kassaController.setKassaVerkoop(kassaVerkoop);
     }
 
     public ArrayList<Artikel> load() throws IOException, DatabaseException, BiffException {
-        return modelFacade.load();
+        return kassaController.load();
     }
 
     public ArrayList<Artikel> loadinMemory() throws IOException, DatabaseException, BiffException {
-        return modelFacade.loadinMemory();
+        return kassaController.loadinMemory();
     }
 
     public void setKortingStrategy(){
-        modelFacade.setKortingStrategy();
+        kassaController.setKortingStrategy();
     }
 
     public double totaalPrijsKorting(){
-        return modelFacade.totaalPrijsKorting();
+        return kassaController.totaalPrijsKorting();
     }
 }

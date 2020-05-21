@@ -1,53 +1,52 @@
-package model;
+package controller;
 
-import controller.InstellingController;
 import jxl.read.biff.BiffException;
-import model.database.*;
-import model.korting.*;
+import model.Artikel;
+import model.ArtikelWinkelmand;
+import model.KassaVerkoop;
+import model.Observer;
+import model.database.DatabaseException;
+import model.database.LoadSaveContext;
+import model.database.LoadSaveEnum;
+import model.database.LoadSaveFactory;
+import model.korting.KortingContext;
+import model.korting.KortingEnum;
+import model.korting.KortingFactory;
 import view.KassaView;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Properties;
 
-import static model.korting.KortingEnum.GEEN;
 
 /**
  * @author Vanhaeren Corentin, Sateur Maxime
  */
 
-public class ModelFacade implements Observer{
+
+public class KassaController implements Observer {
 
     private KassaView kassaView;
     private KassaVerkoop kassaVerkoop;
     private ArtikelWinkelmand artikelWinkelmand;
     private InstellingController instellingController;
     //private LoadsaveArtikeltekst loadsaveArtikeltekst;
-    LoadSaveContext loadSaveContext = new LoadSaveContext();
-    KortingContext kortingContext = new KortingContext();
-    ArrayList<Artikel> producten = new ArrayList<>();
+    private LoadSaveContext loadSaveContext = new LoadSaveContext();
+    private KortingContext kortingContext = new KortingContext();
+    private ArrayList<Artikel> producten = new ArrayList<>();
 
     private Properties properties = new Properties();
     private String path = "src" + File.separator + "bestanden" + File.separator + "KassaApp.properties";
 
-    //LoadSaveFactory loadSaveFactory;
-    //StrategyLoadSave strategyLoadSave;
-/*
-    public KassaviewController(KassaVerkoop kassaVerkoop, KassaView kassaView){
-        this.kassaVerkoop = kassaVerkoop;
-        this.kassaView = kassaView;
-    }
 
- */
-    public ModelFacade(KassaVerkoop kassaVerkoop, InstellingController instellingController) throws DatabaseException {
+
+    public KassaController(KassaVerkoop kassaVerkoop, InstellingController instellingController) throws DatabaseException {
         this.kassaVerkoop = kassaVerkoop;
         this.instellingController = instellingController;
         setKortingStrategy();
         //kassaView = new KassaView(this);
     }
 
-    //methodes voor view
     public void addProductKassaVerkoop(Artikel artikel) {
         kassaVerkoop.addArtikelWinkelkar(artikel);
     }
@@ -77,24 +76,7 @@ public class ModelFacade implements Observer{
         return kassaVerkoop.getTotalPrijs();
     }
 
-    /*
-    public ArrayList<ArtikelWinkelmand> getWinkelmandMetAantal() {
-        ArrayList<ArtikelWinkelmand> winkelmand = new ArrayList<>();
-        for (Map.Entry<Artikel, Integer> entry : kassaVerkoop.getWinkelmandMap().entrySet()) {
-            ArtikelWinkelmand artikel = new ArtikelWinkelmand();
-            artikel.setCode(entry.getKey().getCode());
-            artikel.setOmschrijving((entry.getKey().getOmschrijving()));
-            artikel.setGroep(entry.getKey().getGroep());
-            artikel.setPrijs(entry.getKey().getPrijs());
-            artikel.setAantal(entry.getValue());
-            winkelmand.add(artikel);
-        }
-        return winkelmand;
-    }
-
-     */
-
-@Override
+    @Override
     public void update(String eventType, Artikel artikel) {
         if (eventType.equals("add_product_winkelkar")) {
             //code te laten uitvoeren
@@ -112,22 +94,6 @@ public class ModelFacade implements Observer{
         }
     }
 
-    /*
-    public void update(String eventType) {
-
-    }
-
-     */
-/*
-    public void setProperty(String key, String value) {
-        instellingController.setProperty(key, value);
-    }
-
-    public String getProperty(String key) {
-        return instellingController.getProperty(key);
-    }
-
- */
     public void setProperty(String key, String value){
         try (OutputStream output = new FileOutputStream(new File(path))) {
             properties.setProperty(key, value);
@@ -153,7 +119,6 @@ public class ModelFacade implements Observer{
         LoadSaveEnum saveStrategy = LoadSaveEnum.valueOf(getProperty(key));
         loadSaveContext.setStrategyLoadSave((new LoadSaveFactory().ChooseSaveType(saveStrategy)));
     }
-
 
     public ArrayList<Artikel> getWinkelmandje() {
         return kassaVerkoop.getWinkelmandje();
@@ -209,11 +174,12 @@ public class ModelFacade implements Observer{
         //System.out.println(kortingStrategy + " test");
         //KortingFactory kortingFactory = new KortingFactory();
         //System.out.println(kortingFactory.KortingFactory(kortingStrategy, args) + " test factory");
-       // System.out.println(t.size() + " lenght t");
+        // System.out.println(t.size() + " lenght t");
         //System.out.println(kortingContext + " korting contect");
     }
 
     public double totaalPrijsKorting(){
         return kassaVerkoop.berekenPrijsMetKorting(kortingContext);
     }
+
 }
