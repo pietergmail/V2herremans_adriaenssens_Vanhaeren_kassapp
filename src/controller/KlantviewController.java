@@ -35,7 +35,11 @@ public class KlantviewController {
         kassaviewController.update(eventType, artikel);
     }
 
-    public double totaalPrijsKorting(){
-        return kassaviewController.totaalPrijsKorting();
+    public double totaleKorting(){
+        return kassaviewController.Kortingprijs();
+    }
+
+    public double totalePrijsMetKorting(){
+        return kassaviewController.totalePrijsMetKorting();
     }
 }

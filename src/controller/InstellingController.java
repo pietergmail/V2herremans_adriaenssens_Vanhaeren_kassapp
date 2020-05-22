@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 /**
- * @author Pieter Herremans, Vanhaeren Corentin
+ * @author Pieter Herremans, Vanhaeren Corentin, Sateur Maxime
  */
 public class InstellingController {
 

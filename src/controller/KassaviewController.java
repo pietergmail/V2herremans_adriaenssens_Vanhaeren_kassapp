@@ -137,9 +137,15 @@ public class KassaviewController {
         this.kassaVerkoop = kassaVerkoop;
     }
 
-    public double totaalPrijsKorting(){
+    public double Kortingprijs(){
+        return kassaVerkoop.berekenKorting(instellingController.getKortingContext());
+    }
+
+    public double totalePrijsMetKorting(){
         return kassaVerkoop.berekenPrijsMetKorting(instellingController.getKortingContext());
     }
+
+
 
 
 

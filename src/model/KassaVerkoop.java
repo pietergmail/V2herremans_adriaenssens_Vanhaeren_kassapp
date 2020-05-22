@@ -283,6 +283,13 @@ public void removeArtikelWinkelkar(Artikel artikel){
      */
 
     public double berekenPrijsMetKorting(KortingContext kortingContext){
+        double korting = berekenKorting(kortingContext);
+        double initprijs = getTotalPrijs();
+
+        return initprijs - korting;
+    }
+
+    public double berekenKorting(KortingContext kortingContext){
 
         if(winkelmandlist.size() == 0) return 0;
 

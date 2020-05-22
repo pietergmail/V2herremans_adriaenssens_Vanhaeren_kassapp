@@ -16,7 +16,7 @@ public class Duurstekorting implements KortingStrategy {
     public double getKorting(ArrayList<Artikel> list) {
         Artikel artikel = list.get(0);
         for(Artikel a: list){
-            if(a.getPrijs() > a.getPrijs()){
+            if(a.getPrijs() > artikel.getPrijs()){
                 artikel = a;
             }
         }

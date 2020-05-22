@@ -33,6 +33,7 @@ public class KlantView implements Observer {
 	//ArrayList<ArtikelWinkelmand> winkelmand = new ArrayList<>();
 	//ArrayList<ArtikelWinkelmand> winkelmandonhold = new ArrayList<>();
 	Label totaleprijs;
+	Label totalekorting;
 	Label totaleprijskorting;
 
 
@@ -77,8 +78,9 @@ public class KlantView implements Observer {
 
 		VBox p2 = new VBox(10);
 		totaleprijs = new Label("Totale prijs:");
-		totaleprijskorting = new Label("Totale korting:");
-		p2.getChildren().addAll(totaleprijs, totaleprijskorting);
+		totalekorting = new Label("Totale korting:");
+		totaleprijskorting = new Label("Totale prijs met korting");
+		p2.getChildren().addAll(totaleprijs, totalekorting, totaleprijskorting);
 		p2.setAlignment(Pos.CENTER);
 		p2.setPadding(new Insets(10));
 
@@ -121,11 +123,17 @@ public class KlantView implements Observer {
 	public void updateTotaalPrijs(KlantviewController klantviewController){
 		double prijs = klantviewController.totaalPrijs();
 		totaleprijs.setText("Totale prijs: " + prijs);
+		updateTotaalKorting(klantviewController);
 		updateTotaalPrijsKorting(klantviewController);
 	}
 
-	public void updateTotaalPrijsKorting(KlantviewController klantviewController){
-		double prijs = klantviewController.totaalPrijsKorting();
+	public void updateTotaalKorting(KlantviewController klantviewController){
+		double prijs = klantviewController.totaleKorting();
+		totalekorting.setText("Totale korting: " + prijs);
+	}
+
+	public void updateTotaalPrijsKorting(KlantviewController kassaviewController){
+		double prijs = klantviewController.totalePrijsMetKorting();
 		totaleprijskorting.setText("Totale prijs met korting: " + prijs);
 	}
 

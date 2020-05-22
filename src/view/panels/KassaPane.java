@@ -33,6 +33,7 @@ public class KassaPane extends GridPane {
     private TableView table;
     private Button onhold;
     private Button restoreonhold;
+    private Label totalekorting;
     private Label totaleprijskorting;
 
     private Label verwijder;
@@ -64,8 +65,9 @@ public class KassaPane extends GridPane {
         VBox p3 = new VBox(10);
         table = new TableView<>();
         totaleprijs = new Label("Totale prijs:");
-        totaleprijskorting = new Label("Totale prijs met korting:");
-        p3.getChildren().addAll(table, totaleprijs, totaleprijskorting);
+        totalekorting = new Label("Totale korting:");
+        totaleprijskorting = new Label("Totale Prijs met korting");
+        p3.getChildren().addAll(table, totaleprijs, totalekorting, totaleprijskorting);
         p3.setAlignment(Pos.CENTER);
         p3.setPadding(new Insets(10));
         //table.setItems(producten);
@@ -228,12 +230,19 @@ public class KassaPane extends GridPane {
     public void updateTotaalPrijs(KassaviewController kassaviewController) {
         double prijs = kassaviewController.totaalPrijs();
         totaleprijs.setText("Totale prijs: " + prijs);
+        updateTotaalKorting(kassaviewController);
         updateTotaalPrijsKorting(kassaviewController);
     }
 
     public void updateTotaalPrijsKorting(KassaviewController kassaviewController){
-        double prijs = kassaviewController.totaalPrijsKorting();
-        totaleprijskorting.setText("Totale korting: " + prijs);
+        double prijs = kassaviewController.totalePrijsMetKorting();
+        totaleprijskorting.setText("Totale prijs met korting: " + prijs);
+    }
+
+
+    public void updateTotaalKorting(KassaviewController kassaviewController){
+        double prijs = kassaviewController.Kortingprijs();
+        totalekorting.setText("Totale korting: " + prijs);
     }
 
     private void addVerwijderButtonToTable(KassaviewController kassaviewController) {
