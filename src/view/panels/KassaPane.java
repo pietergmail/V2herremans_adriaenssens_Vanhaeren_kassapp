@@ -26,6 +26,7 @@ import java.util.List;
  */
 
 public class KassaPane extends GridPane {
+    private KassaviewController kassaviewController;
     private Label voegtoe;
     private TextField artikelcode;
     private Button voegartikelToe;
@@ -35,6 +36,7 @@ public class KassaPane extends GridPane {
     private Button restoreonhold;
     private Label totalekorting;
     private Label totaleprijskorting;
+    private Button AFSLUITEN;
 
     private Label verwijder;
     private Button verwijderartikel;
@@ -44,6 +46,7 @@ public class KassaPane extends GridPane {
     //private List<Artikel> winkelmandonhold = new ArrayList<>();
 
     public KassaPane(KassaviewController kassaviewController) {
+        this.kassaviewController = kassaviewController;
         HBox p2 = new HBox(10);
         voegtoe = new Label("voeg artikelcode in:");
         artikelcode = new TextField();
@@ -75,11 +78,13 @@ public class KassaPane extends GridPane {
         VBox p5 = new VBox(10);
         onhold = new Button("zet on hold");
         restoreonhold = new Button("restore on hold");
+        AFSLUITEN = new Button("AFSLUITEN");
         restoreonhold.setDisable(true);
         //restoreonhold.setVisible(false);
         onhold.setPrefWidth(100);
         restoreonhold.setPrefWidth(100);
-        p5.getChildren().addAll(onhold, restoreonhold);
+        AFSLUITEN.setPrefWidth(100);
+        p5.getChildren().addAll(onhold, restoreonhold, AFSLUITEN);
         p5.setAlignment(Pos.CENTER);
         p5.setPadding(new Insets(10));
 
@@ -174,6 +179,9 @@ public class KassaPane extends GridPane {
             setRestoreonhold(kassaviewController);
         });
 
+        AFSLUITEN.setOnAction(e -> {
+            setAFSLUITEN();
+        });
 
 /*
         verwijderartikel.setOnAction(e -> {
@@ -190,6 +198,8 @@ public class KassaPane extends GridPane {
 
 
     }
+
+
 
     public void voegProductToe(KassaviewController kassaviewController) throws DatabaseException {
         try {
@@ -244,6 +254,8 @@ public class KassaPane extends GridPane {
         double prijs = kassaviewController.Kortingprijs();
         totalekorting.setText("Totale korting: " + prijs);
     }
+
+
 
     private void addVerwijderButtonToTable(KassaviewController kassaviewController) {
         TableColumn<Artikel, Void> colBtn = new TableColumn("Verwijder");
@@ -315,6 +327,15 @@ public class KassaPane extends GridPane {
         //table.getItems().addAll(winkelmand);
         updateTotaalPrijs(kassaviewController);
     }
+
+    private void setAFSLUITEN(){
+        artikelcode.setDisable(true);
+        voegartikelToe.setDisable(true);
+        onhold.setDisable(true);
+        restoreonhold.setDisable(true);
+        AFSLUITEN.setText("BETALEN");
+    }
+
 
 
 }
