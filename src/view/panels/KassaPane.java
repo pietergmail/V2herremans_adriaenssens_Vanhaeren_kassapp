@@ -80,6 +80,8 @@ public class KassaPane extends GridPane {
         restoreonhold = new Button("restore on hold");
         AFSLUITEN = new Button("AFSLUITEN");
         restoreonhold.setDisable(true);
+        onhold.setDisable(true);
+        AFSLUITEN.setDisable(true);
         //restoreonhold.setVisible(false);
         onhold.setPrefWidth(100);
         restoreonhold.setPrefWidth(100);
@@ -137,6 +139,8 @@ public class KassaPane extends GridPane {
                 voegProductToe(kassaviewController);
                 artikelcode.clear();
                 artikelcode.requestFocus();
+                onhold.setDisable(false);
+                AFSLUITEN.setDisable(false);
             } catch (DatabaseException databaseException) {
                 databaseException.printStackTrace();
             }
@@ -149,6 +153,8 @@ public class KassaPane extends GridPane {
                     voegProductToe(kassaviewController);
                     artikelcode.clear();
                     artikelcode.requestFocus();
+                    onhold.setDisable(false);
+                    AFSLUITEN.setDisable(false);
                 } catch (DatabaseException databaseException) {
                     databaseException.printStackTrace();
                 }
