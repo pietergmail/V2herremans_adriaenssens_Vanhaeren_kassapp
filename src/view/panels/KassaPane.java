@@ -233,7 +233,7 @@ public class KassaPane extends GridPane {
 
     public void updateTotaalPrijsKorting(KassaviewController kassaviewController){
         double prijs = kassaviewController.totaalPrijsKorting();
-        totaleprijskorting.setText("Totale prijs met korting: " + prijs);
+        totaleprijskorting.setText("Totale korting: " + prijs);
     }
 
     private void addVerwijderButtonToTable(KassaviewController kassaviewController) {

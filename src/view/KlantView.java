@@ -77,7 +77,7 @@ public class KlantView implements Observer {
 
 		VBox p2 = new VBox(10);
 		totaleprijs = new Label("Totale prijs:");
-		totaleprijskorting = new Label("Totale prijs met korting:");
+		totaleprijskorting = new Label("Totale korting:");
 		p2.getChildren().addAll(totaleprijs, totaleprijskorting);
 		p2.setAlignment(Pos.CENTER);
 		p2.setPadding(new Insets(10));

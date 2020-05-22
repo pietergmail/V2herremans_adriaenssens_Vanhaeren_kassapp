@@ -11,31 +11,31 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * @author Vanhaeren Corentin
+ * @author Vanhaeren Corentin, Sateur Maxime
  */
 
 public class KlantviewController {
-    private KassaController kassaController;
+    private KassaviewController kassaviewController;
 
-    public KlantviewController(KassaController kassaController) {
-        this.kassaController = kassaController;
+    public KlantviewController(KassaviewController kassaviewController) {
+        this.kassaviewController = kassaviewController;
     }
 
     public double totaalPrijs() {
-        return kassaController.totaalPrijs();
+        return kassaviewController.totaalPrijs();
     }
 
 
     public ArrayList<ArtikelWinkelmand> getWinkelmandje() {
-        return kassaController.getWinkelmandMetAantal();
+        return kassaviewController.getWinkelmandMetAantal();
     }
 
 
     public void update(String eventType, Artikel artikel) {
-        kassaController.update(eventType, artikel);
+        kassaviewController.update(eventType, artikel);
     }
 
     public double totaalPrijsKorting(){
-        return kassaController.totaalPrijsKorting();
+        return kassaviewController.totaalPrijsKorting();
     }
 }

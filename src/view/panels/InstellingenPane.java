@@ -35,7 +35,7 @@ public class InstellingenPane  extends GridPane implements EventHandler<javafx.e
     private String path = "src" + File.separator + "bestanden" + File.separator + "Save.properties";
     private Label percentage;
     private TextField percentagetxt;
-    private Label bedarg;
+    private Label bedrag;
     private TextField bedargtxt;
     private Label groep;
     private TextField groeptxt;
@@ -98,7 +98,7 @@ public class InstellingenPane  extends GridPane implements EventHandler<javafx.e
 
         percentage = new Label("percentage");
         percentagetxt = new TextField();
-        bedarg = new Label("bedarg");
+        bedrag = new Label("bedrag");
         bedargtxt = new TextField();
         groep = new Label("groep");
         groeptxt = new TextField();
@@ -109,7 +109,7 @@ public class InstellingenPane  extends GridPane implements EventHandler<javafx.e
         this.add(Geenkorting, 0, 9,2,2);
         this.add(percentage, 0, 11, 2, 2);
         this.add(percentagetxt, 1, 11, 2, 2);
-        this.add(bedarg, 0, 13,2,2);
+        this.add(bedrag, 0, 13,2,2);
         this.add(bedargtxt, 1, 13,2,2);
         this.add(groep, 0,15,2,2);
         this.add(groeptxt, 1,15,2,2);
