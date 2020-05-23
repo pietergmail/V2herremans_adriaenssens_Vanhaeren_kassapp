@@ -167,6 +167,8 @@ public class KassaPane extends GridPane {
                     voegProductToe(kassaviewController);
                     artikelcode.clear();
                     artikelcode.requestFocus();
+                    onhold.setDisable(false);
+                    AFSLUITEN.setDisable(false);
                 } catch (DatabaseException databaseException) {
                     databaseException.printStackTrace();
                 }
