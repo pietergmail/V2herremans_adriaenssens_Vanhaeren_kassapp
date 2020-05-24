@@ -274,6 +274,5 @@ public class KlantView implements Observer {
 		//System.out.println(containsArtikel + " bevat?");
 		return containsArtikel;
 	}
-
  */
 }

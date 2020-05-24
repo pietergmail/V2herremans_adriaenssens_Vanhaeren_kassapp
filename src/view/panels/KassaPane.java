@@ -322,7 +322,4 @@ public class KassaPane extends GridPane {
         //AFSLUITEN.setText("BETALEN");
         AFSLUITEN.setDisable(true);
     }
-
-
-
 }

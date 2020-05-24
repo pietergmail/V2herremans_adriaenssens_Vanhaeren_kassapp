@@ -5,7 +5,6 @@ package model.database;
  */
 
 public enum LoadSaveEnum {
-
     TEKST,
-    EXCEL,
+    EXCEL
 }

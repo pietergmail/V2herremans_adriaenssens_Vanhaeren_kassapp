@@ -27,7 +27,4 @@ public class KassaView {
 		stage.sizeToScene();			
 		stage.show();		
 	}
-
-
-
 }

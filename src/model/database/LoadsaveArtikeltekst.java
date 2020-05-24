@@ -65,5 +65,3 @@ public class LoadsaveArtikeltekst implements StrategyLoadSave{
         return new Artikel(code, omschrijving, groep, prijs, voorraad);
     }
 }
-
-

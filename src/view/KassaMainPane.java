@@ -38,6 +38,5 @@ public class KassaMainPane extends BorderPane {
         tabPane.getTabs().add(instellingTab);
         tabPane.getTabs().add(logTab);
         this.setCenter(tabPane);
-
     }
 }

@@ -100,7 +100,4 @@ public class ProductOverviewPane extends GridPane {
 
 		 */
 	}
-	
-	
-
 }
