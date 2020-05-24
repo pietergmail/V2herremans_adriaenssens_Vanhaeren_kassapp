@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * @author Vanhaeren Corentin, Sateur Maxime
  */
 
-public class KlantviewController {
+public class KlantviewController implements Observer{
     private KassaviewController kassaviewController;
 
     public KlantviewController(KassaviewController kassaviewController) {
@@ -30,7 +30,7 @@ public class KlantviewController {
         return kassaviewController.getWinkelmandMetAantal();
     }
 
-
+    @Override
     public void update(String eventType, Artikel artikel) {
         kassaviewController.update(eventType, artikel);
     }

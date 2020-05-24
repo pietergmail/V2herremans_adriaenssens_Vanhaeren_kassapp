@@ -2,7 +2,7 @@ package view.panels;
 
 
 /**
- * @author Sateur Maxime, Herremans Pieter
+ * @author Sateur Maxime, Herremans Pieter, Vanhaeren Corentin
  */
 
 import controller.InstellingController;
