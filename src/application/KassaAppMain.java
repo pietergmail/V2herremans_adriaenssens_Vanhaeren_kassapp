@@ -28,7 +28,7 @@ public class KassaAppMain extends Application {
 
 			KassaView kassaView = new KassaView(kassaviewController);
 			KlantView klantView = new KlantView(klantviewController);
-			//kassaVerkoop.addObserver(kassaviewController);
+			kassaVerkoop.addObserver(kassaviewController);
 			kassaVerkoop.addObserver(klantView);
 			//kassaVerkoop.addObserver(klantviewController);
 			//kassaVerkoop.addObserver(kassaView);
