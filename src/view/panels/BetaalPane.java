@@ -15,21 +15,14 @@ import javafx.stage.Stage;
 import javax.swing.*;
 import java.sql.SQLOutput;
 
-public class BetaalPane extends GridPane {
+class BetaalPane extends GridPane {
 
     private Stage stage = new Stage();
     private KassaPane kassaPane;
     private KassaviewController controller;
-    private Button betaal;
-    private Button cancel;
-    private Button annuleer;
     private TextField textfield;
-    private Label tekst;
-    private Label eindprijs;
-    private Label prijszonderkorting;
-    private Label korting;
 
-    public BetaalPane(KassaviewController controller){
+    BetaalPane(KassaviewController controller){
         this.controller = controller;
         stage.setTitle("BETALEN");
         this.setPrefHeight(200);
@@ -47,16 +40,16 @@ public class BetaalPane extends GridPane {
     }
 
     private void Buttons() {
-        betaal = new Button("Betaal");
+        Button betaal = new Button("Betaal");
         betaal.setOnAction(new BetaalHandler());
         betaal.isDefaultButton();
         this.add(betaal, 1, 3, 1, 1);
 
-        cancel = new Button("Cancel");
+        Button cancel = new Button("Cancel");
         cancel.setOnAction(new CancelHandler());
         this.add(cancel, 2, 3, 1, 1);
 
-        annuleer = new Button("Annuleer");
+        Button annuleer = new Button("Annuleer");
         annuleer.setOnAction(new AnnuleerHandler());
         this.add(annuleer, 3, 3, 1, 1);
     }
@@ -67,16 +60,16 @@ public class BetaalPane extends GridPane {
     }
 
     private void Labels() {
-        tekst = new Label("Bedrag: " + controller.totalePrijsMetKorting());
+        Label tekst = new Label("Bedrag: " + controller.totalePrijsMetKorting());
         this.add(tekst, 1, 0, 1, 1);
 
-        eindprijs = new Label();
+        Label eindprijs = new Label();
         this.add(eindprijs, 2, 0, 1, 1);
 
-        prijszonderkorting = new Label();
+        Label prijszonderkorting = new Label();
         this.add(prijszonderkorting, 3, 0, 1, 1);
 
-        korting = new Label();
+        Label korting = new Label();
         this.add(korting, 4, 0, 1, 1);
     }
 
