@@ -3,7 +3,7 @@ package model.KassaState;
 import model.KassaVerkoop;
 
 /**
- * @author Sateur Maxime
+ * @author Sateur Maxime, Herremans Pieter
  */
 
 public class KassaVerkoopOnHold implements KassaVerkoopState {
@@ -14,11 +14,11 @@ public class KassaVerkoopOnHold implements KassaVerkoopState {
     }
 
     public void setNew(){
-
+        System.out.println("De kassa bestaat al.");
     }
 
     public void setOnHold(){
-
+        System.out.println("De kassa staat al on hold.");
     }
 
     public void setOffHold(){
@@ -26,6 +26,6 @@ public class KassaVerkoopOnHold implements KassaVerkoopState {
     }
 
     public void Done(){
-
+        System.out.println("De kassa staat on hold.");
     }
 }

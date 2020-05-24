@@ -3,7 +3,7 @@ package model.KassaState;
 import model.KassaVerkoop;
 
 /**
- * @author Sateur Maxime
+ * @author Sateur Maxime, Herremans Pieter
  */
 
 public class KassaVerkoopNew implements KassaVerkoopState{
@@ -14,7 +14,7 @@ public class KassaVerkoopNew implements KassaVerkoopState{
     }
 
     public void setNew(){
-        System.out.println();
+        System.out.println("Is nieuw.");
     }
 
     public void setOnHold(){
@@ -22,7 +22,7 @@ public class KassaVerkoopNew implements KassaVerkoopState{
     }
 
     public void setOffHold(){
-        System.out.println();
+        System.out.println("Is niet on hold.");
     }
 
     public void Done(){
