@@ -188,7 +188,10 @@ public class KassaPane extends GridPane {
         });
 
         AFSLUITEN.setOnAction(e -> {
-            setAFSLUITEN();
+            if(this.kassaviewController.getWinkelmandje() != null){
+                System.out.println("afsluiten");
+                new BetaalPane(kassaviewController);
+            }
         });
 
 /*
