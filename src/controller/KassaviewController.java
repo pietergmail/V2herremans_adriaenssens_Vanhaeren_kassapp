@@ -19,7 +19,7 @@ import java.util.Properties;
  * @author Vanhaeren Corentin, Sateur Maxime
  */
 
-public class KassaviewController implements Observer{
+public class KassaviewController {
 
     private KassaView kassaView;
     private KassaVerkoop kassaVerkoop;
@@ -78,7 +78,7 @@ public class KassaviewController implements Observer{
         return kassaVerkoop.getTotalPrijs();
     }
 
-    @Override
+    //@Override
     public void update(String eventType, Artikel artikel) {
         if (eventType.equals("add_product_winkelkar")) {
             //code te laten uitvoeren
