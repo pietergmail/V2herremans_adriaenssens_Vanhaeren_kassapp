@@ -145,12 +145,12 @@ public class KassaviewController {
         return kassaVerkoop.berekenPrijsMetKorting(instellingController.getKortingContext());
     }
 
+    public void betaal(){
+        kassaVerkoop.betaal();
+    }
 
-
-
-
-
-
-
+    public void annuleer(){
+        kassaVerkoop.annuleer();
+    }
 
 }

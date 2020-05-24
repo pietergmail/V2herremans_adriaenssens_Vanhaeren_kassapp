@@ -2,6 +2,7 @@ package model;
 
 import controller.KassaviewController;
 import javafx.collections.FXCollections;
+import model.KassaState.KassaVerkoopDone;
 import model.KassaState.KassaVerkoopNew;
 import model.KassaState.KassaVerkoopOnHold;
 import model.KassaState.KassaVerkoopState;
@@ -131,7 +132,7 @@ public void removeArtikelWinkelkar(Artikel artikel){
 
     @Override
     public void notifyObservers(String eventType, Artikel artikel) {
-        for (Observer observer : observers) {
+        for (Observer observer : this.observers) {
             observer.update(eventType, artikel);
         }
     }
@@ -161,5 +162,19 @@ public void removeArtikelWinkelkar(Artikel artikel){
             round = round.setScale(2, RoundingMode.HALF_UP);
             return round.doubleValue();
         }
+    }
+
+    public void betaal(){
+        new KassaVerkoopNew(this).Done();
+        setKassaState(new KassaVerkoopDone(this));
+        this.winkelmand.clear();
+        notifyObservers("betaal", null);
+    }
+
+    public void annuleer(){
+        new KassaVerkoopNew(this).setNew();
+        setKassaState(new KassaVerkoopNew(this));
+        this.winkelmand.clear();
+        notifyObservers("annuleer", null);
     }
 }

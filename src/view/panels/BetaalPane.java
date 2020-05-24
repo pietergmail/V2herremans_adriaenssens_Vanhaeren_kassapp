@@ -80,8 +80,7 @@ class BetaalPane extends GridPane {
             if(!textfield.getText().trim().isEmpty()){
                 System.out.println("betaling gestart");
                 try{
-                    double bedrag = Double.parseDouble(textfield.getText());
-                    //betaling bedrag
+                    controller.betaal();
 
                 }catch (Exception e){
                     System.out.println("fout bij betaling");
@@ -106,8 +105,8 @@ class BetaalPane extends GridPane {
         @Override
         public void handle(ActionEvent event) {
             try{
-                //controller.cancel
                 System.out.println("betaling geannuleerd");
+                controller.annuleer();
             }
             catch (Exception e) {
                 System.out.println(e.getMessage());

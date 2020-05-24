@@ -11,11 +11,14 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import jxl.read.biff.BiffException;
 import model.Artikel;
 import model.database.DatabaseException;
 
+import java.beans.EventHandler;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +44,7 @@ public class KassaPane extends GridPane {
     private Label verwijder;
     private Button verwijderartikel;
     private TextField verwijderartikelcode;
+    private BetaalPane betaalPane;
     //private Scene scene = new Scene(this);
     //private List<Artikel> winkelmand = new ArrayList<>();
     //private List<Artikel> winkelmandonhold = new ArrayList<>();
@@ -190,27 +194,15 @@ public class KassaPane extends GridPane {
         AFSLUITEN.setOnAction(e -> {
             if(this.kassaviewController.getWinkelmandje() != null){
                 System.out.println("afsluiten");
-                new BetaalPane(kassaviewController);
+                betaalPane = new BetaalPane(kassaviewController);
+                //moet uitgevoerd worden na dat betaalpane is uitgevoerd
+                table.getItems().clear();
+                table.getItems().addAll(kassaviewController.getWinkelmandje());
+                updateTotaalPrijs(kassaviewController);
             }
         });
-
-/*
-        verwijderartikel.setOnAction(e -> {
-            try {
-                verwijderProduct(kassaviewController);
-                artikelcode.clear();
-                artikelcode.requestFocus();
-            } catch (DatabaseException databaseException) {
-                databaseException.printStackTrace();
-            }
-        });
-
- */
-
 
     }
-
-
 
     public void voegProductToe(KassaviewController kassaviewController) throws DatabaseException {
         try {
@@ -228,25 +220,6 @@ public class KassaPane extends GridPane {
             e.printStackTrace();
         }
     }
-
-/*
-    public void verwijderProduct(KassaviewController kassaviewController) throws DatabaseException{
-        try {
-            kassaviewController.removeProductKassaVerkoop(kassaviewController.getArtikel(verwijderartikelcode.getText()));
-            table.getItems().clear();
-            winkelmand.remove(kassaviewController.getArtikel(verwijderartikelcode.getText()));
-            table.getItems().addAll(winkelmand);
-            //table.getItems().addAll(kassaviewController.getWinkelmandje());
-            updateTotaalPrijs(kassaviewController);
-        }catch (IllegalArgumentException e){
-            new Alert(Alert.AlertType.WARNING, e.getMessage()).showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (BiffException e) {
-            e.printStackTrace();
-        }
-    }
-*/
 
     public void updateTotaalPrijs(KassaviewController kassaviewController) {
         double prijs = kassaviewController.totaalPrijs();
