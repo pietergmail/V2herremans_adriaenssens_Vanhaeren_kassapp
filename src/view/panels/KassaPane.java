@@ -197,9 +197,11 @@ public class KassaPane extends GridPane {
                 betaalPane = new BetaalPane(kassaviewController);
                 //moet uitgevoerd worden na dat betaalpane is uitgevoerd
                 table.getItems().clear();
-                table.getItems().addAll(kassaviewController.getWinkelmandje());
-                updateTotaalPrijs(kassaviewController);
+                setAFSLUITEN();
+                //table.getItems().addAll(kassaviewController.getWinkelmandje());
+                //updateTotaalPrijs(kassaviewController);
             }
+
         });
 
     }
@@ -317,7 +319,8 @@ public class KassaPane extends GridPane {
         voegartikelToe.setDisable(true);
         onhold.setDisable(true);
         restoreonhold.setDisable(true);
-        AFSLUITEN.setText("BETALEN");
+        //AFSLUITEN.setText("BETALEN");
+        AFSLUITEN.setDisable(true);
     }
 
 
