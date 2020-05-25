@@ -20,30 +20,23 @@ import java.util.List;
  */
 
 public class KassaVerkoop implements Subject{
-
-    //private HashMap<Artikel, Integer> winkelmandjeOnHold;
-    private ArrayList<Observer> observers = new ArrayList<>();
-    //private HashMap<Artikel, Integer> winkelmandje;
+    private ArrayList<Observer> observers;
     private KassaVerkoopState kassaState;
     private KortingStrategy korting;
-    ArrayList<ArtikelWinkelmand> winkelmand = new ArrayList<>();
+    ArrayList<ArtikelWinkelmand> winkelmand;
     ArrayList<ArtikelWinkelmand> winkelmandonhold = new ArrayList<>();
     private ArrayList<Artikel> winkelmandlist = new ArrayList<>();
     private ArrayList<Artikel> winkelmandonholdlist = new ArrayList<>();
-    //private KortingContext kortingContext;
 
     public KassaVerkoop() {
-        //this.winkelmandje = new HashMap<>();
+        this.observers = new ArrayList<>();
+        this.winkelmand = new ArrayList<>();
+        this.kassaState = new KassaVerkoopNew(this);
     }
 
     public void setWinkelmandje(ArrayList<Artikel> winkelmandje) {
         getWinkelmandje();
     }
-
-
-    //public void addToWinkelmandje(Artikel artikel){ this.winkelmandje.add(artikel);}
-
-    //public void removeFromWinkelMandje(int index) { this.winkelmandje.remove(index);}
 
     public double getTotalPrijs(){
         double total = 0;
@@ -53,18 +46,6 @@ public class KassaVerkoop implements Subject{
         return total;
     }
 
-/*
-    public void addArtikelWinkelkar(Artikel artikel){
-        if (artikelAlreadyAdded(artikel)){
-            winkelmandje.replace(artikel,  winkelmandje.get(artikel)+1);
-        }
-        else{
-            winkelmandje.put(artikel, 1);
-        }
-        notifyObservers("add_product_winkelkar", artikel);
-    }
-
- */
 public void addArtikelWinkelkar(Artikel artikel){
     if (artikelAlreadyAdded(artikel)){
         for (ArtikelWinkelmand a: winkelmand) {
@@ -210,6 +191,16 @@ public void removeArtikelWinkelkar(Artikel artikel){
     @Override
     public void removeObserver(Observer observer) {
         observers.remove(observer);
+    }
+
+    @Override
+    public void updateByAddArtikel(Artikel artikel) {
+
+    }
+
+    @Override
+    public void updateByRemoveArtikel(int i){
+
     }
 
     @Override
