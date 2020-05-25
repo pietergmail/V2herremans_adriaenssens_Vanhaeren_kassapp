@@ -2,9 +2,15 @@ package view.panels;
 
 
 import controller.KassaviewController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -18,7 +24,9 @@ import jxl.read.biff.BiffException;
 import model.Artikel;
 import model.database.DatabaseException;
 
-import java.beans.EventHandler;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +39,8 @@ import java.util.List;
 public class KassaPane extends GridPane {
     private KassaviewController kassaviewController;
     private Label voegtoe;
+
+    private ObservableList<Artikel> winkelmandje;
     private TextField artikelcode;
     private Button voegartikelToe;
     private Label totaleprijs;
@@ -50,7 +60,76 @@ public class KassaPane extends GridPane {
     //private List<Artikel> winkelmandonhold = new ArrayList<>();
 
     public KassaPane(KassaviewController kassaviewController) {
+        kassaviewController.setPane(this);
         this.kassaviewController = kassaviewController;
+        this.winkelmandje = FXCollections.observableArrayList(new ArrayList<>());
+
+        this.setBox();
+        this.setTabel();
+        this.setvoegartikelToe();
+        this.setartikelcode();
+        this.setOnHoldButton();
+        this.setRestoreonholdButton();
+        this.setAFSLUITEN();
+    }
+
+    private void setAFSLUITEN(){
+        AFSLUITEN.setOnAction(e -> {
+            if(this.kassaviewController.getWinkelmandje() != null){
+                System.out.println("afsluiten");
+                betaalPane = new BetaalPane(kassaviewController);
+                //moet uitgevoerd worden na dat betaalpane is uitgevoerd=
+            }
+        });
+    }
+
+    private void setRestoreonholdButton(){
+        restoreonhold.setOnAction(e -> {
+            //System.out.println("restore on hold");
+            restoreonhold.setDisable(true);
+            setRestoreonhold(kassaviewController);
+        });
+    }
+
+    private void setOnHoldButton(){
+        onhold.setOnAction(e -> {
+            //System.out.println("onhold");
+            restoreonhold.setDisable(false);
+            setOnhold(kassaviewController);
+        });
+    }
+
+    private void setartikelcode(){
+        artikelcode.setOnKeyPressed((KeyEvent keyEvent) -> {
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                try {
+                    voegProductToe(kassaviewController);
+                    artikelcode.clear();
+                    artikelcode.requestFocus();
+                    onhold.setDisable(false);
+                    AFSLUITEN.setDisable(false);
+                } catch (DatabaseException databaseException) {
+                    databaseException.printStackTrace();
+                }
+            }
+        });
+    }
+
+    private void setvoegartikelToe() {
+        voegartikelToe.setOnAction(e -> {
+            try {
+                voegProductToe(kassaviewController);
+                artikelcode.clear();
+                artikelcode.requestFocus();
+                onhold.setDisable(false);
+                AFSLUITEN.setDisable(false);
+            } catch (DatabaseException databaseException) {
+                databaseException.printStackTrace();
+            }
+        });
+    }
+
+    public void setBox(){
         HBox p2 = new HBox(10);
         voegtoe = new Label("voeg artikelcode in:");
         artikelcode = new TextField();
@@ -59,16 +138,6 @@ public class KassaPane extends GridPane {
         //p2.setAlignment(Pos.CENTER);
         p2.setPadding(new Insets(10));
 
-        /*
-        HBox p4 = new HBox(20);
-        verwijder = new Label("voeg artikelcode in:");
-        verwijderartikelcode = new TextField();
-        verwijderartikel = new Button("Verwijder");
-        p2.getChildren().addAll(verwijder, verwijderartikelcode, verwijderartikel);
-        p4.setAlignment(Pos.CENTER);
-        p4.setPadding(new Insets(10));
-
-         */
         VBox p3 = new VBox(10);
         table = new TableView<>();
         totaleprijs = new Label("Totale prijs:");
@@ -99,111 +168,12 @@ public class KassaPane extends GridPane {
         p4.setAlignment(Pos.CENTER);
         p4.setPadding(new Insets(10));
 
-
-        TableColumn<Artikel, String> columnOmschrijving = new TableColumn<>("Omschrijving");
-        columnOmschrijving.setMinWidth(200);
-        columnOmschrijving.setCellValueFactory(new PropertyValueFactory<Artikel, String>("omschrijving"));
-
-        TableColumn<Artikel, Double> columnPrijs = new TableColumn<>("Prijs");
-        columnPrijs.setMinWidth(100);
-        columnPrijs.setCellValueFactory(new PropertyValueFactory<Artikel, Double>("prijs"));
-
-        table.getColumns().addAll(columnOmschrijving, columnPrijs);
-
-        addVerwijderButtonToTable(kassaviewController);
-        /*
-        TableColumn<Artikel, Integer> columnAantal = new TableColumn<>("Aantal");
-        columnAantal.setMinWidth(50);
-        columnAantal.setCellValueFactory(new PropertyValueFactory<Artikel, >("Aantal"));
-
-         */
-
-        //table.getColumns().addAll(columnOmschrijving, columnPrijs, columnAantal);
-
-
         VBox p1 = new VBox(10);
         p1.getChildren().addAll(p2, p4);
         p1.setAlignment(Pos.CENTER);
         p1.setPadding(new Insets(10));
 
         this.getChildren().addAll(p1);
-
-        /*
-        Platform.runLater(new Runnable() {
-
-            @Override
-            public void run() {
-                artikelcode.requestFocus();
-            }
-        });
-         */
-
-        voegartikelToe.setOnAction(e -> {
-            try {
-                voegProductToe(kassaviewController);
-                artikelcode.clear();
-                artikelcode.requestFocus();
-                onhold.setDisable(false);
-                AFSLUITEN.setDisable(false);
-            } catch (DatabaseException databaseException) {
-                databaseException.printStackTrace();
-            }
-        });
-
-
-        voegartikelToe.setOnKeyPressed((KeyEvent keyEvent) -> {
-            if (keyEvent.getCode() == KeyCode.ENTER) {
-                try {
-                    voegProductToe(kassaviewController);
-                    artikelcode.clear();
-                    artikelcode.requestFocus();
-                    onhold.setDisable(false);
-                    AFSLUITEN.setDisable(false);
-                } catch (DatabaseException databaseException) {
-                    databaseException.printStackTrace();
-                }
-            }
-        });
-
-        artikelcode.setOnKeyPressed((KeyEvent keyEvent) -> {
-            if (keyEvent.getCode() == KeyCode.ENTER) {
-                try {
-                    voegProductToe(kassaviewController);
-                    artikelcode.clear();
-                    artikelcode.requestFocus();
-                    onhold.setDisable(false);
-                    AFSLUITEN.setDisable(false);
-                } catch (DatabaseException databaseException) {
-                    databaseException.printStackTrace();
-                }
-            }
-        });
-
-        onhold.setOnAction(e -> {
-            //System.out.println("onhold");
-            restoreonhold.setDisable(false);
-            setOnhold(kassaviewController);
-        });
-
-        restoreonhold.setOnAction(e -> {
-            //System.out.println("restore on hold");
-            restoreonhold.setDisable(true);
-            setRestoreonhold(kassaviewController);
-        });
-
-        AFSLUITEN.setOnAction(e -> {
-            if(this.kassaviewController.getWinkelmandje() != null){
-                System.out.println("afsluiten");
-                betaalPane = new BetaalPane(kassaviewController);
-                //moet uitgevoerd worden na dat betaalpane is uitgevoerd
-                table.getItems().clear();
-                setAFSLUITEN();
-                //table.getItems().addAll(kassaviewController.getWinkelmandje());
-                //updateTotaalPrijs(kassaviewController);
-            }
-
-        });
-
     }
 
     public void voegProductToe(KassaviewController kassaviewController) throws DatabaseException {
@@ -314,12 +284,23 @@ public class KassaPane extends GridPane {
         updateTotaalPrijs(kassaviewController);
     }
 
-    private void setAFSLUITEN(){
-        artikelcode.setDisable(true);
-        voegartikelToe.setDisable(true);
-        onhold.setDisable(true);
-        restoreonhold.setDisable(true);
-        //AFSLUITEN.setText("BETALEN");
-        AFSLUITEN.setDisable(true);
+    public void update(){
+        table.getItems().clear();
+        table.getItems().addAll(kassaviewController.getWinkelmandje());
+        updateTotaalPrijs(kassaviewController);
+    }
+
+    public void setTabel(){
+        TableColumn<Artikel, String> columnOmschrijving = new TableColumn<>("Omschrijving");
+        columnOmschrijving.setMinWidth(200);
+        columnOmschrijving.setCellValueFactory(new PropertyValueFactory<Artikel, String>("omschrijving"));
+
+        TableColumn<Artikel, Double> columnPrijs = new TableColumn<>("Prijs");
+        columnPrijs.setMinWidth(100);
+        columnPrijs.setCellValueFactory(new PropertyValueFactory<Artikel, Double>("prijs"));
+
+        table.getColumns().addAll(columnOmschrijving, columnPrijs);
+
+        addVerwijderButtonToTable(kassaviewController);
     }
 }

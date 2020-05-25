@@ -9,6 +9,7 @@ import model.korting.KortingEnum;
 import model.korting.KortingFactory;
 import view.KassaView;
 import view.KlantView;
+import view.panels.KassaPane;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class KassaviewController implements Observer{
     private LoadSaveContext loadSaveContext = new LoadSaveContext();
     private ArrayList<Artikel> producten = new ArrayList<>();
     //private LoadsaveArtikeltekst loadsaveArtikeltekst;
+    private KassaPane pane;
 
 
     private Properties properties = new Properties();
@@ -147,10 +149,16 @@ public class KassaviewController implements Observer{
 
     public void betaal(){
         kassaVerkoop.betaal();
+        this.updateProductsInTable();
     }
 
     public void annuleer(){
         kassaVerkoop.annuleer();
+        this.updateProductsInTable();
     }
+
+    public void setPane(KassaPane pane){this.pane = pane;}
+
+    public void updateProductsInTable(){this.pane.update();}
 
 }
