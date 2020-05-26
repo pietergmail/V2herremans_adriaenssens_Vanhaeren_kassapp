@@ -9,8 +9,8 @@ import controller.Observer;
 public interface Observable {
     void addObserver(Observer observer);
     void removeObserver(Observer observer);
-    void updateByAddArtikel(Artikel artikel);
-    void updateByRemoveArtikel(int i);
+    void updateAddArtikel(Artikel artikel);
+    void updateRemoveArtikel(int i);
     void setOnHold();
     void setOffHold();
     void betaal();

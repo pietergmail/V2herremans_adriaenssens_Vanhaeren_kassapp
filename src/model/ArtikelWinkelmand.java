@@ -46,24 +46,24 @@ public class ArtikelWinkelmand {
 
     public void addAantal(){this.aantal = aantal + 1;}
 
+    //necessary for the contains() function to work in ArtikelVoorKlant
     @Override
     public boolean equals(Object o){
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ArtikelWinkelmand that = (ArtikelWinkelmand) o;
         return Double.compare(that.prijs, prijs) == 0 && Objects.equals(omschrijving, that.omschrijving);
-
     }
 
     public static ArrayList<ArtikelWinkelmand> ArtikelVoorKlant(ArrayList<Artikel> winkelmand){
         ArrayList<ArtikelWinkelmand> viewWinkelmand = new ArrayList<>();
-        for(Artikel artikel : winkelmand){
-            ArtikelWinkelmand artikelWinkelmand = new ArtikelWinkelmand(artikel.getOmschrijving(), artikel.getPrijs(), 1);
+        for(Artikel a : winkelmand){
+            ArtikelWinkelmand artikelWinkelmand = new ArtikelWinkelmand(a.getOmschrijving(), a.getPrijs(), 1);
             if(viewWinkelmand.contains(artikelWinkelmand)){
                 int i = viewWinkelmand.indexOf(artikelWinkelmand);
-                ArtikelWinkelmand a = viewWinkelmand.get(i);
-                a.addAantal();
-                viewWinkelmand.set(i, a);
+                ArtikelWinkelmand aw = viewWinkelmand.get(i);
+                aw.addAantal();
+                viewWinkelmand.set(i, aw);
             }
             else viewWinkelmand.add(artikelWinkelmand);
         }

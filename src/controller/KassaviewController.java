@@ -16,6 +16,7 @@ import java.util.Properties;
 
 /**
  * @author Vanhaeren Corentin, Sateur Maxime
+ * cleanup necessary for unused classes
  */
 
 public class KassaviewController implements Observer {
@@ -53,7 +54,7 @@ public class KassaviewController implements Observer {
             Artikel a = productController.getArtikel(code);
             if (a.getVoorraad() == 0) throw new IllegalArgumentException("Niet in voorraad");
             else{
-                kassaVerkoop.updateByAddArtikel(a);
+                kassaVerkoop.updateAddArtikel(a);
                 System.out.println("Kassaverkoop: " + a.getOmschrijving());
             }
         }
@@ -63,7 +64,7 @@ public class KassaviewController implements Observer {
     }
 
     public void removeProductKassaVerkoop(int index) {
-        kassaVerkoop.updateByRemoveArtikel(index);
+        kassaVerkoop.updateRemoveArtikel(index);
     }
 
     public void setOnHold() {
@@ -86,18 +87,6 @@ public class KassaviewController implements Observer {
         productController.setProductPane(productOverviewPane);
     }
 
-    /*
-    public Artikel getArtikel(String code) throws DatabaseException, IOException, BiffException {
-        for (Artikel a : this.loadinMemory()) {
-            if (a.getCode().equals(code)) {
-                return a;
-            }
-        }
-        throw new IllegalArgumentException("product niet gevonden");
-    }
-*/
-    //vervangen door productcontroller
-
     public double totaalPrijs() {
         return kassaVerkoop.getTotalPrijs();
     }
@@ -106,22 +95,10 @@ public class KassaviewController implements Observer {
         instellingController.setLoadSaveStrategy(loadSaveEnum);
     }
 
+    //should not be used, use the one in productcontroller, this one will still works, probably...
     public ArrayList<Artikel> load() throws IOException, DatabaseException, BiffException {
         return productController.loadArtikels();
-        //should not be used, use the one in productcontroller, this one will still work
     }
-
-
-    /*public ArrayList<Artikel> loadinMemory() throws IOException, DatabaseException, BiffException {
-        if (producten.isEmpty()) {
-            producten = this.load();
-        } else {
-            return producten;
-        }
-        return producten;
-    }
-    */
-    //vervangt door instellingcontroller
 
     public void setKortingStrategy(){
         instellingController.setKortingStrategy();
@@ -173,9 +150,9 @@ public class KassaviewController implements Observer {
 
     @Override
     public void update(KassaVerkoop verkoop) {
-        pane.setWinkelmandje(verkoop.getWinkelmandje());
         pane.updateTotaalPrijs(verkoop.getTotalPrijs());
-        pane.updateTotaalKorting(verkoop.berekenKorting());
         pane.updateTotaalPrijsKorting(verkoop.berekenPrijsMetKorting());
+        pane.setWinkelmandje(verkoop.getWinkelmandje());
+        pane.updateTotaalKorting(verkoop.berekenKorting());
     }
 }

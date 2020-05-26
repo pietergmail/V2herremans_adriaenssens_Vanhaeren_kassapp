@@ -58,24 +58,6 @@ public class KassaVerkoop implements Observable {
 
     public void removeArtikelWinkelkar(int index){
         this.winkelmandlist.remove(index);
-        /*for (int i = 0; i < winkelmand.size(); i++) {
-            ArtikelWinkelmand a = winkelmand.get(i);
-            if (a..equals(index)){
-                //System.out.println("test");
-              if(a.getAantal() > 1){
-                  int aantal = a.getAantal();
-                  aantal-=1;
-                  a.setAantal(aantal);
-                  break;
-              }
-              else {
-                  //winkelmand.remove(a);
-                  winkelmand.remove(index);
-                  break;
-              }
-          }
-        }
-        notifyObservers();*/
     }
 
 
@@ -124,13 +106,13 @@ public class KassaVerkoop implements Observable {
     }
 
     @Override
-    public void updateByAddArtikel(Artikel artikel) {
+    public void updateAddArtikel(Artikel artikel) {
         this.addArtikelWinkelkar(artikel);
         notifyObservers();
     }
 
     @Override
-    public void updateByRemoveArtikel(int i){
+    public void updateRemoveArtikel(int i){
         this.removeArtikelWinkelkar(i);
         notifyObservers();
     }

@@ -6,7 +6,6 @@ import jxl.read.biff.BiffException;
 import model.Artikel;
 import model.database.DatabaseException;
 import model.database.LoadSaveContext;
-import model.database.LoadSaveEnum;
 import model.database.StrategyLoadSave;
 import view.panels.ProductOverviewPane;
 
@@ -23,19 +22,27 @@ public class ProductController {
         loadSaveContext = new LoadSaveContext(loadSaveStrategy);
     }
 
-    public ObservableList<Artikel> loadData() throws DatabaseException, IOException, BiffException {
+    ObservableList<Artikel> loadData() throws DatabaseException, IOException, BiffException {
         return FXCollections.observableArrayList(this.loadArtikels());
     }
 
-    public ArrayList<Artikel> loadArtikels() throws DatabaseException, IOException, BiffException {
+    ArrayList<Artikel> loadArtikels() throws DatabaseException, IOException, BiffException {
     return loadSaveContext.load();
     }
 
-    public Artikel getArtikel(String code){
+    Artikel getArtikel(String code){
         return loadSaveContext.getArtikel(code);
     }
 
-    public void setProductPane(ProductOverviewPane pane){
+    void setProductPane(ProductOverviewPane pane){
+        this.pane = pane;
+    }
+
+    public ProductOverviewPane getPane() {
+        return pane;
+    }
+
+    public void setPane(ProductOverviewPane pane) {
         this.pane = pane;
     }
 

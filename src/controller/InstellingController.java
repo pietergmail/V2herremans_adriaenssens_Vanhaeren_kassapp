@@ -18,14 +18,13 @@ public class InstellingController {
 
     private KortingContext kortingContext = new KortingContext();
     private String path = "src" + File.separator + "bestanden" + File.separator + "KassaApp.properties";
-    private File file;
     private Properties properties;
 
 
 
     public InstellingController() {
         this.properties = new Properties();
-        file = new File(path);
+        File file = new File(path);
         setKortingStrategy();
     }
 
@@ -34,7 +33,7 @@ public class InstellingController {
         return kortingContext;
     }
 
-    public void setProperty(String key, String value){
+    void setProperty(String key, String value){
         try (OutputStream output = new FileOutputStream(new File(path))) {
             properties.setProperty(key, value);
             properties.store(output, "properties");
@@ -43,7 +42,7 @@ public class InstellingController {
         }
     }
 
-    public String getProperty(String key){
+    String getProperty(String key){
         String value = null;
         try (InputStream input = new FileInputStream(new File(path))) {
             properties.load(input);
@@ -54,13 +53,13 @@ public class InstellingController {
         return value;
     }
 
-    public void setLoadSaveStrategy(LoadSaveEnum loadSaveEnum){
+    void setLoadSaveStrategy(LoadSaveEnum loadSaveEnum){
         if(loadSaveEnum == null) throw new IllegalArgumentException("De loadsavekeuze is leeg");
         System.out.println("Loadsavestrategy: " + loadSaveEnum.toString());
         this.setProperty("property.filetype", loadSaveEnum.toString());
     }
 
-    public StrategyLoadSave getLoadSaveStrategy(){
+    StrategyLoadSave getLoadSaveStrategy(){
         LoadSaveEnum loadSaveEnum = LoadSaveEnum.valueOf(getProperty("property.filetype"));
         if (loadSaveEnum.equals(LoadSaveEnum.EXCEL)){
             System.out.println("inladen langs EXCEL");
@@ -74,7 +73,7 @@ public class InstellingController {
         }
     }
 
-    public void setKortingStrategy(){
+    void setKortingStrategy(){
         String key = "property.typekorting";
         ArrayList<Object> t = new ArrayList<>();
         //slot1: percentage korting, slot2: drempelbedrag korting, slot3: groep korting
@@ -89,11 +88,12 @@ public class InstellingController {
         kortingContext.setKortingStrategy(new KortingFactory().kortingFactory(kortingStrategy, t));
     }
 
-    public KortingStrategy getKortingStrategy(){
+    KortingStrategy getKortingStrategy(){
         KortingEnum keuze = KortingEnum.valueOf(getProperty("property.typekorting"));
         ArrayList<Object> args = new ArrayList<>();
         switch(keuze){
             case GROEPKORTING:
+                //kan meer efficient geschreven worden
                 String temp = getProperty("property.percentagekorting");
                 Double temp2 = Double.parseDouble(temp);
                 args.add(temp2);
