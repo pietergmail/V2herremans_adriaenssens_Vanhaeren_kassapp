@@ -48,7 +48,7 @@ public class Artikel implements Comparable{
         return code;
     }
 
-    public void setCode(String code) {
+    private void setCode(String code) {
         this.code = code;
     }
 
@@ -56,7 +56,7 @@ public class Artikel implements Comparable{
         return omschrijving;
     }
 
-    public void setOmschrijving(String omschrijving) {
+    private void setOmschrijving(String omschrijving) {
         this.omschrijving = omschrijving;
     }
 
@@ -64,7 +64,7 @@ public class Artikel implements Comparable{
         return groep;
     }
 
-    public void setGroep(String groep) {
+    private void setGroep(String groep) {
         this.groep = groep;
     }
 
@@ -72,7 +72,7 @@ public class Artikel implements Comparable{
         return prijs;
     }
 
-    public void setPrijs(double prijs) {
+    private void setPrijs(double prijs) {
         this.prijs = prijs;
     }
 
@@ -80,7 +80,7 @@ public class Artikel implements Comparable{
         return voorraad;
     }
 
-    public void setVoorraad(int voorraad) {
+    private void setVoorraad(int voorraad) {
         this.voorraad = voorraad;
     }
 
