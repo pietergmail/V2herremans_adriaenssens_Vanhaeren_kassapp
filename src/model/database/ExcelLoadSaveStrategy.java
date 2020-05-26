@@ -14,11 +14,12 @@ import excel.ExcelPlugin;
  */
 
 public class ExcelLoadSaveStrategy  implements StrategyLoadSave {
+
     @Override
     public ArrayList<Artikel> load() throws IOException, DatabaseException, BiffException {
         File file = getFile();
-        ExcelPlugin excel = new ExcelPlugin();
-        ArrayList<ArrayList<String>> ArtikelenStrings = excel.read(file);
+        ExcelPlugin excelPlugin = new ExcelPlugin();
+        ArrayList<ArrayList<String>> ArtikelenStrings = excelPlugin.read(file);
 
         //change the ArrayList<String> to a bunch of artikels
         ArrayList<Artikel> artikelen =  new ArrayList<>();
