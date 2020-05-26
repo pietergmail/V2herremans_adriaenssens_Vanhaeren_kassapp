@@ -1,45 +1,28 @@
 package controller;
 
-import jxl.read.biff.BiffException;
-import model.Artikel;
-import model.ArtikelWinkelmand;
-import controller.*;
-import model.Observer;
-import model.database.DatabaseException;
-
-import java.io.IOException;
-import java.util.ArrayList;
+import model.KassaVerkoop;
+import view.panels.KlantPane;
 
 /**
  * @author Vanhaeren Corentin, Sateur Maxime
  */
 
-public class KlantviewController implements Observer{
-    private KassaviewController kassaviewController;
+public class KlantviewController implements Observer {
+    private KlantPane pane;
 
-    public KlantviewController(KassaviewController kassaviewController) {
-        this.kassaviewController = kassaviewController;
+    public KlantviewController(KassaVerkoop kassaVerkoop) {
+        kassaVerkoop.addObserver(this);
     }
 
-    public double totaalPrijs() {
-        return kassaviewController.totaalPrijs();
-    }
-
-
-    public ArrayList<ArtikelWinkelmand> getWinkelmandje() {
-        return kassaviewController.getWinkelmandMetAantal();
+    public void setPane(KlantPane pane){
+        this.pane = pane;
     }
 
     @Override
-    public void update(String eventType, Artikel artikel) {
-        kassaviewController.update(eventType, artikel);
-    }
-
-    public double totaleKorting(){
-        return kassaviewController.Kortingprijs();
-    }
-
-    public double totalePrijsMetKorting(){
-        return kassaviewController.totalePrijsMetKorting();
+    public void update(KassaVerkoop verkoop) {
+        pane.setWinkelmand(verkoop.getWinkelmandje());
+        pane.setBetalen(verkoop.getTotalPrijs());
+        pane.setKorting(verkoop.berekenKorting());
+        pane.setBetalen(verkoop.berekenPrijsMetKorting());
     }
 }

@@ -1,9 +1,12 @@
 package model;
+
+import controller.Observer;
+
 /**
  * @author Vanhaeren Corentin
  */
 
-public interface Subject {
+public interface Observable {
     void addObserver(Observer observer);
     void removeObserver(Observer observer);
     void updateByAddArtikel(Artikel artikel);
@@ -12,6 +15,5 @@ public interface Subject {
     void setOffHold();
     void betaal();
     void annuleer();
-    void notifyObservers(String eventType, Artikel artikel);
-    //void notifyObservers(String eventType);
+    //void update(String eventype);
 }

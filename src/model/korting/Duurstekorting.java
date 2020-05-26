@@ -13,7 +13,7 @@ public class Duurstekorting implements KortingStrategy {
     private double percentage;
 
     @Override
-    public double getKorting(ArrayList<Artikel> list) {
+    public double getKorting(ObservableList<Artikel> list) {
         Artikel artikel = list.get(0);
         for(Artikel a: list){
             if(a.getPrijs() > artikel.getPrijs()){

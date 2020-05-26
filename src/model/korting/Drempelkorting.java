@@ -15,7 +15,7 @@ public class Drempelkorting implements KortingStrategy {
 
 
     @Override
-    public double getKorting(ArrayList<Artikel> list) {
+    public double getKorting(ObservableList<Artikel> list) {
         double tot = 0;
         for (Artikel a: list){
             tot += a.getPrijs();

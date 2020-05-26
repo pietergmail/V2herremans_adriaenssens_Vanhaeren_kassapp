@@ -1,5 +1,6 @@
 package model.korting;
 
+import javafx.collections.ObservableList;
 import model.Artikel;
 import model.database.StrategyLoadSave;
 
@@ -21,7 +22,7 @@ public class KortingContext {
         //this.kortingStrategy = new Geenkorting();
     }
 
-    public double getKorting(ArrayList<Artikel> list) {
+    public double getKorting(ObservableList<Artikel> list) {
         return kortingStrategy.getKorting(list);
         //System.out.println(kortingStrategy + " strategy");
         //return 1000;

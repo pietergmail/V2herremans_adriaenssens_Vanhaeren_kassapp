@@ -14,7 +14,7 @@ public class Groepkorting implements KortingStrategy{
     private String groep;
 
     @Override
-    public double getKorting(ArrayList<Artikel> list) {
+    public double getKorting(ObservableList<Artikel> list) {
         double korting = 0;
         for (Artikel a: list) {
             if(a.getGroep().toLowerCase().equals(groep.toLowerCase())){
@@ -28,5 +28,4 @@ public class Groepkorting implements KortingStrategy{
         this.percentage = percentage/100;
         this.groep = groep;
     }
-
 }

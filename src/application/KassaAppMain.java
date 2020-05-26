@@ -3,12 +3,16 @@ package application;
 import controller.InstellingController;
 import controller.KassaviewController;
 import controller.KlantviewController;
+import controller.ProductController;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import jxl.read.biff.BiffException;
 import model.KassaVerkoop;
 import model.database.DatabaseException;
 import view.KassaView;
 import view.KlantView;
+
+import java.io.IOException;
 
 /**
 * @author Zeno Adriaansen, Vanhaeren Corentin, , Sateur Maxime
@@ -18,8 +22,25 @@ public class KassaAppMain extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-		KassaVerkoop kassaVerkoop = new KassaVerkoop();
 
+		try {
+			InstellingController instellingController = new InstellingController();
+			ProductController productController = new ProductController(instellingController);
+			KassaVerkoop kassaVerkoop = new KassaVerkoop();
+			KassaviewController kassaviewController = new KassaviewController(kassaVerkoop, instellingController, productController);
+			KassaView kassaView = new KassaView(kassaviewController);
+			KlantviewController klantviewController = new KlantviewController(kassaVerkoop);
+			KlantView klantView = new KlantView(klantviewController);
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (BiffException e) {
+			e.printStackTrace();
+		}
+
+
+/*
 		try {
 
 			InstellingController instellingController = new InstellingController();
@@ -29,14 +50,17 @@ public class KassaAppMain extends Application {
 			KassaView kassaView = new KassaView(kassaviewController);
 			KlantView klantView = new KlantView(klantviewController);
 			kassaVerkoop.addObserver(kassaviewController);
-			kassaVerkoop.addObserver(klantView);
 			//kassaVerkoop.addObserver(klantviewController);
 			//kassaVerkoop.addObserver(kassaView);
 
 		} catch (DatabaseException e) {
 			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (BiffException e) {
+			e.printStackTrace();
 		}
-
+*/
 		/*
 		ExcelLoadSaveStrategy loadsaveArtikelexcel = new ExcelLoadSaveStrategy();
 		ArrayList<Artikel> list = null;

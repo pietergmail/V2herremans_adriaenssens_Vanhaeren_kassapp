@@ -39,6 +39,21 @@ class BetaalPane extends GridPane {
         stage.show();
     }
 
+    private void Labels() {
+        Label tekst = new Label("Bedrag: " + controller.totalePrijsMetKorting());
+        this.add(tekst, 1, 0, 1, 1);
+
+        Label eindprijs = new Label();
+        this.add(eindprijs, 2, 0, 1, 1);
+
+        Label prijszonderkorting = new Label();
+        this.add(prijszonderkorting, 3, 0, 1, 1);
+
+        Label korting = new Label();
+        this.add(korting, 4, 0, 1, 1);
+    }
+
+
     private void Buttons() {
         Button betaal = new Button("Betaal");
         betaal.setOnAction(new BetaalHandler());
@@ -54,23 +69,12 @@ class BetaalPane extends GridPane {
         this.add(annuleer, 3, 3, 1, 1);
     }
 
+
+
+
     private void Textfield() {
         textfield = new TextField();
         this.add(textfield, 1, 5, 1, 1);
-    }
-
-    private void Labels() {
-        Label tekst = new Label("Bedrag: " + controller.totalePrijsMetKorting());
-        this.add(tekst, 1, 0, 1, 1);
-
-        Label eindprijs = new Label();
-        this.add(eindprijs, 2, 0, 1, 1);
-
-        Label prijszonderkorting = new Label();
-        this.add(prijszonderkorting, 3, 0, 1, 1);
-
-        Label korting = new Label();
-        this.add(korting, 4, 0, 1, 1);
     }
 
     private class BetaalHandler implements EventHandler<ActionEvent>{

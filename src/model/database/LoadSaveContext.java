@@ -10,6 +10,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -18,12 +20,26 @@ import java.util.Properties;
 
 public class LoadSaveContext {
     private StrategyLoadSave strategyLoadSave;
+    private Map<String, Artikel> artikels;
     //private Properties properties = new Properties();
     //private String path = "src" + File.separator + "bestanden" + File.separator + "KassaApp.properties";
 
 
-    public LoadSaveContext(){
+    public LoadSaveContext(StrategyLoadSave strategyLoadSave) throws DatabaseException, IOException, BiffException {
+        this.strategyLoadSave = strategyLoadSave;
+        artikels = new HashMap<>();
 
+        ArrayList<Artikel> a = strategyLoadSave.load();
+        for (Artikel artikel: a){
+            artikels.put(artikel.getCode(), artikel);
+        }
+    }
+
+    public Artikel getArtikel(String code){
+        if(artikels.containsKey(code)) return artikels.get(code);
+        else{
+            throw new IllegalArgumentException("Artikel niet in database.");
+        }
     }
 
     /*

@@ -5,13 +5,16 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import jxl.read.biff.BiffException;
 import model.database.DatabaseException;
+
+import java.io.IOException;
 
 public class KassaView {
 	private Stage stage = new Stage();
 	private KassaviewController kassaviewController;
 		
-	public KassaView(KassaviewController kassaviewController) throws DatabaseException {
+	public KassaView(KassaviewController kassaviewController) throws DatabaseException, IOException, BiffException {
 		this.kassaviewController = kassaviewController;
 		stage.setTitle("KASSA VIEW");
 		stage.setResizable(false);		

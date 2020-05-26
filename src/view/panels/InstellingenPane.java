@@ -35,7 +35,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 public class InstellingenPane extends GridPane{
-    private KassaviewController kassaviewController;
+    private KassaviewController controller;
     private Label titel;
     private Label databsae;
     private Label korting;
@@ -52,10 +52,213 @@ public class InstellingenPane extends GridPane{
     Border border = new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(10), new BorderWidths(1)));
     private Button save;
 
-    public InstellingenPane(KassaviewController kassaviewController){
-        this.kassaviewController = kassaviewController;
+    public InstellingenPane(KassaviewController controller){
+        this.controller = controller;
 
-        //database
+        this.setbox();
+
+        //bij klikken op savebutton worden de instelling opgeslagen
+
+        save.setOnAction(e-> {
+            //popup bij niet ingevulde velden
+            String warningmessage = "";
+            Alert warning = new Alert(Alert.AlertType.WARNING);
+            warning.setTitle("Warning Dialog");
+            warning.setHeaderText(null);
+            //
+
+
+            //bij niet/fout ingevulde velden een popup weergeven of confirmation popup tonen
+            String keuze = (String) chbxkorting.getValue();
+            if (keuze.equals("Drempelkorting")){
+                if(percentagetxt.getText().trim().isEmpty() || percentagetxt.getText() == null){
+                    warningmessage += "Percentage veld moet ingevuld zijn. \n";
+                }
+                if(bedargtxt.getText().trim().isEmpty() || bedargtxt.getText() == null){
+                    warningmessage += "Bedarg veld moet ingevuld zijn. \n";
+                }
+                if(!geldigpercentage() && !percentagetxt.getText().trim().isEmpty()){
+                    warningmessage += "Het percentage moet tussen 0 en 100 liggen. \n";
+                    percentagetxt.clear();
+                }
+                if(!geldigbedarg() && !bedargtxt.getText().trim().isEmpty()){
+                    warningmessage += "Het Bedarg moet groter zijn dan 0. \n";
+                    bedargtxt.clear();
+                }
+                if (!warningmessage.trim().isEmpty()){
+                    warning.setContentText(warningmessage);
+                    warning.showAndWait();
+                }
+                else {
+                    popupsave();
+                }
+            }
+            if (keuze.equals("Duurstekorting")){
+                if(percentagetxt.getText().trim().isEmpty() || percentagetxt.getText() == null){
+                    warningmessage += "Percentage veld moet ingevuld zijn. \n";
+                }
+                if(bedargtxt.getText().trim().isEmpty() || bedargtxt.getText() == null){
+                    warningmessage += "Bedarg veld moet ingevuld zijn. \n";
+                }
+                if(!geldigpercentage() && !percentagetxt.getText().trim().isEmpty()){
+                    warningmessage += "Het percentage moet tussen 0 en 100 liggen. \n";
+                    percentagetxt.clear();
+                }
+                if(!geldigbedarg() && !bedargtxt.getText().trim().isEmpty()){
+                    warningmessage += "Het Bedarg moet groter zijn dan 0. \n";
+                    bedargtxt.clear();
+                }
+                if (!warningmessage.trim().isEmpty()){
+                    warning.setContentText(warningmessage);
+                    warning.showAndWait();
+                }
+                else {
+                    popupsave();
+                }
+            }
+            if (keuze.equals("Groepkorting")) {
+                if(percentagetxt.getText().trim().isEmpty() || percentagetxt.getText() == null){
+                    warningmessage += "Percentage veld moet ingevuld zijn. \n";
+                }
+                if(groeptxt.getText().trim().isEmpty() || groeptxt.getText() == null){
+                    warningmessage += "Groep veld moet ingevuld zijn. \n";
+                }
+                if(!geldigpercentage() && !percentagetxt.getText().trim().isEmpty()){
+                    warningmessage += "Het percentage moet tussen 0 en 100 liggen. \n";
+                    percentagetxt.clear();
+                }
+                //
+                try {
+                    if(!groeptxt.getText().trim().isEmpty()){
+                        warningmessage += "De ingegeven groep bestaat niet. \n";
+                        groeptxt.clear();
+                    }
+                }catch(Exception ex){
+                    throw new IllegalArgumentException(ex);
+                }
+                //
+                if (!warningmessage.trim().isEmpty()){
+                    warning.setContentText(warningmessage);
+                    warning.showAndWait();
+                }
+                else {
+                    popupsave();
+                }
+            }
+            //
+
+
+            //bij geen fouten, worden instelling opgeslagen
+            if(warningmessage.trim().isEmpty()){
+                //opslagen van database
+                if(chbxdatabase.getValue().equals("Tekst")){
+                    controller.setProperty("property.filetype", "TEKST");
+                }
+                if(chbxdatabase.getValue().equals("Excel")){
+                    controller.setProperty("property.filetype", "EXCEL");
+                }
+                //
+
+
+                //opslagen van korting (en ervoor zorgen dat er geen lege velden kunnen worden opgeslagen)
+                if(!percentagetxt.getText().trim().isEmpty() && percentagetxt.getText() != null){
+                    controller.setProperty("property.percentagekorting", percentagetxt.getText());
+                }
+                if(!bedargtxt.getText().trim().isEmpty() && bedargtxt.getText() != null){
+                    controller.setProperty("property.drempelbedragkorting", bedargtxt.getText());
+                }
+                if(!groeptxt.getText().trim().isEmpty() && groeptxt.getText() != null){
+                    controller.setProperty("property.groepkorting", groeptxt.getText());
+                }
+                //
+            }
+            //
+
+        });
+        //
+
+
+        //selecteerd huidige keuze bij opstart databank
+        String d = controller.getProperty("property.filetype");
+        if(d.equalsIgnoreCase("tekst")){
+            chbxdatabase.getSelectionModel().select(0);
+        }
+        else{
+            chbxdatabase.getSelectionModel().select(1);
+        }
+        //
+
+
+        //selcteerd huidige instelling bij opstart korting
+        String k = controller.getProperty("property.typekorting");
+        if(k.equalsIgnoreCase("geen")){
+            chbxkorting.getSelectionModel().select(0);
+        }
+        if(k.equalsIgnoreCase("drempelkorting")){
+            chbxkorting.getSelectionModel().select(1);
+            percentagetxt.setText(controller.getProperty("property.percentagekorting").trim());
+            bedargtxt.setText(controller.getProperty("property.drempelbedragkorting").trim());
+        }
+        if(k.equalsIgnoreCase("duurstekorting")){
+            percentagetxt.setText(controller.getProperty("property.percentagekorting").trim());
+            bedargtxt.setText(controller.getProperty("property.drempelbedragkorting").trim());
+            chbxkorting.getSelectionModel().select(2);
+        }
+        if(k.equalsIgnoreCase("groepkorting")){
+            chbxkorting.getSelectionModel().select(3);
+            percentagetxt.setText(controller.getProperty("property.percentagekorting").trim());
+            groeptxt.setText(controller.getProperty("property.groepkorting").trim());
+        }
+        //
+
+    }
+
+    public void popupsave(){
+        //popup venster met bevestiging
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information Dialog");
+        alert.setHeaderText(null);
+        alert.setContentText("Instellingen opgeslagen");
+        alert.showAndWait();
+        //https://code.makery.ch/blog/javafx-dialogs-official/
+        //
+    }
+
+    private boolean geldigpercentage(){
+        boolean geldig = false;
+        if(!percentagetxt.getText().trim().isEmpty()){
+            if (Double.parseDouble(percentagetxt.getText().trim()) > 0 && Double.parseDouble(percentagetxt.getText().trim()) < 100){
+                geldig = true;
+            }
+        }
+        return geldig;
+    }
+
+    public boolean geldigbedarg(){
+        boolean geldig = false;
+        if(!bedargtxt.getText().trim().isEmpty()){
+            if (Double.parseDouble(bedargtxt.getText().trim()) >= 0){
+                geldig = true;
+            }
+        }
+        return geldig;
+    }
+
+    //test voor groep niet nodig, korting wordt nul als de groep niet bestaat
+    /*public boolean geldigegroep(InstellingController controller) throws DatabaseException, IOException, BiffException {
+        ArrayList<Artikel> producten =
+        boolean geldig = false;
+        for (Artikel a : producten){
+            if(a.getGroep().trim().equalsIgnoreCase(groeptxt.getText().trim())){
+                geldig = true;
+            }
+        }
+        return geldig;
+    }*/
+
+    private void setbox(){
+        //settingup all of the ui
+
         VBox p2 = new VBox(10);
         databsae = new Label("Database:");
         databsae.setFont(new Font(15));
@@ -145,8 +348,8 @@ public class InstellingenPane extends GridPane{
         this.getChildren().addAll(p1);
         //
 
-
         //bij keuze korting verschijnen de juiste velden
+        //klein
         chbxkorting.setOnAction(e -> {
             String keuze = (String) chbxkorting.getValue();
             if (keuze.equals("Drempelkorting")){
@@ -197,214 +400,11 @@ public class InstellingenPane extends GridPane{
                 }
                 catch (IllegalArgumentException m){
 
-                }
-            }
 
-        });
-        //
-
-
-        //bij klikken op savebutton worden de instelling opgeslagen
-        save.setOnAction(e-> {
-            //popup bij niet ingevulde velden
-            String warningmessage = "";
-            Alert warning = new Alert(Alert.AlertType.WARNING);
-            warning.setTitle("Warning Dialog");
-            warning.setHeaderText(null);
-            //
-
-
-            //bij niet/fout ingevulde velden een popup weergeven of confirmation popup tonen
-            String keuze = (String) chbxkorting.getValue();
-            if (keuze.equals("Drempelkorting")){
-                if(percentagetxt.getText().trim().isEmpty() || percentagetxt.getText() == null){
-                    warningmessage += "Percentage veld moet ingevuld zijn. \n";
                 }
-                if(bedargtxt.getText().trim().isEmpty() || bedargtxt.getText() == null){
-                    warningmessage += "Bedarg veld moet ingevuld zijn. \n";
-                }
-                if(!geldigpercentage() && !percentagetxt.getText().trim().isEmpty()){
-                    warningmessage += "Het percentage moet tussen 0 en 100 liggen. \n";
-                    percentagetxt.clear();
-                }
-                if(!geldigbedarg() && !bedargtxt.getText().trim().isEmpty()){
-                    warningmessage += "Het Bedarg moet groter zijn dan 0. \n";
-                    bedargtxt.clear();
-                }
-                if (!warningmessage.trim().isEmpty()){
-                    warning.setContentText(warningmessage);
-                    warning.showAndWait();
-                }
-                else {
-                    popupsave();
-                }
-            }
-            if (keuze.equals("Duurstekorting")){
-                if(percentagetxt.getText().trim().isEmpty() || percentagetxt.getText() == null){
-                    warningmessage += "Percentage veld moet ingevuld zijn. \n";
-                }
-                if(bedargtxt.getText().trim().isEmpty() || bedargtxt.getText() == null){
-                    warningmessage += "Bedarg veld moet ingevuld zijn. \n";
-                }
-                if(!geldigpercentage() && !percentagetxt.getText().trim().isEmpty()){
-                    warningmessage += "Het percentage moet tussen 0 en 100 liggen. \n";
-                    percentagetxt.clear();
-                }
-                if(!geldigbedarg() && !bedargtxt.getText().trim().isEmpty()){
-                    warningmessage += "Het Bedarg moet groter zijn dan 0. \n";
-                    bedargtxt.clear();
-                }
-                if (!warningmessage.trim().isEmpty()){
-                    warning.setContentText(warningmessage);
-                    warning.showAndWait();
-                }
-                else {
-                    popupsave();
-                }
-            }
-            if (keuze.equals("Groepkorting")) {
-                if(percentagetxt.getText().trim().isEmpty() || percentagetxt.getText() == null){
-                    warningmessage += "Percentage veld moet ingevuld zijn. \n";
-                }
-                if(groeptxt.getText().trim().isEmpty() || groeptxt.getText() == null){
-                    warningmessage += "Groep veld moet ingevuld zijn. \n";
-                }
-                if(!geldigpercentage() && !percentagetxt.getText().trim().isEmpty()){
-                    warningmessage += "Het percentage moet tussen 0 en 100 liggen. \n";
-                    percentagetxt.clear();
-                }
-                //
-                try {
-                    if(!geldigegroep(kassaviewController) && !groeptxt.getText().trim().isEmpty()){
-                        warningmessage += "De ingegeven groep bestaat niet. \n";
-                        groeptxt.clear();
-                    }
-                } catch (DatabaseException databaseException) {
-                    databaseException.printStackTrace();
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                } catch (BiffException biffException) {
-                    biffException.printStackTrace();
-                }
-                //
-                if (!warningmessage.trim().isEmpty()){
-                    warning.setContentText(warningmessage);
-                    warning.showAndWait();
-                }
-                else {
-                    popupsave();
-                }
-            }
-            //
-
-
-            //bij geen fouten, worden instelling opgeslagen
-            if(warningmessage.trim().isEmpty()){
-                //opslagen van database
-                if(chbxdatabase.getValue().equals("Tekst")){
-                    kassaviewController.setProperty("property.filetype", "TEKST");
-                }
-                if(chbxdatabase.getValue().equals("Excel")){
-                    kassaviewController.setProperty("property.filetype", "EXCEL");
-                }
-                //
-
-
-                //opslagen van korting (en ervoor zorgen dat er geen lege velden kunnen worden opgeslagen)
-                if(!percentagetxt.getText().trim().isEmpty() && percentagetxt.getText() != null){
-                    kassaviewController.setProperty("property.percentagekorting", percentagetxt.getText());
-                }
-                if(!bedargtxt.getText().trim().isEmpty() && bedargtxt.getText() != null){
-                    kassaviewController.setProperty("property.drempelbedragkorting", bedargtxt.getText());
-                }
-                if(!groeptxt.getText().trim().isEmpty() && groeptxt.getText() != null){
-                    kassaviewController.setProperty("property.groepkorting", groeptxt.getText());
-                }
-                //
-            }
-            //
-
-        });
-        //
-
-
-        //selecteerd huidige keuze bij opstart databank
-        String d = kassaviewController.getProperty("property.filetype");
-        if(d.equalsIgnoreCase("tekst")){
-            chbxdatabase.getSelectionModel().select(0);
-        }
-        else{
-            chbxdatabase.getSelectionModel().select(1);
-        }
-        //
-
-
-        //selcteerd huidige instelling bij opstart korting
-        String k = kassaviewController.getProperty("property.typekorting");
-        if(k.equalsIgnoreCase("geen")){
-            chbxkorting.getSelectionModel().select(0);
-        }
-        if(k.equalsIgnoreCase("drempelkorting")){
-            chbxkorting.getSelectionModel().select(1);
-            percentagetxt.setText(kassaviewController.getProperty("property.percentagekorting").trim());
-            bedargtxt.setText(kassaviewController.getProperty("property.drempelbedragkorting").trim());
-        }
-        if(k.equalsIgnoreCase("duurstekorting")){
-            percentagetxt.setText(kassaviewController.getProperty("property.percentagekorting").trim());
-            bedargtxt.setText(kassaviewController.getProperty("property.drempelbedragkorting").trim());
-            chbxkorting.getSelectionModel().select(2);
-        }
-        if(k.equalsIgnoreCase("groepkorting")){
-            chbxkorting.getSelectionModel().select(3);
-            percentagetxt.setText(kassaviewController.getProperty("property.percentagekorting").trim());
-            groeptxt.setText(kassaviewController.getProperty("property.groepkorting").trim());
-        }
-        //
-
+            }}
+        );
     }
-
-    public void popupsave(){
-        //popup venster met bevestiging
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information Dialog");
-        alert.setHeaderText(null);
-        alert.setContentText("Instellingen opgeslagen");
-        alert.showAndWait();
-        //https://code.makery.ch/blog/javafx-dialogs-official/
-        //
-    }
-
-    public boolean geldigpercentage(){
-        boolean geldig = false;
-        if(!percentagetxt.getText().trim().isEmpty()){
-            if (Double.parseDouble(percentagetxt.getText().trim()) > 0 && Double.parseDouble(percentagetxt.getText().trim()) < 100){
-                geldig = true;
-            }
-        }
-        return geldig;
-    }
-
-    public boolean geldigbedarg(){
-        boolean geldig = false;
-        if(!bedargtxt.getText().trim().isEmpty()){
-            if (Double.parseDouble(bedargtxt.getText().trim()) >= 0){
-                geldig = true;
-            }
-        }
-        return geldig;
-    }
-
-    public boolean geldigegroep(KassaviewController kassaviewController) throws DatabaseException, IOException, BiffException {
-        ArrayList<Artikel> producten = kassaviewController.loadinMemory();
-        boolean geldig = false;
-        for (Artikel a : producten){
-            if(a.getGroep().trim().equalsIgnoreCase(groeptxt.getText().trim())){
-                geldig = true;
-            }
-        }
-        return geldig;
-    }
-
 }
 
 

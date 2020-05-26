@@ -1,33 +1,31 @@
 package controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import jxl.read.biff.BiffException;
 import model.*;
 
 import model.database.*;
-import model.korting.KortingContext;
-import model.korting.KortingEnum;
-import model.korting.KortingFactory;
 import view.KassaView;
-import view.KlantView;
 import view.panels.KassaPane;
+import view.panels.ProductOverviewPane;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Properties;
 
 /**
  * @author Vanhaeren Corentin, Sateur Maxime
  */
 
-public class KassaviewController implements Observer{
+public class KassaviewController implements Observer {
 
     private KassaView kassaView;
     private KassaVerkoop kassaVerkoop;
     private ArtikelWinkelmand artikelWinkelmand;
     private InstellingController instellingController;
-    private LoadSaveContext loadSaveContext = new LoadSaveContext();
-    private ArrayList<Artikel> producten = new ArrayList<>();
+    private LoadSaveContext loadSaveContext;
+    private ProductController productController;
     //private LoadsaveArtikeltekst loadsaveArtikeltekst;
     private KassaPane pane;
 
@@ -36,18 +34,36 @@ public class KassaviewController implements Observer{
     private String path = "src" + File.separator + "bestanden" + File.separator + "KassaApp.properties";
 
 
-    public KassaviewController(KassaVerkoop kassaVerkoop, InstellingController instellingController)  throws DatabaseException {
+    public KassaviewController(KassaVerkoop kassaVerkoop, InstellingController instellingController, ProductController productController ) throws DatabaseException, IOException, BiffException {
         this.kassaVerkoop = kassaVerkoop;
+        kassaVerkoop.addObserver(this);
+        this.productController = productController;
         this.instellingController = instellingController;
-
+        kassaVerkoop.setKorting(instellingController.getKortingStrategy());//needs re-writing
     }
 
-    public void addProductKassaVerkoop(Artikel artikel) {
-        kassaVerkoop.addArtikelWinkelkar(artikel);
+    public void setPane(KassaPane pane){this.pane = pane;}
+
+    public ObservableList<Artikel> getArtikels(){
+        return FXCollections.observableArrayList(kassaVerkoop.getWinkelmandje());
     }
 
-    public void removeProductKassaVerkoop(Artikel artikel) {
-        kassaVerkoop.removeArtikelWinkelkar(artikel);
+    public void addProductKassaVerkoop(String code) {
+        try{
+            Artikel a = productController.getArtikel(code);
+            if (a.getVoorraad() == 0) throw new IllegalArgumentException("Niet in voorraad");
+            else{
+                kassaVerkoop.updateByAddArtikel(a);
+                System.out.println("Kassaverkoop: " + a.getOmschrijving());
+            }
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void removeProductKassaVerkoop(int index) {
+        kassaVerkoop.updateByRemoveArtikel(index);
     }
 
     public void setOnHold() {
@@ -66,6 +82,11 @@ public class KassaviewController implements Observer{
         return instellingController.getProperty(key);
     }
 
+    public void setProductPane(ProductOverviewPane productOverviewPane){
+        productController.setProductPane(productOverviewPane);
+    }
+
+    /*
     public Artikel getArtikel(String code) throws DatabaseException, IOException, BiffException {
         for (Artikel a : this.loadinMemory()) {
             if (a.getCode().equals(code)) {
@@ -74,43 +95,24 @@ public class KassaviewController implements Observer{
         }
         throw new IllegalArgumentException("product niet gevonden");
     }
-
+*/
+    //vervangen door productcontroller
 
     public double totaalPrijs() {
         return kassaVerkoop.getTotalPrijs();
     }
 
-    @Override
-    public void update(String eventType, Artikel artikel) {
-        if (eventType.equals("add_product_winkelkar")) {
-            //code te laten uitvoeren
-            //kassaView.updateTableview(this);
-            System.out.println("Product " + artikel.getOmschrijving() + " is toegevoegd.");
-        }
-        if(eventType.equals("remove_product_winkelkar")){
-            System.out.println("Product " + artikel.getOmschrijving() + " is verwijdert.");
-        }
-        if(eventType.equals("setOnHold")){
-            System.out.println("Winkelkar on hold gezet.");
-        }
-        if(eventType.equals("setOffHold")){
-            System.out.println("Winkelkar off hold gezet.");
-        }
-    }
-
-
-    public void setLoadStrategy(String key){
-        LoadSaveEnum saveStrategy = LoadSaveEnum.valueOf(getProperty(key));
-        loadSaveContext.setStrategyLoadSave((new LoadSaveFactory().ChooseSaveType(saveStrategy)));
+    public void setLoadStrategy(LoadSaveEnum loadSaveEnum){
+        instellingController.setLoadSaveStrategy(loadSaveEnum);
     }
 
     public ArrayList<Artikel> load() throws IOException, DatabaseException, BiffException {
-        setLoadStrategy("property.filetype");
-        return loadSaveContext.load();
+        return productController.loadArtikels();
+        //should not be used, use the one in productcontroller, this one will still work
     }
 
 
-    public ArrayList<Artikel> loadinMemory() throws IOException, DatabaseException, BiffException {
+    /*public ArrayList<Artikel> loadinMemory() throws IOException, DatabaseException, BiffException {
         if (producten.isEmpty()) {
             producten = this.load();
         } else {
@@ -118,6 +120,8 @@ public class KassaviewController implements Observer{
         }
         return producten;
     }
+    */
+    //vervangt door instellingcontroller
 
     public void setKortingStrategy(){
         instellingController.setKortingStrategy();
@@ -140,25 +144,38 @@ public class KassaviewController implements Observer{
     }
 
     public double Kortingprijs(){
-        return kassaVerkoop.berekenKorting(instellingController.getKortingContext());
+        return kassaVerkoop.berekenKorting();
     }
 
     public double totalePrijsMetKorting(){
-        return kassaVerkoop.berekenPrijsMetKorting(instellingController.getKortingContext());
+        return kassaVerkoop.berekenPrijsMetKorting();
     }
 
     public void betaal(){
         kassaVerkoop.betaal();
-        this.updateProductsInTable();
+        //uitbereiding nodig in labo 10
     }
 
     public void annuleer(){
         kassaVerkoop.annuleer();
-        this.updateProductsInTable();
     }
 
-    public void setPane(KassaPane pane){this.pane = pane;}
+    public double getTeBetalen(){
+        return kassaVerkoop.berekenPrijsMetKorting();
+    }
 
+    public ObservableList<Artikel> loadData() throws DatabaseException, IOException, BiffException {return productController.loadData();}
+
+    //Replaced with update function
+    /*
     public void updateProductsInTable(){this.pane.update();}
+    */
 
+    @Override
+    public void update(KassaVerkoop verkoop) {
+        pane.setWinkelmandje(verkoop.getWinkelmandje());
+        pane.updateTotaalPrijs(verkoop.getTotalPrijs());
+        pane.updateTotaalKorting(verkoop.berekenKorting());
+        pane.updateTotaalPrijsKorting(verkoop.berekenPrijsMetKorting());
+    }
 }

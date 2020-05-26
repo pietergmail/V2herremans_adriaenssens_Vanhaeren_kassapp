@@ -1,6 +1,8 @@
 package view.panels;
 
+import controller.InstellingController;
 import controller.KassaviewController;
+import controller.ProductController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -31,11 +33,13 @@ import static javafx.scene.input.KeyCode.O;
 
 public class ProductOverviewPane extends GridPane {
 	private TableView<Artikel> table;
+	private KassaviewController controller;
 	//private LoadSaveContext loadSaveContext = new LoadSaveContext();
 
 
-	public ProductOverviewPane(KassaviewController kassaviewController) throws DatabaseException, IOException, BiffException {
+	public ProductOverviewPane(KassaviewController controller) throws DatabaseException, IOException, BiffException {
 
+		this.controller = controller;
 
 		//ObservableList<Artikel> producten = FXCollections.observableArrayList(new ArrayList<>(loadSaveContext.load()));
 		VBox p1 = new VBox(5);
@@ -46,29 +50,13 @@ public class ProductOverviewPane extends GridPane {
         label1.setPadding(new Insets(5,5,5,5));
         label1.setFont(new Font("Arial", 20));
 
+        this.setTables();
+
+        table.setItems(controller.loadData());
+        this.getChildren().addAll(label1, table);
+		}
+
 		//this.add(new Label("Producten:"), 0, 0, 1, 1);
-
-		table = new TableView<Artikel>();
-		//table.setItems(producten);
-		table.getItems().addAll(kassaviewController.loadinMemory());
-
-		TableColumn<Artikel, String> columnCode = new TableColumn<>("Code");
-		columnCode.setMinWidth(50);
-		columnCode.setCellValueFactory(new PropertyValueFactory<Artikel, String>("code"));
-		TableColumn<Artikel, String> columnOmschrijving = new TableColumn<>("Omschrijving");
-		columnOmschrijving.setMinWidth(150);
-		columnOmschrijving.setCellValueFactory(new PropertyValueFactory<Artikel, String>("omschrijving"));
-		TableColumn<Artikel, String> columnGroep = new TableColumn<>("Groep");
-		columnGroep.setMinWidth(100);
-		columnGroep.setCellValueFactory(new PropertyValueFactory<Artikel, String>("groep"));
-		TableColumn<Artikel, Double> columnPrijs = new TableColumn<>("Prijs");
-		columnPrijs.setMinWidth(100);
-		columnPrijs.setCellValueFactory(new PropertyValueFactory<Artikel, Double>("prijs"));
-		TableColumn<Artikel, Integer> columnVoorraad = new TableColumn<>("Voorraad");
-		columnVoorraad.setMinWidth(50);
-		columnVoorraad.setCellValueFactory(new PropertyValueFactory<Artikel, Integer>("voorraad"));
-		table.getColumns().addAll(columnCode, columnOmschrijving, columnGroep, columnPrijs, columnVoorraad);
-
 
 		/*table.setRowFactory(rij-> {
 			TableRow<Artikel> row = new TableRow<>();
@@ -77,10 +65,6 @@ public class ProductOverviewPane extends GridPane {
 		});
 
 		 */
-		p1.getChildren().addAll(label1, table);
-		this.getChildren().addAll(p1);
-
-
 
 		//System.out.println(producten);
 		/*LoadsaveArtikeltekst loadsaveArtikeltekst = new LoadsaveArtikeltekst();
@@ -99,5 +83,31 @@ public class ProductOverviewPane extends GridPane {
 		}
 
 		 */
+
+		private void setTables(){
+			table = new TableView<Artikel>();
+			//table.setItems(producten);
+
+			TableColumn<Artikel, String> columnCode = new TableColumn<>("Code");
+			columnCode.setMinWidth(50);
+			columnCode.setCellValueFactory(new PropertyValueFactory<Artikel, String>("code"));
+			TableColumn<Artikel, String> columnOmschrijving = new TableColumn<>("Omschrijving");
+			columnOmschrijving.setMinWidth(150);
+			columnOmschrijving.setCellValueFactory(new PropertyValueFactory<Artikel, String>("omschrijving"));
+			TableColumn<Artikel, String> columnGroep = new TableColumn<>("Groep");
+			columnGroep.setMinWidth(100);
+			columnGroep.setCellValueFactory(new PropertyValueFactory<Artikel, String>("groep"));
+			TableColumn<Artikel, Double> columnPrijs = new TableColumn<>("Prijs");
+			columnPrijs.setMinWidth(100);
+			columnPrijs.setCellValueFactory(new PropertyValueFactory<Artikel, Double>("prijs"));
+			TableColumn<Artikel, Integer> columnVoorraad = new TableColumn<>("Voorraad");
+			columnVoorraad.setMinWidth(50);
+			columnVoorraad.setCellValueFactory(new PropertyValueFactory<Artikel, Integer>("voorraad"));
+			table.getColumns().addAll(columnCode, columnOmschrijving, columnGroep, columnPrijs, columnVoorraad);
+		}
+
+		public void updateProducts() throws DatabaseException, IOException, BiffException {
+			table.setItems(controller.loadData());
+			table.refresh();
 	}
 }

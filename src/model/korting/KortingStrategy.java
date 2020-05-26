@@ -10,5 +10,5 @@ import java.util.ArrayList;
  */
 
 public interface KortingStrategy {
-    double getKorting(ArrayList<Artikel> list);
+    double getKorting(ObservableList<Artikel> list);
 }
