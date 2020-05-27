@@ -152,7 +152,7 @@ public class KassaviewController implements Observer {
         double totalebedragmetkorting = kassaVerkoop.berekenPrijsMetKorting();
         double totaleprijs = kassaVerkoop.getTotalPrijs();
         Log log = new Log(totaleprijs, korting, totalebedragmetkorting);
-        this.logController.addLog(log);
+        logController.addLog(log);
         System.out.println(log.toString());
         kassaVerkoop.betaal();
         //uitbereiding nodig in labo 10

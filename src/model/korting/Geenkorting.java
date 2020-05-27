@@ -12,11 +12,7 @@ import java.util.ArrayList;
 public class Geenkorting implements KortingStrategy{
     @Override
     public double getKorting(ObservableList<Artikel> list) {
-        double total = 0;
-        for(Artikel artikel : list){
-            if(artikel != null) total+=artikel.getPrijs();
-        }
-        return total;
+        return 0;
     }
 
     public Geenkorting(){

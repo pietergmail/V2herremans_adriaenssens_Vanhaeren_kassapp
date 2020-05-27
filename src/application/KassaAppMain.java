@@ -8,6 +8,7 @@ import model.KassaVerkoop;
 import model.database.DatabaseException;
 import view.KassaView;
 import view.KlantView;
+import view.panels.KassaPane;
 
 import java.io.IOException;
 
