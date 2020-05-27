@@ -235,7 +235,9 @@ public class KassaPane extends GridPane {
 
                     {
                         btn.setOnAction((k) -> {
-                            kassaviewController.removeProductKassaVerkoop(getIndex());
+                            //kassaviewController.removeProductKassaVerkoop2(getIndex());
+                            kassaviewController.removeProductKassaVerkoop(getTableView().getItems().get(getIndex()));
+
                             //extra code om de tabel te refreshen
 
                             /*table.getItems().clear();

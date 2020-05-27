@@ -56,10 +56,41 @@ public class KassaVerkoop implements Observable {
     }
 
     public void addArtikelWinkelkar(Artikel artikel){
+        if (artikelAlreadyAdded(artikel)){
+            for (ArtikelWinkelmand a: winkelmand) {
+                if (a.getCode().equals(artikel.getCode())){
+                    a.setAantal(a.getAantal()+1);
+                }
+            }
+        }
+        else{
+            ArtikelWinkelmand artikelWinkelmand = new ArtikelWinkelmand(artikel.getCode(), artikel.getOmschrijving(), artikel.getGroep(), artikel.getPrijs(), 1);
+            winkelmand.add(artikelWinkelmand);
+        }
         this.winkelmandlist.add(artikel);
     }
 
-    public void removeArtikelWinkelkar(int index){
+    public void removeArtikelWinkelkar(Artikel artikel){
+
+        for (int i = 0; i < winkelmand.size(); i++) {
+            ArtikelWinkelmand a = winkelmand.get(i);
+            if (a.getCode().equals(artikel.getCode())){
+                //System.out.println("test");
+                if(a.getAantal() > 1){
+                    int aantal = a.getAantal();
+                    aantal-=1;
+                    a.setAantal(aantal);
+                }
+                else {
+                    //winkelmand.remove(a);
+                    winkelmand.remove(i);
+                }
+            }
+        }
+        winkelmandlist.remove(artikel);
+    }
+
+    public void remove(int index){
         this.winkelmandlist.remove(index);
     }
 
@@ -96,7 +127,7 @@ public class KassaVerkoop implements Observable {
 
 
 
-    /*public boolean artikelAlreadyAdded(Artikel artikel){
+    public boolean artikelAlreadyAdded(Artikel artikel){
         boolean containsArtikel = false;
         for (ArtikelWinkelmand a: winkelmand) {
             if (a.getCode().equals(artikel.getCode())){//code van a is null en geeft een error
@@ -105,7 +136,7 @@ public class KassaVerkoop implements Observable {
         }
         //System.out.println(containsArtikel + " bevat?");
         return containsArtikel;
-    }*/
+    }
 
 
     @Override
@@ -125,9 +156,14 @@ public class KassaVerkoop implements Observable {
     }
 
     @Override
-    public void updateRemoveArtikel(int i){
-        this.removeArtikelWinkelkar(i);
+    public void updateRemoveArtikel(Artikel artikel){
+        this.removeArtikelWinkelkar(artikel);
         notifyObservers();
+    }
+
+    @Override
+    public void updateRemoveArtikel2(int i) {
+        this.remove(i);
     }
 
     public void notifyObservers() {
@@ -148,7 +184,12 @@ public class KassaVerkoop implements Observable {
         double korting = berekenKorting();
         double initprijs = getTotalPrijs();
 
-        return initprijs - korting;
+        if( initprijs - korting < 0){
+            return 0;
+        }
+        else {
+            return initprijs - korting;
+        }
     }
 
     public double berekenKorting(){

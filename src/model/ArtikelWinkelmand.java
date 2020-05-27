@@ -1,6 +1,7 @@
 package model;
 
-import java.lang.reflect.Array;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -10,14 +11,24 @@ import java.util.Objects;
  */
 
 public class ArtikelWinkelmand {
-    private String omschrijving;
+   private String code, omschrijving, groep;
     private double prijs;
     private int aantal;
 
-    public ArtikelWinkelmand(String omschrijving, double prijs, int aantal){
+    public ArtikelWinkelmand(String code, String omschrijving, String groep, double prijs, int aantal){
+        setCode(code);
         setOmschrijving(omschrijving);
+        setGroep(groep);
         setPrijs(prijs);
         setAantal(aantal);
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getOmschrijving() {
@@ -26,6 +37,14 @@ public class ArtikelWinkelmand {
 
     public void setOmschrijving(String omschrijving) {
         this.omschrijving = omschrijving;
+    }
+
+    public String getGroep() {
+        return groep;
+    }
+
+    public void setGroep(String groep) {
+        this.groep = groep;
     }
 
     public double getPrijs() {
@@ -58,7 +77,7 @@ public class ArtikelWinkelmand {
     public static ArrayList<ArtikelWinkelmand> ArtikelVoorKlant(ArrayList<Artikel> winkelmand){
         ArrayList<ArtikelWinkelmand> viewWinkelmand = new ArrayList<>();
         for(Artikel a : winkelmand){
-            ArtikelWinkelmand artikelWinkelmand = new ArtikelWinkelmand(a.getOmschrijving(), a.getPrijs(), 1);
+            ArtikelWinkelmand artikelWinkelmand = new ArtikelWinkelmand(a.getCode(),a.getOmschrijving(),a.getGroep(), a.getPrijs(), 1);
             if(viewWinkelmand.contains(artikelWinkelmand)){
                 int i = viewWinkelmand.indexOf(artikelWinkelmand);
                 ArtikelWinkelmand aw = viewWinkelmand.get(i);

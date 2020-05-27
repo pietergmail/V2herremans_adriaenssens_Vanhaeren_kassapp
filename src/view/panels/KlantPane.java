@@ -23,12 +23,15 @@ import java.util.ArrayList;
 public class KlantPane extends GridPane {
     private TableView<ArtikelWinkelmand> table;
     private ObservableList<ArtikelWinkelmand> winkelmand;
+    private ArrayList<ArtikelWinkelmand>winkelmandmetaantal;
 
     private Label totaleprijs;
     private Label korting;
     private Label betalen;
+    KlantviewController controller;
 
     public KlantPane(KlantviewController controller){
+        this.controller = controller;
         controller.setPane(this);
         this.winkelmand = FXCollections.observableArrayList(new ArrayList<>());
         this.setTable();
@@ -91,9 +94,10 @@ public class KlantPane extends GridPane {
     }
 
     public void setWinkelmand(ArrayList<Artikel> winkelmand){
-        ObservableList test = FXCollections.observableArrayList(ArtikelWinkelmand.ArtikelVoorKlant(winkelmand));
-        table.setItems(FXCollections.observableArrayList(ArtikelWinkelmand.ArtikelVoorKlant(winkelmand)));
-        table.refresh();
+        //ObservableList test = FXCollections.observableArrayList(ArtikelWinkelmand.ArtikelVoorKlant(winkelmand));
+        //table.setItems(FXCollections.observableArrayList(ArtikelWinkelmand.ArtikelVoorKlant(winkelmand)));;
+        //table.refresh();
+
     }
 
     public void setTotalePrijs(double totalePrijs){this.totaleprijs.setText("Totale prijs: " + totalePrijs);}
@@ -102,4 +106,8 @@ public class KlantPane extends GridPane {
 
     public void setBetalen(double teBetalen){this.betalen.setText("Totale prijs met korting: " + teBetalen);}
 
+    public void setwinkelmandmetaantal(ArrayList<ArtikelWinkelmand> winkelmandMetAantal) {
+        table.setItems(FXCollections.observableArrayList(winkelmandMetAantal));
+        table.refresh();
+    }
 }
