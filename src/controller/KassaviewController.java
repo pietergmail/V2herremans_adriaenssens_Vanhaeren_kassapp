@@ -62,6 +62,7 @@ public class KassaviewController implements Observer {
         }
         catch (Exception e){
             System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
@@ -147,6 +148,9 @@ public class KassaviewController implements Observer {
 
     public ObservableList<Artikel> loadData() throws DatabaseException, IOException, BiffException {return productController.loadData();}
 
+    public ArrayList<Artikel> loadinMemory() throws IOException, DatabaseException, BiffException {
+        return productController.loadArtikels();
+    }
     //Replaced with update function
     /*
     public void updateProductsInTable(){this.pane.update();}

@@ -37,7 +37,7 @@ import java.util.Properties;
 public class InstellingenPane extends GridPane{
     private KassaviewController controller;
     private Label titel;
-    private Label database;
+    private Label databsae;
     private Label korting;
     private Label databasetxt;
     private Label kortingtxt;
@@ -51,7 +51,21 @@ public class InstellingenPane extends GridPane{
     private TextField groeptxt;
     Border border = new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(10), new BorderWidths(1)));
     private Button save;
-    private Button savefiletype;
+    private RadioButton headerboodschap;
+    private RadioButton headerdatumtijd;
+    private RadioButton footerboodschap;
+    private RadioButton footerkorting;
+    private RadioButton footerBTW;
+    private Label kassabon;
+    private Label header;
+    private Label footer;
+    private TextField headerboodschaptxt;
+    private TextField footerboodschaptxt;
+    private boolean headerboodschapbl;
+    private boolean headerdatumtijdbl;
+    private boolean footerboodschapbl;
+    private boolean footerkortingbl;
+    private boolean footerBTWbl;
 
     public InstellingenPane(KassaviewController controller){
         this.controller = controller;
@@ -60,15 +74,7 @@ public class InstellingenPane extends GridPane{
 
         //bij klikken op savebutton worden de instelling opgeslagen
 
-        savefiletype.setOnAction(e -> {
-            if(chbxdatabase.getValue().equals("Tekst")){
-                controller.setloadsaveStrategy(LoadSaveEnum.valueOf("TEKST"));
-            }
-            if(chbxdatabase.getValue().equals("Excel")){
-                controller.setLoadStrategy(LoadSaveEnum.valueOf("EXCEL"));
-            }
-        });
-
+//bij klikken op savebutton worden de instelling opgeslagen
         save.setOnAction(e-> {
             //popup bij niet ingevulde velden
             String warningmessage = "";
@@ -127,33 +133,35 @@ public class InstellingenPane extends GridPane{
                 }
             }
             if (keuze.equals("Groepkorting")) {
-                if(percentagetxt.getText().trim().isEmpty() || percentagetxt.getText() == null){
+                if (percentagetxt.getText().trim().isEmpty() || percentagetxt.getText() == null) {
                     warningmessage += "Percentage veld moet ingevuld zijn. \n";
                 }
-                if(groeptxt.getText().trim().isEmpty() || groeptxt.getText() == null){
+                if (groeptxt.getText().trim().isEmpty() || groeptxt.getText() == null) {
                     warningmessage += "Groep veld moet ingevuld zijn. \n";
                 }
-                if(!geldigpercentage() && !percentagetxt.getText().trim().isEmpty()){
+                if (!geldigpercentage() && !percentagetxt.getText().trim().isEmpty()) {
                     warningmessage += "Het percentage moet tussen 0 en 100 liggen. \n";
                     percentagetxt.clear();
                 }
                 //
                 try {
-                    if(groeptxt.getText().isEmpty()){
+                    if (!geldigegroep() && !groeptxt.getText().trim().isEmpty()) {
                         warningmessage += "De ingegeven groep bestaat niet. \n";
                         groeptxt.clear();
                     }
-                }catch(Exception ex){
-                    throw new IllegalArgumentException(ex);
+                } catch (DatabaseException | IOException | BiffException databaseException) {
+                    databaseException.printStackTrace();
                 }
                 //
-                if (!warningmessage.trim().isEmpty()){
+                if (!warningmessage.trim().isEmpty()) {
                     warning.setContentText(warningmessage);
                     warning.showAndWait();
-                }
-                else {
+                } else {
                     popupsave();
                 }
+            }
+            if (keuze.equals("Geenkorting")){
+                popupsave();
             }
             //
 
@@ -161,14 +169,16 @@ public class InstellingenPane extends GridPane{
             //bij geen fouten, worden instelling opgeslagen
             if(warningmessage.trim().isEmpty()){
                 //opslagen van database
+                if(chbxdatabase.getValue().equals("Tekst")){
+                    controller.setProperty("property.filetype", "TEKST");
+                }
+                if(chbxdatabase.getValue().equals("Excel")){
+                    controller.setProperty("property.filetype", "EXCEL");
+                }
+                //
 
 
                 //opslagen van korting (en ervoor zorgen dat er geen lege velden kunnen worden opgeslagen)
-
-                if(!((String) chbxkorting.getValue()).isEmpty()){
-                    controller.setTypeKorting(KortingEnum.valueOf(((String) chbxkorting.getValue()).toUpperCase()));
-                }
-
                 if(!percentagetxt.getText().trim().isEmpty() && percentagetxt.getText() != null){
                     controller.setProperty("property.percentagekorting", percentagetxt.getText());
                 }
@@ -177,6 +187,9 @@ public class InstellingenPane extends GridPane{
                 }
                 if(!groeptxt.getText().trim().isEmpty() && groeptxt.getText() != null){
                     controller.setProperty("property.groepkorting", groeptxt.getText());
+                }
+                if(!((String) chbxkorting.getValue()).isEmpty()){
+                    controller.setTypeKorting(KortingEnum.valueOf(((String) chbxkorting.getValue()).toUpperCase()));
                 }
                 //
             }
@@ -208,9 +221,9 @@ public class InstellingenPane extends GridPane{
             bedargtxt.setText(controller.getProperty("property.drempelbedragkorting").trim());
         }
         if(k.equalsIgnoreCase("duurstekorting")){
+            chbxkorting.getSelectionModel().select(2);
             percentagetxt.setText(controller.getProperty("property.percentagekorting").trim());
             bedargtxt.setText(controller.getProperty("property.drempelbedragkorting").trim());
-            chbxkorting.getSelectionModel().select(2);
         }
         if(k.equalsIgnoreCase("groepkorting")){
             chbxkorting.getSelectionModel().select(3);
@@ -252,16 +265,28 @@ public class InstellingenPane extends GridPane{
         return geldig;
     }
 
-    private void setbox(){
+    public boolean geldigegroep() throws DatabaseException, IOException, BiffException {
+        ArrayList<Artikel> producten = controller.loadinMemory();
+        boolean geldig = false;
+        for (Artikel a : producten){
+            if(a.getGroep().trim().equalsIgnoreCase(groeptxt.getText().trim())){
+                geldig = true;
+            }
+        }
+        return geldig;
+    }
+
+    private void setbox() {
         //settingup all of the ui
 
+        //database
         VBox p2 = new VBox(10);
-        database = new Label("Database:");
-        database.setFont(new Font(15));
+        databsae = new Label("Database:");
+        databsae.setFont(new Font(15));
         databasetxt = new Label("Selecteer gewenste database:");
         //databasetxt.setPadding(new Insets(0, 0, 0, 10));
         VBox.setMargin(databasetxt, new Insets(0, 0, 0, 5));
-        chbxdatabase  = new ChoiceBox<>();
+        chbxdatabase = new ChoiceBox<>();
         chbxdatabase.getItems().addAll("Tekst", "Excel");
         //chbxdatabase.setPadding(new Insets(0, 0, 0, 10));
 
@@ -272,12 +297,7 @@ public class InstellingenPane extends GridPane{
         p2.setBorder(border);
         //p2.setAlignment(Pos.CENTER);
         p2.setPadding(new Insets(10));
-
-        savefiletype = new Button("save");
-        savefiletype.setStyle("-fx-background-color: lightgray; -fx-background-radius: 10px; -fx-border-color: black; -fx-border-radius: 10px;  -fx-font-size: 14px;");
-        savefiletype.setMinSize(70,30);
-
-        p2.getChildren().addAll(database, databasetxt, chbxdatabase, savefiletype);
+        p2.getChildren().addAll(databsae, databasetxt, chbxdatabase);
         //
 
 
@@ -287,49 +307,167 @@ public class InstellingenPane extends GridPane{
         korting.setFont(new Font(15));
         kortingtxt = new Label("Selecteer gewenste korting:");
         VBox.setMargin(kortingtxt, new Insets(0, 0, 0, 5));
-        chbxkorting  = new ChoiceBox<>();
-        chbxkorting.getItems().addAll("Geen", "Drempelkorting", "Duurstekorting", "Groepkorting");
+        chbxkorting = new ChoiceBox<>();
+        chbxkorting.getItems().addAll("Geenkorting", "Drempelkorting", "Duurstekorting", "Groepkorting");
 
         VBox.setMargin(chbxkorting, new Insets(0, 0, 0, 5));
         //p3.setAlignment(Pos.CENTER);
-        p3.setMinSize(400, 120);
+        p3.setMinSize(400, 200);
         p3.setBorder(border);
         p3.setPadding(new Insets(10));
         p3.getChildren().addAll(korting, kortingtxt, chbxkorting);
         //
 
 
-        //percentage
+        //korting percentage
         HBox p4 = new HBox(10);
         percentage = new Label("Percentage (%):");
         percentagetxt = new TextField();
         //percentagetxt.setAlignment(Pos.CENTER_RIGHT);
         //p1.setAlignment(Pos.CENTER);
-        p4.setPadding(new Insets(0,0,0,10));
+        p4.setPadding(new Insets(0, 0, 0, 10));
         p4.getChildren().addAll(percentage, percentagetxt);
         //
 
 
-        //bedrag
+        //korting bedrag
         HBox p5 = new HBox(10);
         bedrag = new Label("Bedrag (€):");
         bedargtxt = new TextField();
         //bedargtxt.setAlignment(Pos.CENTER_RIGHT);
         //p1.setAlignment(Pos.CENTER);
-        p5.setPadding(new Insets(0,0,0,10));
+        p5.setPadding(new Insets(0, 0, 0, 10));
         p5.getChildren().addAll(bedrag, bedargtxt);
         //
 
 
-        //groep
+        //korting groep
         HBox p6 = new HBox(10);
         groep = new Label("Groep:");
         groeptxt = new TextField();
         //p1.setAlignment(Pos.CENTER);
-        p6.setPadding(new Insets(0, 0,0, 10));
+        p6.setPadding(new Insets(0, 0, 0, 10));
         p6.getChildren().addAll(groep, groeptxt);
         //
 
+
+        //database + korting
+        VBox p7 = new VBox(10);
+        p7.getChildren().addAll(p2, p3);
+        //
+
+
+        //kassabon header
+        VBox p10 = new VBox(10);
+        header = new Label("Header:");
+        header.setFont(new Font(13));
+        VBox.setMargin(header, new Insets(0, 0, 0, 5));
+        headerboodschap = new RadioButton("headerboodschap");
+        VBox.setMargin(headerboodschap, new Insets(0, 0, 0, 10));
+        headerboodschaptxt = new TextField();
+        headerboodschaptxt.setPromptText("Vul headerboodschap in");
+        VBox.setMargin(headerboodschaptxt, new Insets(0, 0, 0, 33));
+        headerdatumtijd = new RadioButton("datumtijd");
+        VBox.setMargin(headerdatumtijd, new Insets(0, 0, 0, 10));
+
+        p10.getChildren().addAll(header, headerboodschap, headerdatumtijd);
+        //
+
+
+        //kassabon footer
+        VBox p11 = new VBox(10);
+        footer = new Label("Footer:");
+        footer.setFont(new Font(13));
+        VBox.setMargin(footer, new Insets(0, 0, 0, 5));
+        footerboodschap = new RadioButton("footerboodschap");
+        VBox.setMargin(footerboodschap, new Insets(0, 0, 0, 10));
+        footerboodschaptxt = new TextField();
+        //footerboodschaptxt.setId("textField");
+        footerboodschaptxt.setPromptText("Vul footerboodschap in");
+        VBox.setMargin(footerboodschaptxt, new Insets(0, 0, 0, 33));
+        footerBTW = new RadioButton("footerBTW");
+        VBox.setMargin(footerBTW, new Insets(0, 0, 0, 10));
+        footerkorting = new RadioButton("footerkorting");
+        VBox.setMargin(footerkorting, new Insets(0, 0, 0, 10));
+
+        p11.getChildren().addAll(footer, footerboodschap, footerBTW, footerkorting);
+        //
+
+        //kassabon
+        VBox p8 = new VBox(10);
+        kassabon = new Label("Kassabon");
+        kassabon.setFont(new Font(15));
+
+        p8.setMinSize(300, 260);
+        p8.setBorder(border);
+        p8.setPadding(new Insets(10));
+        p8.getChildren().addAll(kassabon, p10, p11);
+        //
+
+
+        //radiobuttons actions
+        headerboodschap.setOnAction(e -> {
+            if (headerboodschap.isSelected()) {
+                System.out.println("test");
+                headerboodschapbl = true;
+                p10.getChildren().clear();
+                p10.getChildren().addAll(kassabon, header, headerboodschap, headerboodschaptxt, headerdatumtijd);
+                //p8.getChildren().addAll(kassabon, header, headerboodschap, headerboodschaptxt, headerdatumtijd, footer, footerboodschap, footerboodschaptxt, footerBTW, footerkorting)
+            }
+            if (!headerboodschap.isSelected()) {
+                System.out.println("unselected");
+                headerboodschapbl = false;
+                p10.getChildren().clear();
+                p10.getChildren().addAll(kassabon, header, headerboodschap, headerdatumtijd);
+            }
+        });
+
+        headerdatumtijd.setOnAction(e -> {
+            if (headerdatumtijd.isSelected()) {
+                headerdatumtijdbl = true;
+            }
+            if (!headerdatumtijd.isSelected()) {
+                headerdatumtijdbl = false;
+            }
+        });
+
+        footerboodschap.setOnAction(e -> {
+            if (footerboodschap.isSelected()) {
+                footerboodschapbl = true;
+                p11.getChildren().clear();
+                p11.getChildren().addAll(footer, footerboodschap, footerboodschaptxt, footerBTW, footerkorting);
+            }
+            if (!footerboodschap.isSelected()) {
+                footerboodschapbl = false;
+                p11.getChildren().clear();
+                p11.getChildren().addAll(footer, footerboodschap, footerBTW, footerkorting);
+            }
+        });
+
+        footerkorting.setOnAction(e -> {
+            if (footerkorting.isSelected()) {
+                footerkortingbl = true;
+            }
+            if (!footerkorting.isSelected()) {
+                footerkortingbl = false;
+            }
+        });
+
+        footerBTW.setOnAction(e -> {
+            if (footerBTW.isSelected()) {
+                footerBTWbl = true;
+            }
+            if (!footerBTW.isSelected()) {
+                footerBTWbl = false;
+            }
+        });
+        //
+
+
+        //subhoofd
+        HBox p9 = new HBox(10);
+        p9.getChildren().addAll(p7, p8);
+        //
 
         //hoofd
         VBox p1 = new VBox(10);
@@ -338,72 +476,69 @@ public class InstellingenPane extends GridPane{
         save = new Button("Save");
         //save.setStyle("-fx-border-color: black; -fx-border-width: 1px; -fx-border-radius: 10");
         save.setStyle("-fx-background-color: lightgray; -fx-background-radius: 10px; -fx-border-color: black; -fx-border-radius: 10px;  -fx-font-size: 14px;");
-        save.setMinSize(70,30);
+        save.setMinSize(70, 30);
         //http://tutorials.jenkov.com/javafx/button.html
         //save.setBorder(border);
         //save.setBackground(new Color.LIGHTGRAY);
 
         //p1.setAlignment(Pos.CENTER);
         p1.setPadding(new Insets(10));
-        p1.getChildren().addAll(titel, p2, p3, save);
+        p1.getChildren().addAll(titel, p9, save);
         this.getChildren().addAll(p1);
         //
 
+
         //bij keuze korting verschijnen de juiste velden
-        //klein
         chbxkorting.setOnAction(e -> {
             String keuze = (String) chbxkorting.getValue();
-            if (keuze.equals("Drempelkorting")){
-                try{
+            if (keuze.equals("Drempelkorting")) {
+                try {
                     p3.getChildren().removeAll(p4, p5, p6);
                     p3.getChildren().add(p4);
                     p3.getChildren().add(p5);
                     percentagetxt.clear();
                     bedargtxt.clear();
                     groeptxt.clear();
-                }
-                catch (IllegalArgumentException m){
+                } catch (IllegalArgumentException m) {
 
                 }
             }
-            if (keuze.equals("Duurstekorting")){
-                try{
+            if (keuze.equals("Duurstekorting")) {
+                try {
                     p3.getChildren().removeAll(p4, p5, p6);
                     p3.getChildren().add(p4);
                     p3.getChildren().add(p5);
                     percentagetxt.clear();
                     bedargtxt.clear();
                     groeptxt.clear();
-                }
-                catch (IllegalArgumentException m){
+                } catch (IllegalArgumentException m) {
 
                 }
             }
-            if (keuze.equals("Groepkorting")){
-                try{
+            if (keuze.equals("Groepkorting")) {
+                try {
                     p3.getChildren().removeAll(p4, p5, p6);
                     p3.getChildren().add(p4);
                     p3.getChildren().add(p6);
                     percentagetxt.clear();
                     bedargtxt.clear();
                     groeptxt.clear();
-                }
-                catch (IllegalArgumentException m){
+                } catch (IllegalArgumentException m) {
 
                 }
             }
-            if (keuze.equals("Geen")){
-                try{
+            if (keuze.equals("Geenkorting")) {
+                try {
                     p3.getChildren().removeAll(p4, p5, p6);
                     percentagetxt.clear();
                     bedargtxt.clear();
                     groeptxt.clear();
-                }
-                catch (IllegalArgumentException m){
-
+                } catch (IllegalArgumentException m) {
 
                 }
-            }}
-        );
+            }
+
+        });
+        //
     }
 }

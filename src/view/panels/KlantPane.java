@@ -3,12 +3,16 @@ package view.panels;
 import controller.KlantviewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import model.Artikel;
 import model.ArtikelWinkelmand;
 import model.Observable;
@@ -35,7 +39,17 @@ public class KlantPane extends GridPane {
         this.setLBetalen();
 
         table.setItems(this.winkelmand);
-        this.getChildren().addAll(table);
+
+        VBox p1 = new VBox(10);
+        p1.getChildren().addAll(table, totaleprijs, korting, betalen);
+        //p1.setAlignment(Pos.CENTER);
+        VBox.setMargin(table, new Insets(0, 0, 0, 10));
+        VBox.setMargin(totaleprijs, new Insets(0, 0, 0, 150));
+        VBox.setMargin(korting, new Insets(0, 0, 0, 145));
+        VBox.setMargin(betalen, new Insets(0, 0, 0, 60));
+        p1.setPadding(new Insets(10));
+
+        this.getChildren().addAll(p1);
 
     }
 
@@ -72,7 +86,7 @@ public class KlantPane extends GridPane {
     }
 
     private void setLKorting(){
-        korting = new Label(":Korting: ");
+        korting = new Label("Korting: ");
         this.add(korting, 0, 5);
     }
 

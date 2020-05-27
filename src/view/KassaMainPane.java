@@ -13,6 +13,7 @@ import model.KassaVerkoop;
 import view.panels.InstellingenPane;
 import model.database.DatabaseException;
 import view.panels.KassaPane;
+import view.panels.LogPane;
 import view.panels.ProductOverviewPane;
 
 import java.io.IOException;
@@ -23,15 +24,18 @@ public class KassaMainPane extends BorderPane {
         KassaPane kassaPane = new KassaPane(kassaviewController);
         ProductOverviewPane artikelPane = new ProductOverviewPane(kassaviewController);
         InstellingenPane instellingPane = new InstellingenPane(kassaviewController);
+        LogPane logPane = new LogPane();
 
         TabPane tabPane = new TabPane();
         Tab kassaTab = new Tab("Kassa", kassaPane);
         Tab artikelTab = new Tab("Artikelen", artikelPane);
         Tab instellingTab = new Tab("Instellingen", instellingPane);
+        Tab logTab = new Tab("Log", logPane);
 
         tabPane.getTabs().add(kassaTab);
         tabPane.getTabs().add(artikelTab);
         tabPane.getTabs().add(instellingTab);
+        tabPane.getTabs().add(logTab);
         this.setCenter(tabPane);
 
         /*

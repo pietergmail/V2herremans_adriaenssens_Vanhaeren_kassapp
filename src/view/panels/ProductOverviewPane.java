@@ -47,13 +47,15 @@ public class ProductOverviewPane extends GridPane {
         this.setVgap(5);
         this.setHgap(5);
         Label label1 = new Label("Producten:");
-        label1.setPadding(new Insets(5,5,5,5));
+        label1.setPadding(new Insets(5,5,5,10));
         label1.setFont(new Font("Arial", 20));
 
         this.setTables();
 
         table.setItems(controller.loadData());
-        this.getChildren().addAll(label1, table);
+		VBox.setMargin(table, new Insets(0, 0, 0, 10));
+        p1.getChildren().addAll(label1, table);
+        this.getChildren().addAll(p1);
 		}
 
 		//this.add(new Label("Producten:"), 0, 0, 1, 1);

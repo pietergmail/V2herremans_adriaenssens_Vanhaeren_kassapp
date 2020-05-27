@@ -17,6 +17,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
@@ -55,6 +56,7 @@ public class KassaPane extends GridPane {
     private Button verwijderartikel;
     private TextField verwijderartikelcode;
     private BetaalPane betaalPane;
+    private Label titel;
     //private Scene scene = new Scene(this);
     //private List<Artikel> winkelmand = new ArrayList<>();
     //private List<Artikel> winkelmandonhold = new ArrayList<>();
@@ -120,7 +122,8 @@ public class KassaPane extends GridPane {
             onhold.setDisable(false);
             AFSLUITEN.setDisable(false);
         } catch (Exception e) {
-            throw new IllegalArgumentException("fout bij het toevoegen product.");
+            new Alert(Alert.AlertType.WARNING, e.getMessage()).showAndWait();
+            //throw new IllegalArgumentException("fout bij het toevoegen product.");
         }
         table.refresh();
         artikelcode.clear();
@@ -128,20 +131,24 @@ public class KassaPane extends GridPane {
 
     private void setBox(){
         HBox p2 = new HBox(10);
-        voegtoe = new Label("voeg artikelcode in:");
+        voegtoe = new Label("Voeg artikelcode in:");
         artikelcode = new TextField();
         voegartikelToe = new Button("voeg toe");
         p2.getChildren().addAll(voegtoe, artikelcode, voegartikelToe);
         //p2.setAlignment(Pos.CENTER);
-        p2.setPadding(new Insets(10));
+        p2.setPadding(new Insets(10, 0, 0, 22));
 
         VBox p3 = new VBox(10);
         table = new TableView<>();
         totaleprijs = new Label("Totale prijs: ");
         totalekorting = new Label("Totale korting: ");
         totaleprijskorting = new Label("Totale Prijs met korting: ");
+        VBox.setMargin(totaleprijs, new Insets(0, 0, 0, 126));
+        VBox.setMargin(totalekorting, new Insets(0, 0, 0, 111));
+        VBox.setMargin(totaleprijskorting, new Insets(0, 0, 0, 62));
+
         p3.getChildren().addAll(table, totaleprijs, totalekorting, totaleprijskorting);
-        p3.setAlignment(Pos.CENTER);
+        //p3.setAlignment(Pos.CENTER);
         p3.setPadding(new Insets(10));
         //table.setItems(producten);
 
@@ -166,8 +173,12 @@ public class KassaPane extends GridPane {
         p4.setPadding(new Insets(10));
 
         VBox p1 = new VBox(10);
-        p1.getChildren().addAll(p2, p4);
-        p1.setAlignment(Pos.CENTER);
+        titel = new Label("Kassa:");
+        titel.setPadding(new Insets(5,5,0,5));
+        titel.setFont(new Font("Arial", 20));
+
+        p1.getChildren().addAll(titel, p2, p4);
+        //p1.setAlignment(Pos.CENTER);
         p1.setPadding(new Insets(10));
 
         this.getChildren().addAll(p1);
