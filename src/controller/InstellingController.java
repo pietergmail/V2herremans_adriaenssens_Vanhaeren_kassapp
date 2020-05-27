@@ -73,6 +73,12 @@ public class InstellingController {
         }
     }
 
+    public void setTypeKorting(KortingEnum kortingEnum){
+        if(kortingEnum == null) throw new IllegalArgumentException("Kortingenum is empty.");
+        System.out.println("typekorting: " + kortingEnum);
+        this.setProperty("property.typekorting", kortingEnum.toString());
+    }
+
     void setKortingStrategy(){
         String key = "property.typekorting";
         ArrayList<Object> t = new ArrayList<>();
@@ -105,7 +111,11 @@ public class InstellingController {
                 args.add(getProperty("property.drempelbedragkorting"));
                 break;
             case DUURSTEKORTING:
-                args.add(getProperty("property.percentagekorting"));
+                String tem = getProperty("property.percentagekorting");
+                Double tem2 = Double.parseDouble(tem);
+                args.add(tem2);
+                break;
+            case GEEN:
                 break;
         }
         return new KortingFactory().kortingFactory(keuze, args);

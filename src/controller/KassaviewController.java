@@ -6,6 +6,7 @@ import jxl.read.biff.BiffException;
 import model.*;
 
 import model.database.*;
+import model.korting.KortingEnum;
 import view.KassaView;
 import view.panels.KassaPane;
 import view.panels.ProductOverviewPane;
@@ -34,6 +35,7 @@ public class KassaviewController implements Observer {
     private Properties properties = new Properties();
     private String path = "src" + File.separator + "bestanden" + File.separator + "KassaApp.properties";
 
+    public void setloadsaveStrategy(LoadSaveEnum loadSaveEnum){instellingController.setLoadSaveStrategy(loadSaveEnum);}
 
     public KassaviewController(KassaVerkoop kassaVerkoop, InstellingController instellingController, ProductController productController ) throws DatabaseException, IOException, BiffException {
         this.kassaVerkoop = kassaVerkoop;
@@ -132,6 +134,8 @@ public class KassaviewController implements Observer {
         kassaVerkoop.betaal();
         //uitbereiding nodig in labo 10
     }
+
+    public void setTypeKorting(KortingEnum kortingEnum){ instellingController.setTypeKorting(kortingEnum);}
 
     public void annuleer(){
         kassaVerkoop.annuleer();

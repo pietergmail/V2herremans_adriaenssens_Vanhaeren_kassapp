@@ -37,7 +37,7 @@ import java.util.Properties;
 public class InstellingenPane extends GridPane{
     private KassaviewController controller;
     private Label titel;
-    private Label databsae;
+    private Label database;
     private Label korting;
     private Label databasetxt;
     private Label kortingtxt;
@@ -51,6 +51,7 @@ public class InstellingenPane extends GridPane{
     private TextField groeptxt;
     Border border = new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(10), new BorderWidths(1)));
     private Button save;
+    private Button savefiletype;
 
     public InstellingenPane(KassaviewController controller){
         this.controller = controller;
@@ -58,6 +59,15 @@ public class InstellingenPane extends GridPane{
         this.setbox();
 
         //bij klikken op savebutton worden de instelling opgeslagen
+
+        savefiletype.setOnAction(e -> {
+            if(chbxdatabase.getValue().equals("Tekst")){
+                controller.setloadsaveStrategy(LoadSaveEnum.valueOf("TEKST"));
+            }
+            if(chbxdatabase.getValue().equals("Excel")){
+                controller.setLoadStrategy(LoadSaveEnum.valueOf("EXCEL"));
+            }
+        });
 
         save.setOnAction(e-> {
             //popup bij niet ingevulde velden
@@ -129,7 +139,7 @@ public class InstellingenPane extends GridPane{
                 }
                 //
                 try {
-                    if(!groeptxt.getText().trim().isEmpty()){
+                    if(groeptxt.getText().isEmpty()){
                         warningmessage += "De ingegeven groep bestaat niet. \n";
                         groeptxt.clear();
                     }
@@ -151,16 +161,14 @@ public class InstellingenPane extends GridPane{
             //bij geen fouten, worden instelling opgeslagen
             if(warningmessage.trim().isEmpty()){
                 //opslagen van database
-                if(chbxdatabase.getValue().equals("Tekst")){
-                    controller.setProperty("property.filetype", "TEKST");
-                }
-                if(chbxdatabase.getValue().equals("Excel")){
-                    controller.setProperty("property.filetype", "EXCEL");
-                }
-                //
 
 
                 //opslagen van korting (en ervoor zorgen dat er geen lege velden kunnen worden opgeslagen)
+
+                if(!((String) chbxkorting.getValue()).isEmpty()){
+                    controller.setTypeKorting(KortingEnum.valueOf(((String) chbxkorting.getValue()).toUpperCase()));
+                }
+
                 if(!percentagetxt.getText().trim().isEmpty() && percentagetxt.getText() != null){
                     controller.setProperty("property.percentagekorting", percentagetxt.getText());
                 }
@@ -244,24 +252,12 @@ public class InstellingenPane extends GridPane{
         return geldig;
     }
 
-    //test voor groep niet nodig, korting wordt nul als de groep niet bestaat
-    /*public boolean geldigegroep(InstellingController controller) throws DatabaseException, IOException, BiffException {
-        ArrayList<Artikel> producten =
-        boolean geldig = false;
-        for (Artikel a : producten){
-            if(a.getGroep().trim().equalsIgnoreCase(groeptxt.getText().trim())){
-                geldig = true;
-            }
-        }
-        return geldig;
-    }*/
-
     private void setbox(){
         //settingup all of the ui
 
         VBox p2 = new VBox(10);
-        databsae = new Label("Database:");
-        databsae.setFont(new Font(15));
+        database = new Label("Database:");
+        database.setFont(new Font(15));
         databasetxt = new Label("Selecteer gewenste database:");
         //databasetxt.setPadding(new Insets(0, 0, 0, 10));
         VBox.setMargin(databasetxt, new Insets(0, 0, 0, 5));
@@ -276,7 +272,12 @@ public class InstellingenPane extends GridPane{
         p2.setBorder(border);
         //p2.setAlignment(Pos.CENTER);
         p2.setPadding(new Insets(10));
-        p2.getChildren().addAll(databsae, databasetxt, chbxdatabase);
+
+        savefiletype = new Button("save");
+        savefiletype.setStyle("-fx-background-color: lightgray; -fx-background-radius: 10px; -fx-border-color: black; -fx-border-radius: 10px;  -fx-font-size: 14px;");
+        savefiletype.setMinSize(70,30);
+
+        p2.getChildren().addAll(database, databasetxt, chbxdatabase, savefiletype);
         //
 
 
@@ -287,7 +288,7 @@ public class InstellingenPane extends GridPane{
         kortingtxt = new Label("Selecteer gewenste korting:");
         VBox.setMargin(kortingtxt, new Insets(0, 0, 0, 5));
         chbxkorting  = new ChoiceBox<>();
-        chbxkorting.getItems().addAll("Geenkorting", "Drempelkorting", "Duurstekorting", "Groepkorting");
+        chbxkorting.getItems().addAll("Geen", "Drempelkorting", "Duurstekorting", "Groepkorting");
 
         VBox.setMargin(chbxkorting, new Insets(0, 0, 0, 5));
         //p3.setAlignment(Pos.CENTER);
@@ -391,7 +392,7 @@ public class InstellingenPane extends GridPane{
 
                 }
             }
-            if (keuze.equals("Geenkorting")){
+            if (keuze.equals("Geen")){
                 try{
                     p3.getChildren().removeAll(p4, p5, p6);
                     percentagetxt.clear();
