@@ -20,20 +20,24 @@ import java.time.LocalTime;
 
 public class LogPane extends GridPane {
 
-    private TableView<Log> table;
     private KassaviewController kassaviewController;
-    public LogPane(KassaviewController kassaviewController) {
+    private TableView<Log> table;
+
+    public LogPane(KassaviewController kassaviewController){
         this.kassaviewController = kassaviewController;
         kassaviewController.setLogPane(this);
-        VBox p1 = new VBox(10);
-        Label label1 = new Label("Log:");
-        label1.setPadding(new Insets(10));
+
+        this.setPadding(new Insets(5, 5, 5, 5));
+        this.setVgap(5);
+        this.setHgap(5);
+
+        Label label1 = new Label("Logs");
         label1.setFont(new Font("Arial", 20));
-        p1.getChildren().addAll(label1);
+
         this.setTable();
+        table.setItems(FXCollections.observableArrayList(kassaviewController.getLogs()));
 
-
-        this.getChildren().addAll(p1);
+        this.getChildren().addAll(label1,table);
     }
 
     private void setTable(){
@@ -42,32 +46,25 @@ public class LogPane extends GridPane {
             TableRow<Log> row = new TableRow<>();
             return row;
         });
+        this.add(new Label("Logs:"), 0, 0, 1, 1);
+        TableColumn<Log,LocalDate> columnDatum = new TableColumn<>("Datum");
+        columnDatum.setMinWidth(100);
+        columnDatum.setCellValueFactory(new PropertyValueFactory<>("datum"));
+        TableColumn<Log,LocalTime> columnTijdstip = new TableColumn<>("Tijdtip");
+        columnTijdstip.setMinWidth(100);
+        columnTijdstip.setCellValueFactory(new PropertyValueFactory<>("tijdtip"));
+        TableColumn<Log,Double> columnTotaalBedrag = new TableColumn<>("Totaal");
+        columnTotaalBedrag.setMinWidth(50);
+        columnTotaalBedrag.setCellValueFactory(new PropertyValueFactory<>("totaalbedrag"));
+        TableColumn<Log,Double> columnKorting = new TableColumn<>("Korting");
+        columnKorting.setMinWidth(50);
+        columnKorting.setCellValueFactory(new PropertyValueFactory<>("korting"));
+        TableColumn<Log,Double> columnTeBetalenMetKorting = new TableColumn<>("Betaald");
+        columnTeBetalenMetKorting.setMinWidth(50);
+        columnTeBetalenMetKorting.setCellValueFactory(new PropertyValueFactory<>("tebetalenbedrag"));
 
-        TableColumn<Log, LocalDate> columnDatum = new TableColumn<>("Datum");
-        columnDatum.setMinWidth(200);
-        columnDatum.setCellValueFactory(new PropertyValueFactory<>("Datum"));
-
-        TableColumn<Log, LocalTime> columnTijd = new TableColumn<>("Tijd");
-        columnTijd.setMinWidth(200);
-        columnTijd.setCellValueFactory(new PropertyValueFactory<>("Tijd"));
-
-
-        TableColumn<Log, Double> columnTotaalBedrag = new TableColumn<>("Totaal");
-        columnTotaalBedrag.setMinWidth(200);
-        columnTotaalBedrag.setCellValueFactory(new PropertyValueFactory<>("Totaal"));
-
-        TableColumn<Log, Double> columnTotaleKorting = new TableColumn<>("Korting");
-        columnTotaleKorting.setMinWidth(200);
-        columnTotaleKorting.setCellValueFactory(new PropertyValueFactory<>("Korting"));
-
-        TableColumn<Log, Double> columnTotaalTeBetalen = new TableColumn<>("Te Betalen");
-        columnTotaalTeBetalen.setMinWidth(200);
-        columnTotaalTeBetalen.setCellValueFactory(new PropertyValueFactory<>("Te Betalen"));
-
-        table.getColumns().addAll(columnDatum, columnTijd, columnTotaalBedrag, columnTotaleKorting, columnTotaalTeBetalen);
+        table.getColumns().addAll(columnDatum,columnTijdstip,columnTotaalBedrag,columnKorting,columnTeBetalenMetKorting);
     }
-
-
 
     public void updateLogTable(){
         table.setItems(FXCollections.observableArrayList(kassaviewController.getLogs()));
