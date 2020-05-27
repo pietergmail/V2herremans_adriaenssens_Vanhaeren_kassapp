@@ -61,6 +61,10 @@ public class ProductController {
         loadSaveContext.save(artikels);
     }
 
+    public void updateProducts() throws DatabaseException, IOException, BiffException {
+        pane.updateProducts();
+    }
+
     //unnecesary
     /*
     public void updateProductsInTabel(){

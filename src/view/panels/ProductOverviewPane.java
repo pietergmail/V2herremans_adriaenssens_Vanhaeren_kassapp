@@ -40,22 +40,21 @@ public class ProductOverviewPane extends GridPane {
 	public ProductOverviewPane(KassaviewController controller) throws DatabaseException, IOException, BiffException {
 
 		this.controller = controller;
-
+		controller.setProductPane(this);
 		//ObservableList<Artikel> producten = FXCollections.observableArrayList(new ArrayList<>(loadSaveContext.load()));
-		VBox p1 = new VBox(5);
+		//VBox p1 = new VBox(5);
 		this.setPadding(new Insets(5, 5, 5, 5));
         this.setVgap(5);
         this.setHgap(5);
         Label label1 = new Label("Producten:");
-        label1.setPadding(new Insets(5,5,5,10));
+       // label1.setPadding(new Insets(5,5,5,10));
         label1.setFont(new Font("Arial", 20));
 
-        this.setTables();
+        this.setTable();
 
-        table.setItems(controller.loadData());
-		VBox.setMargin(table, new Insets(0, 0, 0, 10));
-        p1.getChildren().addAll(label1, table);
-        this.getChildren().addAll(p1);
+		table.setItems(FXCollections.observableArrayList(controller.loadData()));
+		//VBox.setMargin(table, new Insets(0, 0, 0, 10));
+        this.getChildren().addAll(label1, table);
 		}
 
 		//this.add(new Label("Producten:"), 0, 0, 1, 1);
@@ -86,9 +85,12 @@ public class ProductOverviewPane extends GridPane {
 
 		 */
 
-		private void setTables(){
-			table = new TableView<Artikel>();
-			//table.setItems(producten);
+		private void setTable(){
+			table = new TableView<>();
+			table.setRowFactory( t -> {
+				TableRow<Artikel> row = new TableRow<>();
+				return row;
+			});
 
 			TableColumn<Artikel, String> columnCode = new TableColumn<>("Code");
 			columnCode.setMinWidth(50);
@@ -107,14 +109,14 @@ public class ProductOverviewPane extends GridPane {
 			columnPrijs.setCellValueFactory(new PropertyValueFactory<Artikel, Double>("prijs"));
 
 			TableColumn<Artikel, Integer> columnVoorraad = new TableColumn<>("Voorraad");
-			columnVoorraad.setMinWidth(50);
+			columnVoorraad.setMinWidth(100);
 			columnVoorraad.setCellValueFactory(new PropertyValueFactory<Artikel, Integer>("Voorraad"));
 
-			table.getColumns().addAll(columnCode, columnOmschrijving, columnGroep, columnPrijs);
+			table.getColumns().addAll(columnCode, columnOmschrijving, columnGroep, columnPrijs, columnVoorraad);
 		}
 
 		public void updateProducts() throws DatabaseException, IOException, BiffException {
-			table.setItems(controller.loadData());
+			table.setItems(FXCollections.observableArrayList(controller.loadData()));
 			table.refresh();
 	}
 }

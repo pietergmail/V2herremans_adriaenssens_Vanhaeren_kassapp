@@ -108,6 +108,7 @@ public class KassaviewController implements Observer {
         logController.setLogPane(logPane);
     }
 
+
     public double totaalPrijs() {
         return kassaVerkoop.getTotalPrijs();
     }
@@ -157,6 +158,7 @@ public class KassaviewController implements Observer {
         logController.addLog(log);
         System.out.println(log.toString());
         pasVoorraadAan(kassaVerkoop.getWinkelmandje());
+        productController.updateProducts();
         kassaVerkoop.betaal();
         //uitbereiding nodig in labo 10
     }
