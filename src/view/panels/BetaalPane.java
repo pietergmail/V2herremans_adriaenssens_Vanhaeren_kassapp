@@ -6,6 +6,7 @@ import controller.KassaviewController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.TextField;
@@ -89,7 +90,12 @@ class BetaalPane extends GridPane {
                 System.out.println("betaling gestart");
                 try{
                     controller.betaal();
-
+                    System.out.println("betaal");
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Information Dialog");
+                    alert.setHeaderText(null);
+                    alert.setContentText(controller.kassabon());
+                    alert.showAndWait();
 
                 }catch (Exception e){
                     System.out.println("fout bij betaling");

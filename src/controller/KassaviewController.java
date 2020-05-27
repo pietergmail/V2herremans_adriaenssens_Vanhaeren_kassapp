@@ -6,6 +6,7 @@ import jxl.read.biff.BiffException;
 import model.*;
 
 import model.database.*;
+import model.kassabon.*;
 import model.korting.KortingEnum;
 import model.log.Log;
 import view.KassaView;
@@ -156,6 +157,39 @@ public class KassaviewController implements Observer {
         System.out.println(log.toString());
         kassaVerkoop.betaal();
         //uitbereiding nodig in labo 10
+    }
+
+    public String kassabon(){
+        Component component = new KassabonComponent(kassaVerkoop);
+        if(Boolean.parseBoolean(instellingController.getProperty("property.headerboodschap"))){
+            HeaderAlgemeneBoodschap headerAlgemeneBoodschap = new HeaderAlgemeneBoodschap(component);
+            component = headerAlgemeneBoodschap;
+            if(!instellingController.getProperty("property.headerboodschaptext").trim().isEmpty()){
+                headerAlgemeneBoodschap.setBoodschap(instellingController.getProperty("property.headerboodschaptext"));
+            }
+        }
+        if(Boolean.parseBoolean(instellingController.getProperty("property.headerdatumtijd"))){
+            HeaderDatumTijd headerDatumTijd = new HeaderDatumTijd(component);
+            component = headerDatumTijd;
+        }
+        if(Boolean.parseBoolean(instellingController.getProperty("property.footerboodschap"))){
+            FooterAlgemeneBoodschap footerAlgemeneBoodschap = new FooterAlgemeneBoodschap(component);
+            component = footerAlgemeneBoodschap;
+            if(!instellingController.getProperty("property.headerboodschaptext").trim().isEmpty()){
+                footerAlgemeneBoodschap.setBoodschap(instellingController.getProperty("property.footerboodschaptext"));
+            }
+        }
+        if(Boolean.parseBoolean(instellingController.getProperty("property.footerkorting"))){
+            FooterKorting footerKorting = new FooterKorting(component);
+            component = footerKorting;
+        }
+        if(Boolean.parseBoolean(instellingController.getProperty("property.footerBTW"))){
+            FooterBTW footerBTW = new FooterBTW(component);
+            component = footerBTW;
+        }
+        //component.kassabon();
+        System.out.println(component.kassabon());
+        return component.kassabon();
     }
 
     public void setTypeKorting(KortingEnum kortingEnum){ instellingController.setTypeKorting(kortingEnum);}
