@@ -107,8 +107,8 @@ public class InstellingController {
                 args.add(getProperty("property.groepkorting"));
                 break;
             case DREMPELKORTING:
-                args.add(getProperty("property.percentagekorting"));
-                args.add(getProperty("property.drempelbedragkorting"));
+                args.add(Double.parseDouble(getProperty("property.percentagekorting")));
+                args.add(Double.parseDouble(getProperty("property.drempelbedragkorting")));
                 break;
             case DUURSTEKORTING:
                 String tem = getProperty("property.percentagekorting");
