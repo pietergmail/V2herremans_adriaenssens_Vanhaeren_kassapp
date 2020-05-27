@@ -7,8 +7,10 @@ import model.*;
 
 import model.database.*;
 import model.korting.KortingEnum;
+import model.log.Log;
 import view.KassaView;
 import view.panels.KassaPane;
+import view.panels.LogPane;
 import view.panels.ProductOverviewPane;
 
 import java.io.*;
@@ -28,6 +30,7 @@ public class KassaviewController implements Observer {
     private InstellingController instellingController;
     private LoadSaveContext loadSaveContext;
     private ProductController productController;
+    private LogController logController;
     //private LoadsaveArtikeltekst loadsaveArtikeltekst;
     private KassaPane pane;
 
@@ -37,11 +40,12 @@ public class KassaviewController implements Observer {
 
     public void setloadsaveStrategy(LoadSaveEnum loadSaveEnum){instellingController.setLoadSaveStrategy(loadSaveEnum);}
 
-    public KassaviewController(KassaVerkoop kassaVerkoop, InstellingController instellingController, ProductController productController ) throws DatabaseException, IOException, BiffException {
+    public KassaviewController(KassaVerkoop kassaVerkoop, InstellingController instellingController, ProductController productController, LogController logController ) throws DatabaseException, IOException, BiffException {
         this.kassaVerkoop = kassaVerkoop;
         kassaVerkoop.addObserver(this);
         this.productController = productController;
         this.instellingController = instellingController;
+        this.logController = logController;
         kassaVerkoop.setKorting(instellingController.getKortingStrategy());//needs re-writing
     }
 
@@ -70,6 +74,10 @@ public class KassaviewController implements Observer {
         kassaVerkoop.updateRemoveArtikel(index);
     }
 
+    public ArrayList<Log> getLogs(){
+        return logController.getLogs();
+    }
+
     public void setOnHold() {
         kassaVerkoop.setOnHold();
     }
@@ -92,6 +100,10 @@ public class KassaviewController implements Observer {
 
     public void setProductPane(ProductOverviewPane productOverviewPane){
         productController.setProductPane(productOverviewPane);
+    }
+
+    public void setLogPane(LogPane logPane){
+        logController.setLogPane(logPane);
     }
 
     public double totaalPrijs() {
@@ -136,6 +148,12 @@ public class KassaviewController implements Observer {
     }
 
     public void betaal(){
+        double korting = kassaVerkoop.berekenKorting();
+        double totalebedragmetkorting = kassaVerkoop.berekenPrijsMetKorting();
+        double totaleprijs = kassaVerkoop.getTotalPrijs();
+        Log log = new Log(totaleprijs, korting, totalebedragmetkorting);
+        this.logController.addLog(log);
+        System.out.println(log.toString());
         kassaVerkoop.betaal();
         //uitbereiding nodig in labo 10
     }

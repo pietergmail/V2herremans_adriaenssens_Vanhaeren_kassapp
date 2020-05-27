@@ -24,7 +24,7 @@ public class KassaMainPane extends BorderPane {
         KassaPane kassaPane = new KassaPane(kassaviewController);
         ProductOverviewPane artikelPane = new ProductOverviewPane(kassaviewController);
         InstellingenPane instellingPane = new InstellingenPane(kassaviewController);
-        LogPane logPane = new LogPane();
+        LogPane logPane = new LogPane(kassaviewController);
 
         TabPane tabPane = new TabPane();
         Tab kassaTab = new Tab("Kassa", kassaPane);

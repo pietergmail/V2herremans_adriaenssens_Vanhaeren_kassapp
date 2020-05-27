@@ -274,9 +274,12 @@ public class KassaPane extends GridPane {
 
     }
 
-    public void resetKnoppen(){
-        AFSLUITEN.setDisable(true);
-        onhold.setDisable(true);
+    public void enableVerwijderen(){
+        verwijderartikel.setDisable(false);
+    }
+
+    public void disableVerwijderen(){
+        verwijderartikel.setDisable(true);
     }
 
     private void setOnhold() {

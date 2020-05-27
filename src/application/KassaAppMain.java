@@ -1,9 +1,6 @@
 package application;
 	
-import controller.InstellingController;
-import controller.KassaviewController;
-import controller.KlantviewController;
-import controller.ProductController;
+import controller.*;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import jxl.read.biff.BiffException;
@@ -27,7 +24,8 @@ public class KassaAppMain extends Application {
 			InstellingController instellingController = new InstellingController();
 			ProductController productController = new ProductController(instellingController);
 			KassaVerkoop kassaVerkoop = new KassaVerkoop();
-			KassaviewController kassaviewController = new KassaviewController(kassaVerkoop, instellingController, productController);
+			LogController logController = new LogController();
+			KassaviewController kassaviewController = new KassaviewController(kassaVerkoop, instellingController, productController, logController);
 			KassaView kassaView = new KassaView(kassaviewController);
 			KlantviewController klantviewController = new KlantviewController(kassaVerkoop);
 			KlantView klantView = new KlantView(klantviewController);
