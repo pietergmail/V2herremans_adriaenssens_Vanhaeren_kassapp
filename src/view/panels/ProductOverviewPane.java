@@ -91,19 +91,24 @@ public class ProductOverviewPane extends GridPane {
 			TableColumn<Artikel, String> columnCode = new TableColumn<>("Code");
 			columnCode.setMinWidth(50);
 			columnCode.setCellValueFactory(new PropertyValueFactory<Artikel, String>("code"));
+
 			TableColumn<Artikel, String> columnOmschrijving = new TableColumn<>("Omschrijving");
 			columnOmschrijving.setMinWidth(150);
 			columnOmschrijving.setCellValueFactory(new PropertyValueFactory<Artikel, String>("omschrijving"));
+
 			TableColumn<Artikel, String> columnGroep = new TableColumn<>("Groep");
 			columnGroep.setMinWidth(100);
 			columnGroep.setCellValueFactory(new PropertyValueFactory<Artikel, String>("groep"));
+
 			TableColumn<Artikel, Double> columnPrijs = new TableColumn<>("Prijs");
 			columnPrijs.setMinWidth(100);
 			columnPrijs.setCellValueFactory(new PropertyValueFactory<Artikel, Double>("prijs"));
+
 			TableColumn<Artikel, Integer> columnVoorraad = new TableColumn<>("Voorraad");
 			columnVoorraad.setMinWidth(50);
-			columnVoorraad.setCellValueFactory(new PropertyValueFactory<Artikel, Integer>("voorraad"));
-			table.getColumns().addAll(columnCode, columnOmschrijving, columnGroep, columnPrijs, columnVoorraad);
+			columnVoorraad.setCellValueFactory(new PropertyValueFactory<Artikel, Integer>("Voorraad"));
+
+			table.getColumns().addAll(columnCode, columnOmschrijving, columnGroep, columnPrijs);
 		}
 
 		public void updateProducts() throws DatabaseException, IOException, BiffException {

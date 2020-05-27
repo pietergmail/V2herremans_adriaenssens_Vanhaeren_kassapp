@@ -63,17 +63,17 @@ public class KlantPane extends GridPane {
 
     private void setLTotalePrijs() {
         totaleprijs = new Label("Totaal: ");
-        this.add(totaleprijs, 1, 3);
+        this.add(totaleprijs, 0, 3);
     }
 
     private void setLBetalen(){
         betalen = new Label("Totale prijs met korting: ");
-        this.add(betalen, 1, 3);
+        this.add(betalen, 0, 4);
     }
 
     private void setLKorting(){
         korting = new Label(":Korting: ");
-        this.add(korting, 1, 3);
+        this.add(korting, 0, 5);
     }
 
     public void setWinkelmand(ArrayList<Artikel> winkelmand){
