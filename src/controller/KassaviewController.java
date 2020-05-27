@@ -3,6 +3,7 @@ package controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import jxl.read.biff.BiffException;
+import jxl.write.WriteException;
 import model.*;
 
 import model.database.*;
@@ -148,13 +149,14 @@ public class KassaviewController implements Observer {
         return kassaVerkoop.berekenPrijsMetKorting();
     }
 
-    public void betaal(){
+    public void betaal() throws WriteException, BiffException, IOException, DomainException, DatabaseException {
         double korting = kassaVerkoop.berekenKorting();
         double totalebedragmetkorting = kassaVerkoop.berekenPrijsMetKorting();
         double totaleprijs = kassaVerkoop.getTotalPrijs();
         Log log = new Log(totaleprijs, korting, totalebedragmetkorting);
         logController.addLog(log);
         System.out.println(log.toString());
+        pasVoorraadAan(kassaVerkoop.getWinkelmandje());
         kassaVerkoop.betaal();
         //uitbereiding nodig in labo 10
     }
@@ -218,5 +220,11 @@ public class KassaviewController implements Observer {
         pane.updateTotaalPrijsKorting(verkoop.berekenPrijsMetKorting());
         pane.setWinkelmandje(verkoop.getWinkelmandje());
         pane.updateTotaalKorting(verkoop.berekenKorting());
+    }
+
+    public void pasVoorraadAan(ArrayList<Artikel> artikels) throws WriteException, BiffException, DatabaseException, DomainException, IOException {
+        for(Artikel artikel : artikels){
+            productController.pasVoorraadAan(artikel);
+        }
     }
 }

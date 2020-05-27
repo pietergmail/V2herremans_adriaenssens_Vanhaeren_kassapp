@@ -3,8 +3,10 @@ package controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import jxl.read.biff.BiffException;
+import jxl.write.WriteException;
 import model.Artikel;
 import model.database.DatabaseException;
+import model.database.DomainException;
 import model.database.LoadSaveContext;
 import model.database.StrategyLoadSave;
 import view.panels.ProductOverviewPane;
@@ -44,6 +46,19 @@ public class ProductController {
 
     public void setPane(ProductOverviewPane pane) {
         this.pane = pane;
+    }
+
+    public void pasVoorraadAan(Artikel artikel) throws IOException, DatabaseException, BiffException, DomainException, WriteException {
+        ArrayList<Artikel> artikels = new ArrayList<>();
+        artikels.addAll(loadArtikels());
+
+        for(Artikel a : artikels){
+            if(a.getCode().equals(artikel.getCode())){
+                a.verminderVoorraad();
+                break;
+            }
+        }
+        loadSaveContext.save(artikels);
     }
 
     //unnecesary

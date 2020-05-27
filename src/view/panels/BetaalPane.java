@@ -12,6 +12,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import model.database.DatabaseException;
+import model.database.DomainException;
 
 import javax.swing.*;
 import java.sql.SQLOutput;
@@ -100,6 +102,10 @@ class BetaalPane extends GridPane {
                 }catch (Exception e){
                     System.out.println("fout bij betaling");
                     System.out.println(e.getMessage());
+                } catch (DatabaseException e) {
+                    e.printStackTrace();
+                } catch (DomainException e) {
+                    e.printStackTrace();
                 }
                 stage.close();
             }
