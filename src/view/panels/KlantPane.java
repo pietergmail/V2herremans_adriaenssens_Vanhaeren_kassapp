@@ -44,9 +44,9 @@ public class KlantPane extends GridPane {
         p1.getChildren().addAll(table, totaleprijs, korting, betalen);
         //p1.setAlignment(Pos.CENTER);
         VBox.setMargin(table, new Insets(0, 0, 0, 10));
-        VBox.setMargin(totaleprijs, new Insets(0, 0, 0, 150));
-        VBox.setMargin(korting, new Insets(0, 0, 0, 145));
-        VBox.setMargin(betalen, new Insets(0, 0, 0, 60));
+        VBox.setMargin(totaleprijs, new Insets(0, 0, 0, 126));
+        VBox.setMargin(korting, new Insets(0, 0, 0, 111));
+        VBox.setMargin(betalen, new Insets(0, 0, 0, 62));
         p1.setPadding(new Insets(10));
 
         this.getChildren().addAll(p1);
@@ -76,8 +76,8 @@ public class KlantPane extends GridPane {
     }
 
     private void setLTotalePrijs() {
-        totaleprijs = new Label("Totaal: ");
-        this.add(totaleprijs, 0, 3);
+        totaleprijs = new Label("Totale prijs: ");
+        this.add(totaleprijs, 0, 4);
     }
 
     private void setLBetalen(){
@@ -86,8 +86,8 @@ public class KlantPane extends GridPane {
     }
 
     private void setLKorting(){
-        korting = new Label("Korting: ");
-        this.add(korting, 0, 5);
+        korting = new Label("Totale Korting: ");
+        this.add(korting, 0, 4);
     }
 
     public void setWinkelmand(ArrayList<Artikel> winkelmand){
@@ -96,10 +96,10 @@ public class KlantPane extends GridPane {
         table.refresh();
     }
 
-    public void SetTotalePrijs(double totalePrijs){this.totaleprijs.setText("Totaal: " + totalePrijs);}
+    public void setTotalePrijs(double totalePrijs){this.totaleprijs.setText("Totale prijs: " + totalePrijs);}
 
-    public void setKorting(double korting){this.korting.setText("Korting: " + korting);}
+    public void setKorting(double korting){this.korting.setText("Totale Korting: " + korting);}
 
-    public void setBetalen(double teBetalen){this.korting.setText("Te Betalen: " + teBetalen);}
+    public void setBetalen(double teBetalen){this.betalen.setText("Totale prijs met korting: " + teBetalen);}
 
 }

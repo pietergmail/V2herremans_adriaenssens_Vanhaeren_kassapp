@@ -21,7 +21,7 @@ public class KlantviewController implements Observer {
     @Override
     public void update(KassaVerkoop verkoop) {
         pane.setWinkelmand(verkoop.getWinkelmandje());
-        pane.setBetalen(verkoop.getTotalPrijs());
+        pane.setTotalePrijs(verkoop.getTotalPrijs());
         pane.setKorting(verkoop.berekenKorting());
         pane.setBetalen(verkoop.berekenPrijsMetKorting());
     }

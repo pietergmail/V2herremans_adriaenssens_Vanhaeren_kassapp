@@ -23,6 +23,7 @@ import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import jxl.read.biff.BiffException;
 import model.Artikel;
+import model.KassaVerkoop;
 import model.database.DatabaseException;
 
 import javax.swing.*;
@@ -156,6 +157,7 @@ public class KassaPane extends GridPane {
         onhold = new Button("zet on hold");
         restoreonhold = new Button("restore on hold");
         AFSLUITEN = new Button("AFSLUITEN");
+
         restoreonhold.setDisable(true);
         onhold.setDisable(true);
         AFSLUITEN.setDisable(true);
@@ -272,8 +274,14 @@ public class KassaPane extends GridPane {
 
     }
 
+    public void resetKnoppen(){
+        AFSLUITEN.setDisable(true);
+        onhold.setDisable(true);
+    }
+
     private void setOnhold() {
         kassaviewController.setOnHold();
+        onhold.setDisable(true);
         /*
         kassaviewController.setOnHold();
         table.getItems().clear();

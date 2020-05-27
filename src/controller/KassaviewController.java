@@ -78,6 +78,10 @@ public class KassaviewController implements Observer {
         kassaVerkoop.setOffHold();
     }
 
+    public void pasWinkelkarAan(){
+        kassaVerkoop.pasWinkelkarAan();
+    }
+
     public void setProperty(String key,String value){
         instellingController.setProperty(key,value);
     }

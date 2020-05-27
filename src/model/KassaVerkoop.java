@@ -22,8 +22,11 @@ public class KassaVerkoop implements Observable {
     private KortingStrategy korting;
     private ArrayList<ArtikelWinkelmand> winkelmand;
     private ArrayList<ArtikelWinkelmand> winkelmandonhold = new ArrayList<>();
+    private ArrayList<ArtikelWinkelmand> winkelmandbetaal = new ArrayList<>();
+    private ArrayList<Artikel> winkelmandbetaallist = new ArrayList<>();
     private ArrayList<Artikel> winkelmandlist = new ArrayList<>();
     private ArrayList<Artikel> winkelmandonholdlist = new ArrayList<>();
+    private int onHoldCounter;
 
     public KassaVerkoop() {
         this.observers = new ArrayList<>();
@@ -73,6 +76,7 @@ public class KassaVerkoop implements Observable {
         winkelmand.clear();
         winkelmandlist.clear();
         notifyObservers();
+        onHoldCounter = 0;
     }
 
     public void setOffHold() {
@@ -82,6 +86,15 @@ public class KassaVerkoop implements Observable {
         winkelmandlist.addAll(winkelmandonholdlist);
         notifyObservers();
     }
+
+    public void pasWinkelkarAan(){
+        winkelmand.clear();
+        winkelmandlist.clear();
+        winkelmand.addAll(winkelmandbetaal);
+        winkelmandlist.addAll(winkelmandbetaallist);
+    }
+
+
 
     /*public boolean artikelAlreadyAdded(Artikel artikel){
         boolean containsArtikel = false;
@@ -153,8 +166,17 @@ public class KassaVerkoop implements Observable {
     public void betaal(){
         new KassaVerkoopNew(this).Done();
         setKassaState(new KassaVerkoopDone(this));
-        this.winkelmand.clear();
+        winkelmandbetaal.clear();
+        winkelmandbetaal.addAll(winkelmand);
+        winkelmandbetaallist.addAll(winkelmandlist);
+        winkelmand.clear();
+        winkelmandlist.clear();
+        onHoldCounter++;
         notifyObservers();
+        if(onHoldCounter == 3){
+            winkelmandonhold.clear();
+            winkelmandonholdlist.clear();
+        }
     }
 
     public void annuleer(){

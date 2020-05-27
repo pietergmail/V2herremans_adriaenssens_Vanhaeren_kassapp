@@ -67,6 +67,10 @@ class BetaalPane extends GridPane {
         Button annuleer = new Button("Annuleer");
         annuleer.setOnAction(new AnnuleerHandler());
         this.add(annuleer, 3, 3, 1, 1);
+
+        Button open = new Button("Open");
+        open.setOnAction(new OpenHandler());
+        this.add(open, 4, 3, 1, 1);
     }
 
 
@@ -86,12 +90,22 @@ class BetaalPane extends GridPane {
                 try{
                     controller.betaal();
 
+
                 }catch (Exception e){
                     System.out.println("fout bij betaling");
                     System.out.println(e.getMessage());
                 }
                 stage.close();
             }
+        }
+    }
+
+    private class OpenHandler implements EventHandler<ActionEvent>{
+
+        @Override
+        public void handle(ActionEvent event){
+            System.out.println("betaling gecanceled");
+            controller.pasWinkelkarAan();
         }
     }
 
