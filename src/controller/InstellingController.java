@@ -115,7 +115,7 @@ public class InstellingController {
                 Double tem2 = Double.parseDouble(tem);
                 args.add(tem2);
                 break;
-            case GEEN:
+            case GEENKORTING:
                 break;
         }
         return new KortingFactory().kortingFactory(keuze, args);

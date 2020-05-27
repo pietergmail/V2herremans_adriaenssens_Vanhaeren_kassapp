@@ -14,7 +14,7 @@ public class KortingFactory {
         KortingStrategy korting = null;
         //slot1: percentage korting, slot2: drempelbedrag korting, slot3: groep korting
         switch (typeKorting){
-            case GEEN:
+            case GEENKORTING:
                 //if(args.size() != 1) throw new ModelException("More then one or no args");
                 //korting = new Duurstekorting(Double.parseDouble((String)args.get(0)));
                 korting = new Geenkorting();
