@@ -182,7 +182,8 @@ public class KassaVerkoop implements Observable {
     public void annuleer(){
         new KassaVerkoopNew(this).setNew();
         setKassaState(new KassaVerkoopNew(this));
-        this.winkelmand.clear();
+        winkelmand.clear();
+        winkelmandlist.clear();
         notifyObservers();
     }
 
