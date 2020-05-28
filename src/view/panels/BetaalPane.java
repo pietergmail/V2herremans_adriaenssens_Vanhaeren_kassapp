@@ -91,14 +91,13 @@ class BetaalPane extends GridPane {
             if(!textfield.getText().trim().isEmpty()){
                 System.out.println("betaling gestart");
                 try{
-                    //controller.betaal();
+                    controller.betaal();
                     System.out.println("betaal");
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Information Dialog");
                     alert.setHeaderText(null);
-                    alert.setContentText(controller.kassabon());
+                   // alert.setContentText(controller.kassabon());
                     alert.showAndWait();
-                    controller.betaal();
 
                 }catch (Exception e){
                     System.out.println("fout bij betaling");

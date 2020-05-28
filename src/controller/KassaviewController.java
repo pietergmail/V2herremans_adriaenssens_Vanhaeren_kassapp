@@ -72,13 +72,10 @@ public class KassaviewController implements Observer {
         }
     }
 
-    public void removeProductKassaVerkoop(Artikel artikel) {
-        kassaVerkoop.updateRemoveArtikel(artikel);
+    public void removeProductKassaVerkoop(int index) {
+        kassaVerkoop.updateRemoveArtikel(index);
     }
 
-    public void removeProductKassaVerkoop2(int index) {
-        kassaVerkoop.remove(index);
-    }
     public ArrayList<Log> getLogs(){
         return logController.getLogs();
     }
@@ -168,50 +165,32 @@ public class KassaviewController implements Observer {
 
     public String kassabon(){
         Component component = new KassabonComponent(kassaVerkoop);
-
+        if(Boolean.parseBoolean(instellingController.getProperty("property.headerboodschap"))){
+            HeaderAlgemeneBoodschap headerAlgemeneBoodschap = new HeaderAlgemeneBoodschap(component);
+            component = headerAlgemeneBoodschap;
+            if(!instellingController.getProperty("property.headerboodschaptext").trim().isEmpty()){
+                headerAlgemeneBoodschap.setBoodschap(instellingController.getProperty("property.headerboodschaptext"));
+            }
+        }
         if(Boolean.parseBoolean(instellingController.getProperty("property.headerdatumtijd"))){
             HeaderDatumTijd headerDatumTijd = new HeaderDatumTijd(component);
             component = headerDatumTijd;
         }
-
-        if(Boolean.parseBoolean(instellingController.getProperty("property.headerboodschap"))){
-            HeaderAlgemeneBoodschap headerAlgemeneBoodschap = new HeaderAlgemeneBoodschap(component);
-
-            if(!instellingController.getProperty("property.headerboodschaptext").trim().isEmpty()){
-                headerAlgemeneBoodschap.setBoodschap(instellingController.getProperty("property.headerboodschaptext"));
-            }
-            component = headerAlgemeneBoodschap;
-        }
-
-
-
-
-
-        if(Boolean.parseBoolean(instellingController.getProperty("property.footerkorting"))){
-            FooterKorting footerKorting = new FooterKorting(component);
-            footerKorting.setKassaVerkoop(kassaVerkoop);
-            component = footerKorting;
-        }
-
-
-        if(Boolean.parseBoolean(instellingController.getProperty("property.footerBTW"))){
-            FooterBTW footerBTW = new FooterBTW(component);
-            footerBTW.setKassaVerkoop(kassaVerkoop);
-            component = footerBTW;
-        }
-
         if(Boolean.parseBoolean(instellingController.getProperty("property.footerboodschap"))){
             FooterAlgemeneBoodschap footerAlgemeneBoodschap = new FooterAlgemeneBoodschap(component);
-
+            component = footerAlgemeneBoodschap;
             if(!instellingController.getProperty("property.headerboodschaptext").trim().isEmpty()){
                 footerAlgemeneBoodschap.setBoodschap(instellingController.getProperty("property.footerboodschaptext"));
             }
-            component = footerAlgemeneBoodschap;
         }
-
-
-
-
+        if(Boolean.parseBoolean(instellingController.getProperty("property.footerkorting"))){
+            FooterKorting footerKorting = new FooterKorting(component);
+            component = footerKorting;
+        }
+        if(Boolean.parseBoolean(instellingController.getProperty("property.footerBTW"))){
+            FooterBTW footerBTW = new FooterBTW(component);
+            component = footerBTW;
+        }
         //component.kassabon();
         System.out.println(component.kassabon());
         return component.kassabon();

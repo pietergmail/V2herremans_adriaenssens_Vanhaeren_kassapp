@@ -10,8 +10,7 @@ public interface Observable {
     void addObserver(Observer observer);
     void removeObserver(Observer observer);
     void updateAddArtikel(Artikel artikel);
-    void updateRemoveArtikel(Artikel artikel);
-    void updateRemoveArtikel2(int i);
+    void updateRemoveArtikel(int i);
     void setOnHold();
     void setOffHold();
     void betaal();

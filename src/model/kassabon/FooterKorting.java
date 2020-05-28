@@ -23,8 +23,8 @@ public class FooterKorting extends KassabonDecorator {
         String bon = "";
         //bon += "***********************************" + "\n";
         bon += super.kassabon();
-        bon +=  "Prijs zonder korting:" + (kassaVerkoop.berekenPrijsMetKorting() - kassaVerkoop.berekenKorting()) + " €" + "\n";
-        bon +=  "Korting:" + kassaVerkoop.berekenKorting() + " €" + "\n";
+        bon +=  "Prijs zonder korting:" + kassaVerkoop.getTotalPrijs() + " €" + "\n";
+        bon +=  "Korting:" + (kassaVerkoop.berekenPrijsMetKorting() - kassaVerkoop.getTotalPrijs()) + " €" + "\n";
         //System.out.println(bon);
         return bon;
     }
