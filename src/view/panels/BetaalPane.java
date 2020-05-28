@@ -72,10 +72,6 @@ class BetaalPane extends GridPane {
         Button annuleer = new Button("Annuleer");
         annuleer.setOnAction(new AnnuleerHandler());
         this.add(annuleer, 3, 3, 1, 1);
-
-        Button open = new Button("Open");
-        open.setOnAction(new OpenHandler());
-        this.add(open, 4, 3, 1, 1);
     }
 
 
