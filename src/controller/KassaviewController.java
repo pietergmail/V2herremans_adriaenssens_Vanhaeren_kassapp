@@ -9,6 +9,7 @@ import model.*;
 import model.database.*;
 import model.kassabon.*;
 import model.korting.KortingEnum;
+import model.korting.KortingStrategy;
 import model.log.Log;
 import view.KassaView;
 import view.panels.KassaPane;
@@ -163,39 +164,6 @@ public class KassaviewController implements Observer {
         //uitbereiding nodig in labo 10
     }
 
-    public String kassabon(){
-        Component component = new KassabonComponent(kassaVerkoop);
-        if(Boolean.parseBoolean(instellingController.getProperty("property.headerboodschap"))){
-            HeaderAlgemeneBoodschap headerAlgemeneBoodschap = new HeaderAlgemeneBoodschap(component);
-            component = headerAlgemeneBoodschap;
-            if(!instellingController.getProperty("property.headerboodschaptext").trim().isEmpty()){
-                headerAlgemeneBoodschap.setBoodschap(instellingController.getProperty("property.headerboodschaptext"));
-            }
-        }
-        if(Boolean.parseBoolean(instellingController.getProperty("property.headerdatumtijd"))){
-            HeaderDatumTijd headerDatumTijd = new HeaderDatumTijd(component);
-            component = headerDatumTijd;
-        }
-        if(Boolean.parseBoolean(instellingController.getProperty("property.footerboodschap"))){
-            FooterAlgemeneBoodschap footerAlgemeneBoodschap = new FooterAlgemeneBoodschap(component);
-            component = footerAlgemeneBoodschap;
-            if(!instellingController.getProperty("property.headerboodschaptext").trim().isEmpty()){
-                footerAlgemeneBoodschap.setBoodschap(instellingController.getProperty("property.footerboodschaptext"));
-            }
-        }
-        if(Boolean.parseBoolean(instellingController.getProperty("property.footerkorting"))){
-            FooterKorting footerKorting = new FooterKorting(component);
-            component = footerKorting;
-        }
-        if(Boolean.parseBoolean(instellingController.getProperty("property.footerBTW"))){
-            FooterBTW footerBTW = new FooterBTW(component);
-            component = footerBTW;
-        }
-        //component.kassabon();
-        System.out.println(component.kassabon());
-        return component.kassabon();
-    }
-
     public void setTypeKorting(KortingEnum kortingEnum){ instellingController.setTypeKorting(kortingEnum);}
 
     public void annuleer(){
@@ -215,6 +183,33 @@ public class KassaviewController implements Observer {
     /*
     public void updateProductsInTable(){this.pane.update();}
     */
+
+    public KortingStrategy getKortingStrategy(){
+        return kassaVerkoop.getKorting();
+    }
+
+    public String generateRekening(Component kassabon){
+        if(Boolean.parseBoolean(getProperty("property.headerdatumtijd"))){
+            kassabon = new HeaderDatumTijd(kassabon);//werkt
+        }
+
+        if(Boolean.parseBoolean(getProperty("property.headerboodschap"))){
+            kassabon = new HeaderAlgemeneBoodschap(kassabon, getProperty("property.headerboodschaptext"));//werkt
+        }
+
+        if(Boolean.parseBoolean(getProperty("property.footerboodschap"))){
+            kassabon = new FooterAlgemeneBoodschap(kassabon, getProperty("property.footerboodschaptext"));//werkt
+        }
+
+        if(Boolean.parseBoolean(getProperty("property.footerkorting"))){
+            kassabon = new FooterKorting(kassabon);
+        }
+
+        if(Boolean.parseBoolean(getProperty("property.footerBTW"))){
+            kassabon = new FooterBTW(kassabon);
+        }
+        return kassabon.genereerKassabon();
+    }
 
     @Override
     public void update(KassaVerkoop verkoop) {

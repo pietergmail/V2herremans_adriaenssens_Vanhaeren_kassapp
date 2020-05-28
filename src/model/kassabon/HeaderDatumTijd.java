@@ -13,12 +13,12 @@ public class HeaderDatumTijd extends KassabonDecorator{
     }
 
     @Override
-    public String kassabon() {
+    public String genereerKassabon() {
         String datumtijd = "Datum: "  + LocalDate.now().getDayOfMonth() + "/" + LocalDate.now().getMonthValue() + "/" + LocalDate.now().getYear() + "   Tijd: " + LocalTime.now().getHour() + ":"+LocalTime.now().getMinute();
         String bon = "";
         bon += datumtijd + "\n";
         //bon += "***********************************" + "\n";
-        bon += super.kassabon();
+        bon += super.genereerKassabon();
         //System.out.println(bon);
         return bon;
     }

@@ -1,7 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="fixed buggy" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="decorator done met">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/bestanden/KassaApp.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/bestanden/KassaApp.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/bestanden/artikel.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/bestanden/artikel.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/controller/KassaviewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/controller/KassaviewController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/controller/KlantviewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/controller/KlantviewController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/model/ArtikelWinkelmand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/model/ArtikelWinkelmand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/model/KassaVerkoop.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/model/KassaVerkoop.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/model/Observable.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/model/Observable.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/model/kassabon/Component.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/model/kassabon/Component.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/model/kassabon/FooterAlgemeneBoodschap.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/model/kassabon/FooterAlgemeneBoodschap.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/model/kassabon/FooterKorting.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/model/kassabon/FooterKorting.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/model/kassabon/HeaderAlgemeneBoodschap.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/model/kassabon/HeaderAlgemeneBoodschap.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/model/kassabon/KassabonComponent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/model/kassabon/KassabonComponent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/model/kassabon/KassabonDecorator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/model/kassabon/KassabonDecorator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/view/panels/BetaalPane$AnnuleerHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/view/panels/BetaalPane$AnnuleerHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/view/panels/BetaalPane$BetaalHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/view/panels/BetaalPane$BetaalHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/view/panels/BetaalPane$CancelHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/view/panels/BetaalPane$CancelHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/view/panels/BetaalPane$OpenHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/view/panels/BetaalPane$OpenHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/view/panels/BetaalPane.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/view/panels/BetaalPane.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/view/panels/InstellingenPane.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/view/panels/InstellingenPane.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/view/panels/KassaPane$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/view/panels/KassaPane$1$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/view/panels/KassaPane$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/view/panels/KassaPane$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/view/panels/KassaPane.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/view/panels/KassaPane.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/view/panels/KlantPane.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/view/panels/KlantPane.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/view/panels/LogPane.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020/view/panels/LogPane.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bestanden/KassaApp.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/bestanden/KassaApp.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bestanden/artikel.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/bestanden/artikel.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/KassaviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/KassaviewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/kassabon/Component.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/kassabon/Component.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/kassabon/FooterAlgemeneBoodschap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/kassabon/FooterAlgemeneBoodschap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/kassabon/FooterBTW.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/kassabon/FooterBTW.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/kassabon/FooterKorting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/kassabon/FooterKorting.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/kassabon/HeaderAlgemeneBoodschap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/kassabon/HeaderAlgemeneBoodschap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/kassabon/HeaderDatumTijd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/kassabon/HeaderDatumTijd.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/kassabon/KassabonComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/kassabon/KassabonComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/kassabon/KassabonDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/kassabon/KassabonDecorator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/panels/BetaalPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/panels/BetaalPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/panels/ProductOverviewPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/panels/ProductOverviewPane.java" afterDir="false" />
+    </list>
     <list id="d25111a7-aa33-44a0-be4b-3e50add3f745" name="gitignore" comment="" />
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -96,18 +135,18 @@
         <counts>
           <entry key="class" value="1" />
           <entry key="dummy" value="14" />
-          <entry key="java" value="27018" />
-          <entry key="properties" value="87" />
+          <entry key="java" value="29455" />
+          <entry key="properties" value="107" />
           <entry key="properties~Stashed changes" value="1" />
-          <entry key="txt" value="1481" />
+          <entry key="txt" value="1508" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CLASS" value="1" />
-          <entry key="JAVA" value="27018" />
-          <entry key="PLAIN_TEXT" value="1496" />
-          <entry key="Properties" value="87" />
+          <entry key="JAVA" value="29455" />
+          <entry key="PLAIN_TEXT" value="1523" />
+          <entry key="Properties" value="107" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -118,10 +157,10 @@
           <entry key="class" value="3" />
           <entry key="css" value="4" />
           <entry key="iml" value="1" />
-          <entry key="java" value="409" />
-          <entry key="properties" value="17" />
+          <entry key="java" value="468" />
+          <entry key="properties" value="19" />
           <entry key="properties~Stashed changes" value="1" />
-          <entry key="txt" value="3" />
+          <entry key="txt" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -129,10 +168,10 @@
           <entry key="CLASS" value="3" />
           <entry key="CSS" value="4" />
           <entry key="IDEA_MODULE" value="1" />
-          <entry key="JAVA" value="409" />
+          <entry key="JAVA" value="468" />
           <entry key="Manifest" value="1" />
-          <entry key="PLAIN_TEXT" value="4" />
-          <entry key="Properties" value="17" />
+          <entry key="PLAIN_TEXT" value="6" />
+          <entry key="Properties" value="19" />
           <entry key="UML" value="2" />
         </counts>
       </usages-collector>
@@ -146,8 +185,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/view/panels/BetaalPane.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="524">
-              <caret line="112" selection-start-line="112" selection-end-line="112" />
+            <state relative-caret-position="594">
+              <caret line="127" column="42" lean-forward="true" selection-start-line="127" selection-start-column="42" selection-end-line="127" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -156,71 +195,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/model/KassaVerkoop.java">
+        <entry file="file://$PROJECT_DIR$/src/view/panels/ProductOverviewPane.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-118">
-              <caret line="76" column="31" lean-forward="true" selection-start-line="76" selection-start-column="31" selection-end-line="76" selection-end-column="31" />
-              <folding>
-                <element signature="e#1852#1853#0" expanded="true" />
-                <element signature="e#1900#1901#0" expanded="true" />
-                <element signature="e#1952#1953#0" expanded="true" />
-                <element signature="e#2001#2002#0" expanded="true" />
-                <element signature="e#2064#2065#0" expanded="true" />
-                <element signature="e#2108#2109#0" expanded="true" />
-                <element signature="e#3329#3330#0" expanded="true" />
-                <element signature="e#3371#3372#0" expanded="true" />
-                <element signature="e#3435#3436#0" expanded="true" />
-                <element signature="e#3474#3475#0" expanded="true" />
-                <element signature="e#3938#3939#0" expanded="true" />
-                <element signature="e#3973#3974#0" expanded="true" />
-                <element signature="e#4040#4041#0" expanded="true" />
-                <element signature="e#4073#4074#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/kassabon/FooterKorting.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/kassabon/HeaderAlgemeneBoodschap.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/kassabon/HeaderDatumTijd.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/kassabon/KassabonComponent.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="646">
-              <caret line="45" column="19" selection-start-line="45" selection-start-column="19" selection-end-line="45" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/kassabon/KassabonDecorator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
+            <state relative-caret-position="432">
+              <caret line="112" column="55" lean-forward="true" selection-start-line="112" selection-start-column="55" selection-end-line="112" selection-end-column="55" />
             </state>
           </provider>
         </entry>
@@ -228,7 +206,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/view/panels/InstellingenPane.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2320">
+            <state relative-caret-position="599">
               <caret line="196" column="43" selection-start-line="196" selection-start-column="43" selection-end-line="196" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -238,10 +216,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/view/panels/KassaPane.java">
+        <entry file="file://$PROJECT_DIR$/src/model/kassabon/FooterKorting.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="316" column="24" selection-start-line="316" selection-start-column="16" selection-end-line="316" selection-end-column="24" />
+            <state relative-caret-position="374">
+              <caret line="22" column="24" lean-forward="true" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -252,8 +230,66 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/kassabon/FooterBTW.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+            <state relative-caret-position="187">
+              <caret line="11" selection-start-line="11" selection-end-line="11" />
+              <folding>
+                <element signature="e#223#224#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/model/kassabon/KassabonComponent.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="307">
+              <caret line="63" column="22" lean-forward="true" selection-start-line="63" selection-start-column="22" selection-end-line="63" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/model/kassabon/KassabonDecorator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" column="46" selection-start-line="14" selection-start-column="46" selection-end-line="14" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/controller/KassaviewController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="545">
+              <caret line="210" column="43" selection-start-line="210" selection-start-column="43" selection-end-line="210" selection-end-column="43" />
+              <folding>
+                <element signature="e#3243#3244#0" expanded="true" />
+                <element signature="e#3303#3304#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/view/panels/KassaPane.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="293">
+              <caret line="319" lean-forward="true" selection-start-line="319" selection-end-line="319" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/view/panels/KlantPane.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="38">
+              <caret line="75" column="5" lean-forward="true" selection-start-line="75" selection-start-column="5" selection-end-line="75" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -313,15 +349,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/model/database/LoadsaveArtikeltekst.java" />
-        <option value="$PROJECT_DIR$/src/model/database/Excelplugin.java" />
-        <option value="$PROJECT_DIR$/src/model/database/LoadSaveArtikelExcel.java" />
-        <option value="$PROJECT_DIR$/src/model/database/LoadSaveArtikelExcel_old.java" />
-        <option value="$PROJECT_DIR$/src/model/database/ExcelPlugin.java" />
-        <option value="$PROJECT_DIR$/src/model/database/excelPluginAdapter.java" />
-        <option value="$PROJECT_DIR$/src/model/database/ExcelPluginAdapter.java" />
-        <option value="$PROJECT_DIR$/src/model/database/ExcelLoadSaveStrategy .java" />
-        <option value="$PROJECT_DIR$/src/controller/InstelllingController.java" />
         <option value="$PROJECT_DIR$/src/bestanden/KassaApp.properties~Stashed changes" />
         <option value="$PROJECT_DIR$/src/model/ModelException.java" />
         <option value="$PROJECT_DIR$/src/model/database/LoadSaveEnum.java" />
@@ -343,7 +370,6 @@
         <option value="$PROJECT_DIR$/src/view/KlantView.java" />
         <option value="$PROJECT_DIR$/src/model/database/LoadSaveContext.java" />
         <option value="$PROJECT_DIR$/src/view/panels/KassaPane.java" />
-        <option value="$PROJECT_DIR$/src/view/panels/BetaalPane.java" />
         <option value="$PROJECT_DIR$/src/view/KassaMainPane.java" />
         <option value="$PROJECT_DIR$/src/view/KassaView.java" />
         <option value="$PROJECT_DIR$/src/application/KassaAppMain.java" />
@@ -355,15 +381,25 @@
         <option value="$PROJECT_DIR$/src/model/Observable.java" />
         <option value="$PROJECT_DIR$/src/controller/ProductController.java" />
         <option value="$PROJECT_DIR$/src/model/Artikel.java" />
-        <option value="$PROJECT_DIR$/src/view/panels/ProductOverviewPane.java" />
         <option value="$PROJECT_DIR$/src/view/panels/KlantPane.java" />
-        <option value="$PROJECT_DIR$/src/controller/KassaviewController.java" />
         <option value="$PROJECT_DIR$/src/model/korting/KortingFactory.java" />
         <option value="$PROJECT_DIR$/src/view/panels/InstellingenPane.java" />
         <option value="$PROJECT_DIR$/src/model/korting/KortingEnum.java" />
         <option value="$PROJECT_DIR$/src/controller/InstellingController.java" />
         <option value="$PROJECT_DIR$/src/model/database/ExcelLoadSaveStrategy.java" />
         <option value="$PROJECT_DIR$/src/bestanden/KassaApp.properties" />
+        <option value="$PROJECT_DIR$/src/bestanden/artikel.txt" />
+        <option value="$PROJECT_DIR$/src/model/kassabon/Component.java" />
+        <option value="$PROJECT_DIR$/src/model/kassabon/FooterAlgemeneBoodschap.java" />
+        <option value="$PROJECT_DIR$/src/model/kassabon/FooterKorting.java" />
+        <option value="$PROJECT_DIR$/src/model/kassabon/HeaderAlgemeneBoodschap.java" />
+        <option value="$PROJECT_DIR$/src/model/kassabon/KassabonComponent.java" />
+        <option value="$PROJECT_DIR$/src/model/kassabon/HeaderDatumTijd.java" />
+        <option value="$PROJECT_DIR$/src/model/kassabon/FooterBTW.java" />
+        <option value="$PROJECT_DIR$/src/model/kassabon/KassabonDecorator.java" />
+        <option value="$PROJECT_DIR$/src/controller/KassaviewController.java" />
+        <option value="$PROJECT_DIR$/src/view/panels/BetaalPane.java" />
+        <option value="$PROJECT_DIR$/src/view/panels/ProductOverviewPane.java" />
       </list>
     </option>
   </component>
@@ -458,21 +494,7 @@
               <item name="v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="model" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020" type="b2602c69:ProjectViewProjectNode" />
-              <item name="v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
               <item name="kassabon" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020" type="b2602c69:ProjectViewProjectNode" />
-              <item name="v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-              <item name="korting" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="v2_Adriaenssens_Herremans_Sateur_Vanhaeren_KassaApp_2019_2020" type="b2602c69:ProjectViewProjectNode" />
@@ -510,7 +532,7 @@
     <property name="ToolWindowFind.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1590566058174" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1590677669563" />
     <property name="create.test.in.the.same.root" value="true" />
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../ExcelPlugin.jar!/" />
@@ -815,7 +837,7 @@
       <workItem from="1590478976256" duration="18362000" />
       <workItem from="1590560544737" duration="6106000" />
       <workItem from="1590568798991" duration="8351000" />
-      <workItem from="1590651381623" duration="2866000" />
+      <workItem from="1590651381623" duration="11622000" />
     </task>
     <task id="LOCAL-00001" summary="creation of project">
       <created>1587547923778</created>
@@ -1101,13 +1123,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="176190000" />
+    <option name="totallyTimeSpent" value="184946000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="974" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.32822758" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.28884026" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" />
       <window_info id="Designer" order="3" />
@@ -1116,8 +1138,8 @@
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32858709" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3713034" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.31106243" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.22015335" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.27929902" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -1232,13 +1254,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/model/korting/Drempelkorting.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="31" column="1" lean-forward="true" selection-start-line="31" selection-start-column="1" selection-end-line="31" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/database/LoadSaveFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -1291,20 +1306,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/KlantView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/KassaView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="47" selection-start-line="24" selection-start-column="47" selection-end-line="24" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_241/javafx-src.zip!/com/sun/glass/ui/View.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="196">
@@ -1337,13 +1338,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="494">
           <caret line="186" selection-start-line="186" selection-end-line="186" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_241/javafx-src.zip!/javafx/event/Event.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="198" selection-start-line="198" selection-end-line="198" />
         </state>
       </provider>
     </entry>
@@ -1404,27 +1398,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/KassaMainPane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="44" column="55" selection-start-line="44" selection-start-column="55" selection-end-line="44" selection-end-column="55" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/korting/KortingFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="256">
           <caret line="29" selection-start-line="29" selection-end-line="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/InstellingController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="120" selection-start-line="120" selection-end-line="120" />
         </state>
       </provider>
     </entry>
@@ -1450,6 +1427,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="261">
           <caret line="22" selection-start-line="22" selection-end-line="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1460,134 +1440,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/bestanden/KassaApp.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/KlantviewController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/panels/KlantPane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1187">
-          <caret line="75" column="5" lean-forward="true" selection-start-line="75" selection-start-column="5" selection-end-line="75" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/KassaviewController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="44" selection-start-line="44" selection-end-line="44" />
-          <folding>
-            <element signature="e#1947#2080#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/ProductController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="21" selection-start-line="21" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/panels/ProductOverviewPane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1445">
-          <caret line="110" column="89" selection-start-line="110" selection-start-column="89" selection-end-line="110" selection-end-column="89" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/kassabon/Component.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/kassabon/FooterAlgemeneBoodschap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/kassabon/FooterKorting.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/kassabon/HeaderAlgemeneBoodschap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/kassabon/HeaderDatumTijd.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/kassabon/KassabonComponent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="45" column="19" selection-start-line="45" selection-start-column="19" selection-end-line="45" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/kassabon/FooterBTW.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/kassabon/KassabonDecorator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/panels/InstellingenPane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2320">
-          <caret line="196" column="43" selection-start-line="196" selection-start-column="43" selection-end-line="196" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/panels/KassaPane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="316" column="24" selection-start-line="316" selection-start-column="16" selection-end-line="316" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/panels/BetaalPane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="524">
-          <caret line="112" selection-start-line="112" selection-end-line="112" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1614,6 +1470,195 @@
             <element signature="e#4040#4041#0" expanded="true" />
             <element signature="e#4073#4074#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/KassaView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="30" column="28" lean-forward="true" selection-start-line="30" selection-start-column="28" selection-end-line="30" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/InstellingController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="704">
+          <caret line="120" selection-start-line="120" selection-end-line="120" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/KlantviewController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_241/javafx-src.zip!/javafx/event/Event.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="499">
+          <caret line="197" selection-start-line="197" selection-end-line="197" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/bestanden/KassaApp.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="25" lean-forward="true" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/bestanden/artikel.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/kassabon/Component.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="11" lean-forward="true" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/kassabon/FooterAlgemeneBoodschap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="29" column="19" lean-forward="true" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/kassabon/HeaderDatumTijd.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="18" column="31" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
+          <folding>
+            <element signature="e#225#226#0" expanded="true" />
+            <element signature="e#257#258#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/kassabon/HeaderAlgemeneBoodschap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="27" column="37" selection-start-line="27" selection-start-column="37" selection-end-line="27" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/KlantView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/KassaMainPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="44" column="55" selection-start-line="44" selection-start-column="55" selection-end-line="44" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/panels/KassaPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="293">
+          <caret line="319" lean-forward="true" selection-start-line="319" selection-end-line="319" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/panels/KlantPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="75" column="5" lean-forward="true" selection-start-line="75" selection-start-column="5" selection-end-line="75" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/kassabon/FooterBTW.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="e#223#224#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/panels/InstellingenPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="599">
+          <caret line="196" column="43" selection-start-line="196" selection-start-column="43" selection-end-line="196" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/kassabon/KassabonComponent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="63" column="22" lean-forward="true" selection-start-line="63" selection-start-column="22" selection-end-line="63" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/kassabon/FooterKorting.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="24" lean-forward="true" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/kassabon/KassabonDecorator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="46" selection-start-line="14" selection-start-column="46" selection-end-line="14" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/KassaviewController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="545">
+          <caret line="210" column="43" selection-start-line="210" selection-start-column="43" selection-end-line="210" selection-end-column="43" />
+          <folding>
+            <element signature="e#3243#3244#0" expanded="true" />
+            <element signature="e#3303#3304#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/panels/BetaalPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="127" column="42" lean-forward="true" selection-start-line="127" selection-start-column="42" selection-end-line="127" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/panels/ProductOverviewPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="112" column="55" lean-forward="true" selection-start-line="112" selection-start-column="55" selection-end-line="112" selection-end-column="55" />
         </state>
       </provider>
     </entry>

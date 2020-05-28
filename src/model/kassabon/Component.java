@@ -5,5 +5,7 @@ package model.kassabon;
  */
 
 public interface Component {
-    String kassabon();
+    String genereerKassabon();
+    Double getTotaal();
+    Double getKorting();
 }

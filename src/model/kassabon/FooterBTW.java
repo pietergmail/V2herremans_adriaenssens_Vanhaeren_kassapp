@@ -7,23 +7,17 @@ import model.KassaVerkoop;
  */
 
 public class FooterBTW extends KassabonDecorator{
-    private KassaVerkoop kassaVerkoop;
     public FooterBTW(Component component) {
         super(component);
-        setKassaVerkoop(kassaVerkoop);
-    }
-
-    public void setKassaVerkoop(KassaVerkoop kassaVerkoop) {
-        this.kassaVerkoop = kassaVerkoop;
     }
 
     @Override
-    public String kassabon() {
+    public String genereerKassabon() {
         String bon = "";
         //bon += "***********************************" + "\n";
-        bon += super.kassabon();
-        bon +=  "Prijs zonder BTW: " + kassaVerkoop.getTotalPrijs()*0.94 + " €" + "\n";
-        bon +=  "BTW: " + kassaVerkoop.getTotalPrijs()*0.06 + " €" + "\n";
+        bon += super.genereerKassabon();
+        bon +=  "Prijs zonder BTW: " + super.getTotaal()*0.94 + " €" + "\n";
+        bon +=  "BTW: " + super.getTotaal()*0.06 + " €" + "\n";
         //System.out.println(bon);
         return bon;
     }

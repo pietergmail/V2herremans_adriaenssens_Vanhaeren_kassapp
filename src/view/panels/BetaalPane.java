@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import model.database.DatabaseException;
 import model.database.DomainException;
+import model.kassabon.*;
 
 import javax.swing.*;
 import java.sql.SQLOutput;
@@ -24,6 +25,7 @@ class BetaalPane extends GridPane {
     private KassaPane kassaPane;
     private KassaviewController controller;
     private TextField textfield;
+    private Component kassabon;
 
     BetaalPane(KassaviewController controller){
         this.controller = controller;
@@ -91,15 +93,21 @@ class BetaalPane extends GridPane {
             if(!textfield.getText().trim().isEmpty()){
                 System.out.println("betaling gestart");
                 try{
+                    double bedrag = Double.parseDouble(textfield.getText());
+
+                    kassabon = new KassabonComponent(controller.getArtikels(), controller.getKortingStrategy());
                     controller.betaal();
                     System.out.println("betaal");
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Information Dialog");
                     alert.setHeaderText(null);
-                   // alert.setContentText(controller.kassabon());
+
+
+                    System.out.println(controller.generateRekening(kassabon));
+                    alert.setContentText(controller.generateRekening(kassabon));
                     alert.showAndWait();
 
-                }catch (Exception e){
+                }catch (Exception e) {
                     System.out.println("fout bij betaling");
                     System.out.println(e.getMessage());
                 } catch (DatabaseException e) {

@@ -112,6 +112,8 @@ public class ProductOverviewPane extends GridPane {
 			columnVoorraad.setMinWidth(100);
 			columnVoorraad.setCellValueFactory(new PropertyValueFactory<Artikel, Integer>("Voorraad"));
 
+			table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
 			table.getColumns().addAll(columnCode, columnOmschrijving, columnGroep, columnPrijs, columnVoorraad);
 		}
 

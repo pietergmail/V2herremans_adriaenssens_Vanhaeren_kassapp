@@ -1,30 +1,30 @@
 package model.kassabon;
 
+import javafx.collections.ObservableList;
+import model.Artikel;
 import model.KassaVerkoop;
+
+import java.util.ArrayList;
 
 /**
  * @author Vanhaeren Corentin
  */
 
 public class FooterKorting extends KassabonDecorator {
-    private KassaVerkoop kassaVerkoop;
+    //private KassaVerkoop kassaVerkoop; this has no place here
 
     public FooterKorting(Component component) {
         super(component);
-        setKassaVerkoop(kassaVerkoop);
-    }
 
-    public void setKassaVerkoop(KassaVerkoop kassaVerkoop) {
-        this.kassaVerkoop = kassaVerkoop;
     }
 
     @Override
-    public String kassabon() {
+    public String genereerKassabon() {
         String bon = "";
         //bon += "***********************************" + "\n";
-        bon += super.kassabon();
-        bon +=  "Prijs zonder korting:" + kassaVerkoop.getTotalPrijs() + " €" + "\n";
-        bon +=  "Korting:" + (kassaVerkoop.berekenPrijsMetKorting() - kassaVerkoop.getTotalPrijs()) + " €" + "\n";
+        bon += super.genereerKassabon();
+        bon +=  "Prijs zonder korting:" + super.getTotaal() + " €" + "\n";
+        bon +=  "Korting:" + (super.getTotaal() - super.getKorting()) + " €" + "\n";
         //System.out.println(bon);
         return bon;
     }

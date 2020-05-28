@@ -4,15 +4,31 @@ package model.kassabon;
  * @author Vanhaeren Corentin
  */
 
-public abstract class KassabonDecorator implements Component {
+public class KassabonDecorator implements Component {
     private Component wrappee;
+    private Double totaal;
+    private Double korting;
 
     public KassabonDecorator(Component component){
         this.wrappee = component;
+        this.totaal = component.getTotaal();
+        this.korting = component.getKorting();
     }
 
     @Override
-    public String kassabon(){
-        return wrappee.kassabon();
-    };
+    public String genereerKassabon(){
+        return wrappee.genereerKassabon();
+    }
+
+    @Override
+    public Double getTotaal() {
+        return totaal;
+    }
+
+    @Override
+    public Double getKorting() {
+        return korting;
+    }
+
+    ;
 }

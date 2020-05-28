@@ -7,7 +7,7 @@ package model.kassabon;
 public class HeaderAlgemeneBoodschap extends KassabonDecorator{
     private String boodschap;
 
-    public HeaderAlgemeneBoodschap(Component component) {
+    public HeaderAlgemeneBoodschap(Component component, String boodschap) {
         super(component);
         setBoodschap(boodschap);
     }
@@ -21,11 +21,11 @@ public class HeaderAlgemeneBoodschap extends KassabonDecorator{
     }
 
     @Override
-    public String kassabon() {
+    public String genereerKassabon() {
         String bon = "";
         bon += boodschap + "\n";
         //bon += "***********************************" + "\n";
-        bon += super.kassabon();
+        bon += super.genereerKassabon();
         //System.out.println(bon);
         return bon;
     }
