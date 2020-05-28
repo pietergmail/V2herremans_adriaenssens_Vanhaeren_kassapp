@@ -81,6 +81,9 @@ public class KassaPane extends GridPane {
             if(this.kassaviewController.getWinkelmandje() != null){
                 System.out.println("afsluiten");
                 betaalPane = new BetaalPane(kassaviewController);
+                restoreonhold.setDisable(true);
+                onhold.setDisable(true);
+                AFSLUITEN.setDisable(true);
                 //moet uitgevoerd worden na dat betaalpane is uitgevoerd=
             }
         });
@@ -90,6 +93,7 @@ public class KassaPane extends GridPane {
         restoreonhold.setOnAction(e -> {
             //System.out.println("restore on hold");
             restoreonhold.setDisable(true);
+            onhold.setDisable(false);
             setRestoreonhold();
         });
     }
@@ -98,9 +102,24 @@ public class KassaPane extends GridPane {
         onhold.setOnAction(e -> {
             //System.out.println("onhold");
             restoreonhold.setDisable(false);
+            onhold.setDisable(true);
             setOnhold();
         });
     }
+
+    public void setAFSLUITENDisabled(boolean bool){
+        AFSLUITEN.setDisable(bool);
+    }
+
+    public void setRestoreonholdDisabled(boolean bool){
+        restoreonhold.setDisable(bool);
+    }
+
+    public void setOnholdDisabled(boolean bool){
+        onhold.setDisable(bool);
+    }
+
+
 
     private void setartikelcode(){
         //voor met enter event
@@ -274,13 +293,7 @@ public class KassaPane extends GridPane {
 
     }
 
-    public void enableVerwijderen(){
-        verwijderartikel.setDisable(false);
-    }
 
-    public void disableVerwijderen(){
-        verwijderartikel.setDisable(true);
-    }
 
     private void setOnhold() {
         kassaviewController.setOnHold();

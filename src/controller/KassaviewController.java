@@ -36,7 +36,7 @@ public class KassaviewController implements Observer {
     private LogController logController;
     //private LoadsaveArtikeltekst loadsaveArtikeltekst;
     private KassaPane pane;
-
+    private boolean isHoldEmpty = true;
 
     private Properties properties = new Properties();
     private String path = "src" + File.separator + "bestanden" + File.separator + "KassaApp.properties";
@@ -83,10 +83,12 @@ public class KassaviewController implements Observer {
 
     public void setOnHold() {
         kassaVerkoop.setOnHold();
+        isHoldEmpty = false;
     }
 
     public void setOffHold() {
         kassaVerkoop.setOffHold();
+        isHoldEmpty = true;
     }
 
     public void pasWinkelkarAan(){
@@ -161,6 +163,7 @@ public class KassaviewController implements Observer {
         pasVoorraadAan(kassaVerkoop.getWinkelmandje());
         productController.updateProducts();
         kassaVerkoop.betaal();
+        if(!isHoldEmpty) pane.setRestoreonholdDisabled(false);
         //uitbereiding nodig in labo 10
     }
 
@@ -168,6 +171,17 @@ public class KassaviewController implements Observer {
 
     public void annuleer(){
         kassaVerkoop.annuleer();
+    }
+
+    public void cancel(){
+        pane.setAFSLUITENDisabled(false);
+        if(isHoldEmpty){
+            pane.setRestoreonholdDisabled(true);
+            pane.setOnholdDisabled(false);
+        }else{
+            pane.setRestoreonholdDisabled(false);
+            pane.setOnholdDisabled(true);
+        }
     }
 
     public double getTeBetalen(){

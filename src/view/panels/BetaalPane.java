@@ -121,7 +121,6 @@ class BetaalPane extends GridPane {
         @Override
         public void handle(ActionEvent event){
             System.out.println("betaling gecanceled");
-            kassaPane.enableVerwijderen();
         }
     }
 
@@ -130,6 +129,7 @@ class BetaalPane extends GridPane {
         @Override
         public void handle(ActionEvent event){
             System.out.println("betaling gecanceled");
+            controller.cancel();
             stage.close();
         }
     }
