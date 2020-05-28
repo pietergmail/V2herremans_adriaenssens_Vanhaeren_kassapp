@@ -198,17 +198,12 @@ public class InstellingenPane extends GridPane{
             if(percentagetxt.getText().trim().isEmpty() || percentagetxt.getText() == null){
                 warningmessage += "Percentage veld moet ingevuld zijn. \n";
             }
-            if(bedargtxt.getText().trim().isEmpty() || bedargtxt.getText() == null){
-                warningmessage += "Bedarg veld moet ingevuld zijn. \n";
-            }
+
             if(!geldigpercentage() && !percentagetxt.getText().trim().isEmpty()){
                 warningmessage += "Het percentage moet tussen 0 en 100 liggen. \n";
                 percentagetxt.clear();
             }
-            if(!geldigbedarg() && !bedargtxt.getText().trim().isEmpty()){
-                warningmessage += "Het Bedarg moet groter zijn dan 0. \n";
-                bedargtxt.clear();
-            }
+
             if (headerboodschap.isSelected()) {
                 if(headerboodschaptxt.getText().trim().isEmpty() || headerboodschaptxt.getText() == null){
                     warningmessage += "Headerboodschap veld moet ingevuld zijn. \n";
@@ -577,7 +572,6 @@ public class InstellingenPane extends GridPane{
                 try {
                     p3.getChildren().removeAll(p4, p5, p6);
                     p3.getChildren().add(p4);
-                    p3.getChildren().add(p5);
                     percentagetxt.clear();
                     bedargtxt.clear();
                     groeptxt.clear();

@@ -12,6 +12,7 @@ import model.korting.KortingEnum;
 import model.korting.KortingStrategy;
 import model.log.Log;
 import view.KassaView;
+import view.panels.BetaalPane;
 import view.panels.KassaPane;
 import view.panels.LogPane;
 import view.panels.ProductOverviewPane;
@@ -36,6 +37,7 @@ public class KassaviewController implements Observer {
     private LogController logController;
     //private LoadsaveArtikeltekst loadsaveArtikeltekst;
     private KassaPane pane;
+    private BetaalPane betaalPane;
     private boolean isHoldEmpty = true;
 
     private Properties properties = new Properties();
@@ -58,13 +60,24 @@ public class KassaviewController implements Observer {
         return FXCollections.observableArrayList(kassaVerkoop.getWinkelmandje());
     }
 
+
+
     public void addProductKassaVerkoop(String code) {
         try{
             Artikel a = productController.getArtikel(code);
-            if (a.getVoorraad() == 0) throw new IllegalArgumentException("Niet in voorraad");
-            else{
+            int voorraad = a.getVoorraad();
+            int aantalInMand = 0;
+            for(Artikel artikel : kassaVerkoop.getWinkelmandje()){
+                if(artikel.getCode().equals(code)){
+                    aantalInMand++;
+                }
+            }
+            if(voorraad > aantalInMand){
                 kassaVerkoop.updateAddArtikel(a);
+
                 System.out.println("Kassaverkoop: " + a.getOmschrijving());
+            }else{
+                throw new IllegalArgumentException("Niet in voorraad");
             }
         }
         catch (Exception e){
@@ -73,8 +86,14 @@ public class KassaviewController implements Observer {
         }
     }
 
+
+
     public void removeProductKassaVerkoop(int index) {
         kassaVerkoop.updateRemoveArtikel(index);
+        if(kassaVerkoop.getWinkelmandje().isEmpty()){
+            pane.setOnholdDisabled(true);
+            pane.setAFSLUITENDisabled(true);
+        }
     }
 
     public ArrayList<Log> getLogs(){
@@ -231,6 +250,7 @@ public class KassaviewController implements Observer {
         pane.updateTotaalPrijsKorting(verkoop.berekenPrijsMetKorting());
         pane.setWinkelmandje(verkoop.getWinkelmandje());
         pane.updateTotaalKorting(verkoop.berekenKorting());
+      //  betaalPane.setEindPrijs(totalePrijsMetKorting());
     }
 
     public void pasVoorraadAan(ArrayList<Artikel> artikels) throws WriteException, BiffException, DatabaseException, DomainException, IOException {

@@ -24,5 +24,6 @@ public class KlantviewController implements Observer {
         pane.setTotalePrijs(verkoop.getTotalPrijs());
         pane.setKorting(verkoop.berekenKorting());
         pane.setBetalen(verkoop.berekenPrijsMetKorting());
+
     }
 }

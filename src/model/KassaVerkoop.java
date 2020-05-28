@@ -57,6 +57,7 @@ public class KassaVerkoop implements Observable {
 
     public void addArtikelWinkelkar(Artikel artikel){
         this.winkelmandlist.add(artikel);
+        System.out.println(winkelmandlist.toString());
     }
 
     public void removeArtikelWinkelkar(int index){

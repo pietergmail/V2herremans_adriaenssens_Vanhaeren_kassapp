@@ -3,6 +3,8 @@ package view.panels;
 
 
 import controller.KassaviewController;
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -19,15 +21,17 @@ import model.kassabon.*;
 import javax.swing.*;
 import java.sql.SQLOutput;
 
-class BetaalPane extends GridPane {
+public class BetaalPane extends GridPane {
 
     private Stage stage = new Stage();
     private KassaPane kassaPane;
     private KassaviewController controller;
     private TextField textfield;
     private Component kassabon;
+    private Label tekst;
 
-    BetaalPane(KassaviewController controller){
+
+ public BetaalPane(KassaviewController controller){
         this.controller = controller;
         stage.setTitle("BETALEN");
         this.setPrefHeight(200);
@@ -45,7 +49,7 @@ class BetaalPane extends GridPane {
     }
 
     private void Labels() {
-        Label tekst = new Label("Bedrag: " + controller.totalePrijsMetKorting());
+         tekst = new Label("Bedrag: " + controller.totalePrijsMetKorting());
         this.add(tekst, 1, 0, 1, 1);
 
         Label eindprijs = new Label();
@@ -86,10 +90,10 @@ class BetaalPane extends GridPane {
 
         @Override
         public void handle(ActionEvent event) {
-            if(!textfield.getText().trim().isEmpty()){
+            double bedrag = Double.parseDouble(textfield.getText());
+            if(!textfield.getText().trim().isEmpty() && bedrag > controller.totalePrijsMetKorting()){
                 System.out.println("betaling gestart");
                 try{
-                    double bedrag = Double.parseDouble(textfield.getText());
 
                     kassabon = new KassabonComponent(controller.getArtikels(), controller.getKortingStrategy());
                     controller.betaal();
@@ -112,17 +116,17 @@ class BetaalPane extends GridPane {
                     e.printStackTrace();
                 }
                 stage.close();
+            }else{
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("Niet genoeg geld");
+                alert.showAndWait();
             }
         }
     }
 
-    private class OpenHandler implements EventHandler<ActionEvent>{
 
-        @Override
-        public void handle(ActionEvent event){
-            System.out.println("betaling gecanceled");
-        }
-    }
 
     private class CancelHandler implements EventHandler<ActionEvent>{
 
@@ -148,4 +152,6 @@ class BetaalPane extends GridPane {
             stage.close();
         }
     }
+
+    public void setEindPrijs(double teBetalen){this.tekst.setText("Totale prijs met korting: " + teBetalen);}
 }
