@@ -52,9 +52,7 @@ public class KassaVerkoop implements Observable {
         for(Artikel artikel : getWinkelmandje()){
             if(artikel != null) total+=artikel.getPrijs();
         }
-        BigDecimal round = BigDecimal.valueOf(total);
-        round = round.setScale(2, RoundingMode.HALF_UP);
-        return round.doubleValue();
+        return total;
     }
 
     public void addArtikelWinkelkar(Artikel artikel){
@@ -190,9 +188,7 @@ public class KassaVerkoop implements Observable {
             return 0;
         }
         else {
-            BigDecimal round = BigDecimal.valueOf(initprijs - korting);
-            round = round.setScale(2, RoundingMode.HALF_UP);
-            return round.doubleValue();
+            return initprijs - korting;
         }
     }
 

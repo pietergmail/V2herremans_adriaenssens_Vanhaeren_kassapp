@@ -31,7 +31,7 @@ public class LogPane extends GridPane {
         p1.setPadding(new Insets(10));
 
 
-        Label label1 = new Label("Logs:");
+        Label label1 = new Label("Logs");
         label1.setFont(new Font("Arial", 20));
 
         this.setTable();
@@ -48,6 +48,7 @@ public class LogPane extends GridPane {
             TableRow<Log> row = new TableRow<>();
             return row;
         });
+        this.add(new Label("Logs:"), 0, 0, 1, 1);
         TableColumn<Log,LocalDate> columnDatum = new TableColumn<>("Datum");
         columnDatum.setMinWidth(140);
         columnDatum.setCellValueFactory(new PropertyValueFactory<>("datum"));
@@ -55,7 +56,7 @@ public class LogPane extends GridPane {
         columnTijdstip.setMinWidth(140);
         columnTijdstip.setCellValueFactory(new PropertyValueFactory<>("tijdtip"));
         TableColumn<Log,Double> columnTotaalBedrag = new TableColumn<>("Totaal");
-        columnTotaalBedrag.setMinWidth(140);
+        columnTotaalBedrag.setMinWidth(40);
         columnTotaalBedrag.setCellValueFactory(new PropertyValueFactory<>("totaalbedrag"));
         TableColumn<Log,Double> columnKorting = new TableColumn<>("Korting");
         columnKorting.setMinWidth(140);

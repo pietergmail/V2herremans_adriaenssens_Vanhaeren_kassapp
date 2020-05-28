@@ -225,7 +225,6 @@ public class KassaPane extends GridPane {
 
     private void addVerwijderButtonToTable(KassaviewController kassaviewController) {
         TableColumn<Artikel, Void> colBtn = new TableColumn("Verwijder");
-        colBtn.setMinWidth(50);
 
         Callback<TableColumn<Artikel, Void>, TableCell<Artikel, Void>> cellFactory = new Callback<TableColumn<Artikel, Void>, TableCell<Artikel, Void>>() {
             @Override
