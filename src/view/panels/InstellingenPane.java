@@ -124,10 +124,16 @@ public class InstellingenPane extends GridPane{
 
         //selecteerd huidige instelling bij opstart kassabon
         headerboodschap.setSelected(Boolean.parseBoolean(controller.getProperty("property.headerboodschap")));
+        headerboodschapbl = Boolean.parseBoolean(controller.getProperty("property.headerboodschap"));
         headerdatumtijd.setSelected(Boolean.parseBoolean(controller.getProperty("property.headerdatumtijd")));
+        headerdatumtijdbl = Boolean.parseBoolean(controller.getProperty("property.headerdatumtijd"));
         footerboodschap.setSelected(Boolean.parseBoolean(controller.getProperty("property.footerboodschap")));
+        footerboodschapbl = Boolean.parseBoolean(controller.getProperty("property.footerboodschap"));
         footerkorting.setSelected(Boolean.parseBoolean( controller.getProperty("property.footerkorting")));
+        footerkortingbl = Boolean.parseBoolean( controller.getProperty("property.footerkorting"));
         footerBTW.setSelected(Boolean.parseBoolean(controller.getProperty("property.footerBTW")));
+        footerBTWbl = Boolean.parseBoolean(controller.getProperty("property.footerBTW"));
+
 
         if (headerboodschap.isSelected()) {
             headerboodschaptxt.setText(controller.getProperty("property.headerboodschaptext"));
@@ -621,6 +627,7 @@ public class InstellingenPane extends GridPane{
                 //p8.getChildren().addAll(kassabon, header, headerboodschap, headerboodschaptxt, headerdatumtijd, footer, footerboodschap, footerboodschaptxt, footerBTW, footerkorting)
             }
             if (!headerboodschap.isSelected()) {
+                headerboodschaptxt.clear();
                 headerboodschapbl = false;
                 p10.getChildren().clear();
                 p10.getChildren().addAll(kassabon, header, headerboodschap, headerdatumtijd);
@@ -643,6 +650,7 @@ public class InstellingenPane extends GridPane{
                 p11.getChildren().addAll(footer, footerboodschap, footerboodschaptxt, footerBTW, footerkorting);
             }
             if (!footerboodschap.isSelected()) {
+                footerboodschaptxt.clear();
                 footerboodschapbl = false;
                 p11.getChildren().clear();
                 p11.getChildren().addAll(footer, footerboodschap, footerBTW, footerkorting);
