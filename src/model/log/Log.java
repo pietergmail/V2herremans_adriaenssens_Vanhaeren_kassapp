@@ -23,27 +23,27 @@ public class Log {
         setTebetalenbedrag(tebetalenbedrag);
     }
 
-    private LocalDate getDatum() {
+    public LocalDate getDatum() {
         return datum;
     }
 
-    private void setDatum(LocalDate datum) {
+    public void setDatum(LocalDate datum) {
         this.datum = datum;
     }
 
-    private LocalTime getTijdtip() {
+    public LocalTime getTijdtip() {
         return tijdtip;
     }
 
-    private void setTijdtip(LocalTime tijdtip) {
+    public void setTijdtip(LocalTime tijdtip) {
         this.tijdtip = tijdtip;
     }
 
-    private double getTotaalbedrag() {
+    public double getTotaalbedrag() {
         return totaalbedrag;
     }
 
-    private void setTotaalbedrag(double totaalbedrag) {
+    public void setTotaalbedrag(double totaalbedrag) {
         this.totaalbedrag = totaalbedrag;
     }
 
@@ -55,11 +55,11 @@ public class Log {
         this.korting = korting;
     }
 
-    private double getTebetalenbedrag() {
+    public double getTebetalenbedrag() {
         return tebetalenbedrag;
     }
 
-    private void setTebetalenbedrag(double tebetalenbedrag) {
+    public void setTebetalenbedrag(double tebetalenbedrag) {
         this.tebetalenbedrag = tebetalenbedrag;
     }
 
