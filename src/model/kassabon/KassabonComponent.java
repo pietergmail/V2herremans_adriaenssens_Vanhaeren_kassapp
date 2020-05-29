@@ -6,6 +6,8 @@ import model.ArtikelWinkelmand;
 import model.KassaVerkoop;
 import model.korting.KortingStrategy;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 /**
@@ -87,11 +89,15 @@ public class KassabonComponent implements Component {
 
     @Override
     public Double getTotaal() {
-        return totaal;
+        BigDecimal bd = new BigDecimal(Double.toString(totaal));
+        bd = bd.setScale(2, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 
     @Override
     public Double getKorting() {
-        return korting;
+        BigDecimal bd = new BigDecimal(Double.toString(korting));
+        bd = bd.setScale(2, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 }
