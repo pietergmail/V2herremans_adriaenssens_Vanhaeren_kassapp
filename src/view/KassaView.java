@@ -11,18 +11,17 @@ import model.database.DatabaseException;
 import java.io.IOException;
 
 public class KassaView {
-	private Stage stage = new Stage();
-	private KassaviewController kassaviewController;
-		
+
 	public KassaView(KassaviewController kassaviewController) throws DatabaseException, IOException, BiffException {
-		this.kassaviewController = kassaviewController;
+		Stage stage = new Stage();
 		stage.setTitle("KASSA VIEW");
 		stage.setResizable(false);		
 		stage.setX(20);
 		stage.setY(20);
 		Group root = new Group();
 		Scene scene = new Scene(root, 750, 500);
-		BorderPane borderPane = new KassaMainPane(this.kassaviewController);
+		BorderPane borderPane;
+		borderPane = new KassaMainPane(kassaviewController);
 		borderPane.prefHeightProperty().bind(scene.heightProperty());
 		borderPane.prefWidthProperty().bind(scene.widthProperty());
 		root.getChildren().add(borderPane);

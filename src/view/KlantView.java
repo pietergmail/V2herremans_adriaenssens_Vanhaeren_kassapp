@@ -7,9 +7,9 @@ import javafx.stage.Stage;
 import view.panels.KlantPane;
 
 public class KlantView {
-    private Stage stage = new Stage();
 
     public KlantView(KlantviewController controller){
+        Stage stage = new Stage();
         stage.setTitle("KLANT VIEW");
         stage.setResizable(false);
         stage.setX(775);

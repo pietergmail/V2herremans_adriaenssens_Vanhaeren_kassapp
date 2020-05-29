@@ -1,7 +1,5 @@
 package view;
-/**
- * @author Vanhaeren Corentin
- */
+
 
 import controller.KassaviewController;
 import controller.ProductController;
@@ -18,8 +16,12 @@ import view.panels.ProductOverviewPane;
 
 import java.io.IOException;
 
-public class KassaMainPane extends BorderPane {
-    public KassaMainPane(KassaviewController kassaviewController) throws DatabaseException, IOException, BiffException {
+/**
+ * @author Vanhaeren Corentin, Herremans Pieter
+ */
+
+class KassaMainPane extends BorderPane {
+    KassaMainPane(KassaviewController kassaviewController) throws DatabaseException, IOException, BiffException {
 
         KassaPane kassaPane = new KassaPane(kassaviewController);
         ProductOverviewPane artikelPane = new ProductOverviewPane(kassaviewController);
@@ -37,27 +39,5 @@ public class KassaMainPane extends BorderPane {
         tabPane.getTabs().add(instellingTab);
         tabPane.getTabs().add(logTab);
         this.setCenter(tabPane);
-
-        /*
-        TabPane tabPane = new TabPane();
-        KassaPane kassaPane = new KassaPane(kassaviewController);
-        Tab kassaTab = new Tab("Kassa", kassaPane);
-        ProductOverviewPane productOverviewPane = null;
-        try {
-            productOverviewPane = new ProductOverviewPane(kassaviewController);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (BiffException e) {
-            e.printStackTrace();
-        }
-        Tab artikelTab = new Tab("Artikelen",productOverviewPane);
-        InstellingenPane instellingenPane = new InstellingenPane(kassaviewController);
-        Tab instellingTab = new Tab("Instellingen",instellingenPane);
-        Tab logTab = new Tab("Log");
-        tabPane.getTabs().add(kassaTab);
-        tabPane.getTabs().add(artikelTab);
-        tabPane.getTabs().add(instellingTab);
-        tabPane.getTabs().add(logTab);
-        this.setCenter(tabPane);*/
     }
 }

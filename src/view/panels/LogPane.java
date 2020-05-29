@@ -3,16 +3,13 @@ package view.panels;
 import controller.KassaviewController;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import model.ArtikelWinkelmand;
 import model.log.Log;
 
 import java.time.LocalDate;
@@ -42,10 +39,7 @@ public class LogPane extends GridPane {
 
     private void setTable(){
         table = new TableView<>();
-        table.setRowFactory( t -> {
-            TableRow<Log> row = new TableRow<>();
-            return row;
-        });
+        table.setRowFactory( t -> new TableRow<>());
         this.add(new Label("Logs:"), 0, 0, 1, 1);
         TableColumn<Log,LocalDate> columnDatum = new TableColumn<>("Datum");
         columnDatum.setMinWidth(100);

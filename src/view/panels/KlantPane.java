@@ -4,25 +4,20 @@ import controller.KlantviewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import model.Artikel;
 import model.ArtikelWinkelmand;
-import model.Observable;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class KlantPane extends GridPane {
     private TableView<ArtikelWinkelmand> table;
-    private ObservableList<ArtikelWinkelmand> winkelmand;
 
     private Label totaleprijs;
     private Label korting;
@@ -30,19 +25,17 @@ public class KlantPane extends GridPane {
 
     public KlantPane(KlantviewController controller){
         controller.setPane(this);
-        this.winkelmand = FXCollections.observableArrayList(new ArrayList<>());
+        ObservableList<ArtikelWinkelmand> winkelmand = FXCollections.observableArrayList(new ArrayList<>());
         this.setTable();
 
-        //Setting labels
         this.setLTotalePrijs();
         this.setLKorting();
         this.setLBetalen();
 
-        table.setItems(this.winkelmand);
+        table.setItems(winkelmand);
 
         VBox p1 = new VBox(10);
         p1.getChildren().addAll(table, totaleprijs, korting, betalen);
-        //p1.setAlignment(Pos.CENTER);
         VBox.setMargin(table, new Insets(0, 0, 0, 10));
         VBox.setMargin(totaleprijs, new Insets(0, 0, 0, 126));
         VBox.setMargin(korting, new Insets(0, 0, 0, 111));
@@ -55,10 +48,7 @@ public class KlantPane extends GridPane {
 
     private void setTable(){
         table = new TableView<>();
-        table.setRowFactory( t -> {
-            TableRow<ArtikelWinkelmand> row = new TableRow<>();
-            return row;
-        });
+        table.setRowFactory( t -> new TableRow<>());
 
         TableColumn<ArtikelWinkelmand, String> columnOmschrijving = new TableColumn<>("Omschrijving");
         columnOmschrijving.setMinWidth(200);
@@ -91,7 +81,7 @@ public class KlantPane extends GridPane {
     }
 
     public void setWinkelmand(ArrayList<Artikel> winkelmand){
-        ObservableList test = FXCollections.observableArrayList(ArtikelWinkelmand.ArtikelVoorKlant(winkelmand));
+        FXCollections.observableArrayList(ArtikelWinkelmand.ArtikelVoorKlant(winkelmand));
         table.setItems(FXCollections.observableArrayList(ArtikelWinkelmand.ArtikelVoorKlant(winkelmand)));
         table.refresh();
     }
