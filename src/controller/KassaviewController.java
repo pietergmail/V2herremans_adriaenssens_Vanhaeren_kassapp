@@ -204,19 +204,11 @@ public class KassaviewController implements Observer {
         }
     }
 
-    public double getTeBetalen(){
-        return kassaVerkoop.berekenPrijsMetKorting();
-    }
-
     public ObservableList<Artikel> loadData() throws DatabaseException, IOException, BiffException {return productController.loadData();}
 
     public ArrayList<Artikel> loadinMemory() throws IOException, DatabaseException, BiffException {
         return productController.loadArtikels();
     }
-    //Replaced with update function
-    /*
-    public void updateProductsInTable(){this.pane.update();}
-    */
 
     public KortingStrategy getKortingStrategy(){
         return kassaVerkoop.getKorting();
@@ -258,7 +250,6 @@ public class KassaviewController implements Observer {
         if(this.betaalPane != null){
             betaalPane.setEindPrijs(verkoop.berekenPrijsMetKorting());
         }
-      //  betaalPane.setEindPrijs(totalePrijsMetKorting());
     }
 
     private void pasVoorraadAan(ArrayList<Artikel> artikels) throws WriteException, BiffException, DatabaseException, DomainException, IOException {

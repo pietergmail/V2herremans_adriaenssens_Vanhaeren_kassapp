@@ -89,8 +89,7 @@ public class BetaalPane extends GridPane {
 
         @Override
         public void handle(ActionEvent event) {
-            double bedrag = Double.parseDouble(textfield.getText());
-            if(!textfield.getText().trim().isEmpty() && bedrag >= controller.totalePrijsMetKorting()){
+            if(!textfield.getText().trim().isEmpty() && Double.parseDouble(textfield.getText()) >= controller.totalePrijsMetKorting()){
                 System.out.println("betaling gestart");
                 try{
 
