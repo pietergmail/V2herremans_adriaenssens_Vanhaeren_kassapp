@@ -13,13 +13,17 @@ public class ArtikelWinkelmand {
     private double prijs;
     private int aantal;
 
-    private ArtikelWinkelmand(String omschrijving, double prijs, int aantal){
+    public ArtikelWinkelmand(String omschrijving, double prijs, int aantal){
         setOmschrijving(omschrijving);
         setPrijs(prijs);
         setAantal(aantal);
     }
 
-    private void setOmschrijving(String omschrijving) {
+    public String getOmschrijving() {
+        return omschrijving;
+    }
+
+    public void setOmschrijving(String omschrijving) {
         this.omschrijving = omschrijving;
     }
 
@@ -31,11 +35,15 @@ public class ArtikelWinkelmand {
         this.prijs = prijs;
     }
 
-    private void setAantal(int aantal) {
+    public int getAantal() {
+        return aantal;
+    }
+
+    public void setAantal(int aantal) {
         this.aantal = aantal;
     }
 
-    private void addAantal(){this.aantal = aantal + 1;}
+    public void addAantal(){this.aantal = aantal + 1;}
 
     //necessary for the contains() function to work in ArtikelVoorKlant
     @Override

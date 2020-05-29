@@ -3,8 +3,6 @@ package view.panels;
 
 
 import controller.KassaviewController;
-import javafx.beans.Observable;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -17,9 +15,6 @@ import javafx.stage.Stage;
 import model.database.DatabaseException;
 import model.database.DomainException;
 import model.kassabon.*;
-
-import javax.swing.*;
-import java.sql.SQLOutput;
 
 public class BetaalPane extends GridPane {
 
