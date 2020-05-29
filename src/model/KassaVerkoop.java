@@ -11,6 +11,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 
+import static jdk.nashorn.internal.objects.NativeMath.round;
+
 /**
  * @author Pieter Herremans, Vanhaeren Corentin, Sateur Maxime
  */
