@@ -9,6 +9,7 @@ import model.korting.KortingStrategy;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import static jdk.nashorn.internal.objects.NativeMath.round;
@@ -131,8 +132,9 @@ public class KassaVerkoop implements Observable {
     public double berekenPrijsMetKorting(){
         double korting = berekenKorting();
         double initprijs = getTotalPrijs();
-
-        return initprijs - korting;
+        BigDecimal bd = new BigDecimal(Double.toString(initprijs - korting));
+        bd = bd.setScale(2, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 
     public double berekenKorting(){
