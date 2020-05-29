@@ -231,16 +231,16 @@ public class KassaviewController implements Observer {
             kassabon = new HeaderAlgemeneBoodschap(kassabon, getProperty("property.headerboodschaptext"));//werkt
         }
 
+        if(Boolean.parseBoolean(getProperty("property.footerboodschap"))){
+            kassabon = new FooterAlgemeneBoodschap(kassabon, getProperty("property.footerboodschaptext"));//werkt
+        }
+
         if(Boolean.parseBoolean(getProperty("property.footerkorting"))){
             kassabon = new FooterKorting(kassabon);
         }
 
         if(Boolean.parseBoolean(getProperty("property.footerBTW"))){
             kassabon = new FooterBTW(kassabon);
-        }
-
-        if(Boolean.parseBoolean(getProperty("property.footerboodschap"))){
-            kassabon = new FooterAlgemeneBoodschap(kassabon, getProperty("property.footerboodschaptext"));//werkt
         }
         return kassabon.genereerKassabon();
     }
