@@ -9,10 +9,8 @@ import model.korting.KortingStrategy;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import static jdk.nashorn.internal.objects.NativeMath.round;
 
 /**
  * @author Pieter Herremans, Vanhaeren Corentin, Sateur Maxime
@@ -50,7 +48,9 @@ public class KassaVerkoop implements Observable {
         for(Artikel artikel : getWinkelmandje()){
             if(artikel != null) total+=artikel.getPrijs();
         }
-        return total;
+        BigDecimal bd = new BigDecimal(Double.toString(total));
+        bd = bd.setScale(2, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 
     private void addArtikelWinkelkar(Artikel artikel){
@@ -86,13 +86,6 @@ public class KassaVerkoop implements Observable {
         notifyObservers();
     }
 
-    public void pasWinkelkarAan(){
-        winkelmand.clear();
-        winkelmandlist.clear();
-        winkelmand.addAll(winkelmandbetaal);
-        winkelmandlist.addAll(winkelmandbetaallist);
-    }
-
     @Override
     public void removeObserver(Observer observer) {
         observers.remove(observer);
@@ -123,10 +116,6 @@ public class KassaVerkoop implements Observable {
 
     public ArrayList<Artikel> getWinkelmandje(){
       return winkelmandlist;
-    }
-
-    public ArrayList<ArtikelWinkelmand> getWinkelmandMetAantal(){
-        return winkelmand;
     }
 
     public double berekenPrijsMetKorting(){
