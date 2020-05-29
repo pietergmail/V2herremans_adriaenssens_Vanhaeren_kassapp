@@ -101,5 +101,4 @@ public class KlantPane extends GridPane {
     public void setKorting(double korting){this.korting.setText("Totale Korting: " + korting);}
 
     public void setBetalen(double teBetalen){this.betalen.setText("Totale prijs met korting: " + teBetalen);}
-
 }

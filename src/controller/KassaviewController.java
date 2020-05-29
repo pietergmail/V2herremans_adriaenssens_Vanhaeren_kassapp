@@ -35,6 +35,7 @@ public class KassaviewController implements Observer {
     private LoadSaveContext loadSaveContext;
     private ProductController productController;
     private LogController logController;
+
     //private LoadsaveArtikeltekst loadsaveArtikeltekst;
     private KassaPane pane;
     private BetaalPane betaalPane;
@@ -244,12 +245,19 @@ public class KassaviewController implements Observer {
         return kassabon.genereerKassabon();
     }
 
+    public void setBetaalPane(KassaviewController kassaviewController){
+        this.betaalPane = new BetaalPane(kassaviewController);
+    }
+
     @Override
     public void update(KassaVerkoop verkoop) {
         pane.updateTotaalPrijs(verkoop.getTotalPrijs());
         pane.updateTotaalPrijsKorting(verkoop.berekenPrijsMetKorting());
         pane.setWinkelmandje(verkoop.getWinkelmandje());
         pane.updateTotaalKorting(verkoop.berekenKorting());
+        if(this.betaalPane != null){
+            betaalPane.setEindPrijs(verkoop.berekenPrijsMetKorting());
+        }
       //  betaalPane.setEindPrijs(totalePrijsMetKorting());
     }
 

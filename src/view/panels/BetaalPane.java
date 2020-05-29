@@ -27,7 +27,6 @@ public class BetaalPane extends GridPane {
     private KassaPane kassaPane;
     private KassaviewController controller;
     private TextField textfield;
-    private Component kassabon;
     private Label tekst;
 
 
@@ -49,7 +48,8 @@ public class BetaalPane extends GridPane {
     }
 
     private void Labels() {
-         tekst = new Label("Bedrag: " + controller.totalePrijsMetKorting());
+        tekst = new Label("Totale Prijs met korting: ");
+        setEindPrijs(controller.totalePrijsMetKorting());
         this.add(tekst, 1, 0, 1, 1);
 
         Label eindprijs = new Label();
@@ -95,7 +95,7 @@ public class BetaalPane extends GridPane {
                 System.out.println("betaling gestart");
                 try{
 
-                    kassabon = new KassabonComponent(controller.getArtikels(), controller.getKortingStrategy());
+                    Component kassabon = new KassabonComponent(controller.getArtikels(), controller.getKortingStrategy());
                     controller.betaal();
                     System.out.println("betaal");
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -110,9 +110,7 @@ public class BetaalPane extends GridPane {
                 }catch (Exception e) {
                     System.out.println("fout bij betaling");
                     System.out.println(e.getMessage());
-                } catch (DatabaseException e) {
-                    e.printStackTrace();
-                } catch (DomainException e) {
+                } catch (DatabaseException | DomainException e) {
                     e.printStackTrace();
                 }
                 stage.close();
@@ -153,5 +151,7 @@ public class BetaalPane extends GridPane {
         }
     }
 
-    public void setEindPrijs(double teBetalen){this.tekst.setText("Totale prijs met korting: " + teBetalen);}
+
+
+    public void setEindPrijs(double teBetalen){tekst.setText("Totale prijs met korting: " + teBetalen);}
 }

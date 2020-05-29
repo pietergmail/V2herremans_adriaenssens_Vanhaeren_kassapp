@@ -80,7 +80,7 @@ public class KassaPane extends GridPane {
         AFSLUITEN.setOnAction(e -> {
             if(this.kassaviewController.getWinkelmandje() != null){
                 System.out.println("afsluiten");
-                betaalPane = new BetaalPane(kassaviewController);
+                kassaviewController.setBetaalPane(kassaviewController);
                 restoreonhold.setDisable(true);
                 onhold.setDisable(true);
                 AFSLUITEN.setDisable(true);
@@ -206,25 +206,6 @@ public class KassaPane extends GridPane {
     }
 
 
-    //onodig, zit in de controller
-    /*public void voegProductToe(KassaviewController kassaviewController) throws DatabaseException {
-        try {
-            kassaviewController.addProductKassaVerkoop(kassaviewController.getArtikel(artikelcode.getText()));
-            table.getItems().clear();
-            //winkelmand.add(kassaviewController.getArtikel(artikelcode.getText()));
-            //table.getItems().addAll(winkelmand);
-            table.getItems().addAll(kassaviewController.getWinkelmandje());
-            updateTotaalPrijs(kassaviewController);
-        } catch (IllegalArgumentException e) {
-            new Alert(Alert.AlertType.WARNING, e.getMessage()).showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (BiffException e) {
-            e.printStackTrace();
-        }
-    }*/
-
-
     public void setWinkelmandje(ArrayList<Artikel> winkelmandje){
         this.winkelmandje = FXCollections.observableArrayList(winkelmandje);
         table.setItems(this.winkelmandje);
@@ -255,20 +236,6 @@ public class KassaPane extends GridPane {
                     {
                         btn.setOnAction((k) -> {
                             kassaviewController.removeProductKassaVerkoop(getIndex());
-                            //extra code om de tabel te refreshen
-
-                            /*table.getItems().clear();
-                            table.getItems().addAll(kassaviewController.getWinkelmandje());
-                            //table.getItems().clear();
-                            //winkelmand.remove(getTableView().getItems().get(getIndex()));
-                            //table.getItems().addAll(winkelmand);
-                            //table.getItems().addAll(kassaviewController.getWinkelmandje());
-                            //
-                            //table.getItems().remove(getIndex());
-                            //winkelmand = new ArrayList<>(table.getItems());
-                            //table.getItems().clear();
-                            //table.getItems().addAll(winkelmand);
-                            updateTotaalPrijs(kassaviewController);*/
                         });
                     }
 
