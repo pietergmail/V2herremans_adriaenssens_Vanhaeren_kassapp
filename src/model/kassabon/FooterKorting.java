@@ -24,7 +24,7 @@ public class FooterKorting extends KassabonDecorator {
         //bon += "***********************************" + "\n";
         bon += super.genereerKassabon();
         bon +=  "Prijs zonder korting:" + super.getTotaal() + " €" + "\n";
-        bon +=  "Korting:" + (super.getTotaal() - super.getKorting()) + " €" + "\n";
+        bon +=  "Korting:" + (super.getKorting()) + " €" + "\n";
         //System.out.println(bon);
         return bon;
     }

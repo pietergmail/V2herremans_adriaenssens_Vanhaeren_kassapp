@@ -261,7 +261,7 @@ public class KassaviewController implements Observer {
       //  betaalPane.setEindPrijs(totalePrijsMetKorting());
     }
 
-    public void pasVoorraadAan(ArrayList<Artikel> artikels) throws WriteException, BiffException, DatabaseException, DomainException, IOException {
+    private void pasVoorraadAan(ArrayList<Artikel> artikels) throws WriteException, BiffException, DatabaseException, DomainException, IOException {
         for(Artikel artikel : artikels){
             productController.pasVoorraadAan(artikel);
         }
