@@ -242,11 +242,11 @@ public class KassaPane extends GridPane {
     private void setTabel(){
         TableColumn<Artikel, String> columnOmschrijving = new TableColumn<>("Omschrijving");
         columnOmschrijving.setMinWidth(200);
-        columnOmschrijving.setCellValueFactory(new PropertyValueFactory<Artikel, String>("omschrijving"));
+        columnOmschrijving.setCellValueFactory(new PropertyValueFactory<>("omschrijving"));
 
         TableColumn<Artikel, Double> columnPrijs = new TableColumn<>("Prijs");
         columnPrijs.setMinWidth(100);
-        columnPrijs.setCellValueFactory(new PropertyValueFactory<Artikel, Double>("prijs"));
+        columnPrijs.setCellValueFactory(new PropertyValueFactory<>("prijs"));
 
         table.getColumns().addAll(columnOmschrijving, columnPrijs);
 

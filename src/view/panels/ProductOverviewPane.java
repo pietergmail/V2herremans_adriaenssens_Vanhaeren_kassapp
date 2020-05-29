@@ -43,23 +43,23 @@ public class ProductOverviewPane extends GridPane {
 
 			TableColumn<Artikel, String> columnCode = new TableColumn<>("Code");
 			columnCode.setMinWidth(50);
-			columnCode.setCellValueFactory(new PropertyValueFactory<Artikel, String>("code"));
+			columnCode.setCellValueFactory(new PropertyValueFactory<>("code"));
 
 			TableColumn<Artikel, String> columnOmschrijving = new TableColumn<>("Omschrijving");
 			columnOmschrijving.setMinWidth(150);
-			columnOmschrijving.setCellValueFactory(new PropertyValueFactory<Artikel, String>("omschrijving"));
+			columnOmschrijving.setCellValueFactory(new PropertyValueFactory<>("omschrijving"));
 
 			TableColumn<Artikel, String> columnGroep = new TableColumn<>("Groep");
 			columnGroep.setMinWidth(100);
-			columnGroep.setCellValueFactory(new PropertyValueFactory<Artikel, String>("groep"));
+			columnGroep.setCellValueFactory(new PropertyValueFactory<>("groep"));
 
 			TableColumn<Artikel, Double> columnPrijs = new TableColumn<>("Prijs");
 			columnPrijs.setMinWidth(100);
-			columnPrijs.setCellValueFactory(new PropertyValueFactory<Artikel, Double>("prijs"));
+			columnPrijs.setCellValueFactory(new PropertyValueFactory<>("prijs"));
 
 			TableColumn<Artikel, Integer> columnVoorraad = new TableColumn<>("Voorraad");
 			columnVoorraad.setMinWidth(100);
-			columnVoorraad.setCellValueFactory(new PropertyValueFactory<Artikel, Integer>("Voorraad"));
+			columnVoorraad.setCellValueFactory(new PropertyValueFactory<>("Voorraad"));
 
 			table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
