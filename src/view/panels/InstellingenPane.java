@@ -124,10 +124,16 @@ public class InstellingenPane extends GridPane{
 
         //selecteerd huidige instelling bij opstart kassabon
         headerboodschap.setSelected(Boolean.parseBoolean(controller.getProperty("property.headerboodschap")));
+        headerboodschapbl = Boolean.parseBoolean(controller.getProperty("property.headerboodschap"));
         headerdatumtijd.setSelected(Boolean.parseBoolean(controller.getProperty("property.headerdatumtijd")));
+        headerdatumtijdbl = Boolean.parseBoolean(controller.getProperty("property.headerdatumtijd"));
         footerboodschap.setSelected(Boolean.parseBoolean(controller.getProperty("property.footerboodschap")));
+        footerboodschapbl = Boolean.parseBoolean(controller.getProperty("property.footerboodschap"));
         footerkorting.setSelected(Boolean.parseBoolean( controller.getProperty("property.footerkorting")));
+        footerkortingbl = Boolean.parseBoolean( controller.getProperty("property.footerkorting"));
         footerBTW.setSelected(Boolean.parseBoolean(controller.getProperty("property.footerBTW")));
+        footerBTWbl = Boolean.parseBoolean(controller.getProperty("property.footerBTW"));
+
 
         if (headerboodschap.isSelected()) {
             headerboodschaptxt.setText(controller.getProperty("property.headerboodschaptext"));
@@ -500,6 +506,12 @@ public class InstellingenPane extends GridPane{
         footer = new Label("Footer:");
         footer.setFont(new Font(13));
         VBox.setMargin(footer, new Insets(0, 0, 0, 5));
+        footerkorting = new RadioButton("Footerkorting");
+        VBox.setMargin(footerkorting, new Insets(0, 0, 0, 10));
+
+        footerBTW = new RadioButton("FooterBTW");
+        VBox.setMargin(footerBTW, new Insets(0, 0, 0, 10));
+
         footerboodschap = new RadioButton("Footerboodschap");
         VBox.setMargin(footerboodschap, new Insets(0, 0, 0, 10));
         footerboodschaptxt = new TextField();
@@ -507,12 +519,9 @@ public class InstellingenPane extends GridPane{
         footerboodschaptxt.setPromptText("Vul footerboodschap in");
         footerboodschaptxt.setMaxWidth(200);
         VBox.setMargin(footerboodschaptxt, new Insets(0, 0, 0, 33));
-        footerBTW = new RadioButton("FooterBTW");
-        VBox.setMargin(footerBTW, new Insets(0, 0, 0, 10));
-        footerkorting = new RadioButton("Footerkorting");
-        VBox.setMargin(footerkorting, new Insets(0, 0, 0, 10));
 
-        p11.getChildren().addAll(footer, footerboodschap, footerBTW, footerkorting);
+
+        p11.getChildren().addAll(footer, footerkorting, footerBTW, footerboodschap);
         //
 
         //kassabon
@@ -615,6 +624,7 @@ public class InstellingenPane extends GridPane{
                 //p8.getChildren().addAll(kassabon, header, headerboodschap, headerboodschaptxt, headerdatumtijd, footer, footerboodschap, footerboodschaptxt, footerBTW, footerkorting)
             }
             if (!headerboodschap.isSelected()) {
+                headerboodschaptxt.clear();
                 headerboodschapbl = false;
                 p10.getChildren().clear();
                 p10.getChildren().addAll(kassabon, header, headerboodschap, headerdatumtijd);
@@ -634,12 +644,13 @@ public class InstellingenPane extends GridPane{
             if (footerboodschap.isSelected()) {
                 footerboodschapbl = true;
                 p11.getChildren().clear();
-                p11.getChildren().addAll(footer, footerboodschap, footerboodschaptxt, footerBTW, footerkorting);
+                p11.getChildren().addAll(footer, footerkorting, footerBTW, footerboodschap, footerboodschaptxt);
             }
             if (!footerboodschap.isSelected()) {
+                footerboodschaptxt.clear();
                 footerboodschapbl = false;
                 p11.getChildren().clear();
-                p11.getChildren().addAll(footer, footerboodschap, footerBTW, footerkorting);
+                p11.getChildren().addAll(footer, footerkorting, footerBTW, footerboodschap);
             }
         });
 

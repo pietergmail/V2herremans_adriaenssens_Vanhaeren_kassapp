@@ -42,22 +42,20 @@ public class ProductOverviewPane extends GridPane {
 		this.controller = controller;
 		controller.setProductPane(this);
 		//ObservableList<Artikel> producten = FXCollections.observableArrayList(new ArrayList<>(loadSaveContext.load()));
-		//VBox p1 = new VBox(5);
-		this.setPadding(new Insets(5, 5, 5, 5));
-        this.setVgap(5);
-        this.setHgap(5);
-        Label label1 = new Label("Producten:");
-       // label1.setPadding(new Insets(5,5,5,10));
-        label1.setFont(new Font("Arial", 20));
+		VBox p1 = new VBox(5);
+		Label label1 = new Label("Producten:");
+		label1.setPadding(new Insets(5,5,5,10));
+		label1.setFont(new Font("Arial", 20));
 
-        this.setTable();
+		this.setTable();
 
 		table.setItems(FXCollections.observableArrayList(controller.loadData()));
-		//VBox.setMargin(table, new Insets(0, 0, 0, 10));
-        this.getChildren().addAll(label1, table);
-		}
+		VBox.setMargin(table, new Insets(0, 0, 0, 10));
+		p1.getChildren().addAll(label1, table);
+		this.getChildren().addAll(p1);
+	}
 
-		//this.add(new Label("Producten:"), 0, 0, 1, 1);
+	//this.add(new Label("Producten:"), 0, 0, 1, 1);
 
 		/*table.setRowFactory(rij-> {
 			TableRow<Artikel> row = new TableRow<>();
@@ -67,7 +65,7 @@ public class ProductOverviewPane extends GridPane {
 
 		 */
 
-		//System.out.println(producten);
+	//System.out.println(producten);
 		/*LoadsaveArtikeltekst loadsaveArtikeltekst = new LoadsaveArtikeltekst();
 		try {
 			ArrayList<Object> list = loadsaveArtikeltekst.load();
@@ -85,40 +83,38 @@ public class ProductOverviewPane extends GridPane {
 
 		 */
 
-		private void setTable(){
-			table = new TableView<>();
-			table.setRowFactory( t -> {
-				TableRow<Artikel> row = new TableRow<>();
-				return row;
-			});
+	private void setTable(){
+		table = new TableView<>();
+		table.setRowFactory( t -> {
+			TableRow<Artikel> row = new TableRow<>();
+			return row;
+		});
 
-			TableColumn<Artikel, String> columnCode = new TableColumn<>("Code");
-			columnCode.setMinWidth(50);
-			columnCode.setCellValueFactory(new PropertyValueFactory<Artikel, String>("code"));
+		TableColumn<Artikel, String> columnCode = new TableColumn<>("Code");
+		columnCode.setMinWidth(50);
+		columnCode.setCellValueFactory(new PropertyValueFactory<Artikel, String>("code"));
 
-			TableColumn<Artikel, String> columnOmschrijving = new TableColumn<>("Omschrijving");
-			columnOmschrijving.setMinWidth(150);
-			columnOmschrijving.setCellValueFactory(new PropertyValueFactory<Artikel, String>("omschrijving"));
+		TableColumn<Artikel, String> columnOmschrijving = new TableColumn<>("Omschrijving");
+		columnOmschrijving.setMinWidth(150);
+		columnOmschrijving.setCellValueFactory(new PropertyValueFactory<Artikel, String>("omschrijving"));
 
-			TableColumn<Artikel, String> columnGroep = new TableColumn<>("Groep");
-			columnGroep.setMinWidth(100);
-			columnGroep.setCellValueFactory(new PropertyValueFactory<Artikel, String>("groep"));
+		TableColumn<Artikel, String> columnGroep = new TableColumn<>("Groep");
+		columnGroep.setMinWidth(100);
+		columnGroep.setCellValueFactory(new PropertyValueFactory<Artikel, String>("groep"));
 
-			TableColumn<Artikel, Double> columnPrijs = new TableColumn<>("Prijs");
-			columnPrijs.setMinWidth(100);
-			columnPrijs.setCellValueFactory(new PropertyValueFactory<Artikel, Double>("prijs"));
+		TableColumn<Artikel, Double> columnPrijs = new TableColumn<>("Prijs");
+		columnPrijs.setMinWidth(100);
+		columnPrijs.setCellValueFactory(new PropertyValueFactory<Artikel, Double>("prijs"));
 
-			TableColumn<Artikel, Integer> columnVoorraad = new TableColumn<>("Voorraad");
-			columnVoorraad.setMinWidth(100);
-			columnVoorraad.setCellValueFactory(new PropertyValueFactory<Artikel, Integer>("Voorraad"));
+		TableColumn<Artikel, Integer> columnVoorraad = new TableColumn<>("Voorraad");
+		columnVoorraad.setMinWidth(100);
+		columnVoorraad.setCellValueFactory(new PropertyValueFactory<Artikel, Integer>("Voorraad"));
 
-			table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		table.getColumns().addAll(columnCode, columnOmschrijving, columnGroep, columnPrijs, columnVoorraad);
+	}
 
-			table.getColumns().addAll(columnCode, columnOmschrijving, columnGroep, columnPrijs, columnVoorraad);
-		}
-
-		public void updateProducts() throws DatabaseException, IOException, BiffException {
-			table.setItems(FXCollections.observableArrayList(controller.loadData()));
-			table.refresh();
+	public void updateProducts() throws DatabaseException, IOException, BiffException {
+		table.setItems(FXCollections.observableArrayList(controller.loadData()));
+		table.refresh();
 	}
 }

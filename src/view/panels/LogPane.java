@@ -27,17 +27,19 @@ public class LogPane extends GridPane {
         this.kassaviewController = kassaviewController;
         kassaviewController.setLogPane(this);
 
-        this.setPadding(new Insets(5, 5, 5, 5));
-        this.setVgap(5);
-        this.setHgap(5);
+        VBox p1 = new VBox(10);
+        p1.setPadding(new Insets(10));
 
-        Label label1 = new Label("Logs");
+
+        Label label1 = new Label("Logs:");
         label1.setFont(new Font("Arial", 20));
 
         this.setTable();
         table.setItems(FXCollections.observableArrayList(kassaviewController.getLogs()));
 
-        this.getChildren().addAll(label1,table);
+        p1.getChildren().addAll(label1, table);
+
+        this.getChildren().addAll(p1);
     }
 
     private void setTable(){
@@ -46,21 +48,20 @@ public class LogPane extends GridPane {
             TableRow<Log> row = new TableRow<>();
             return row;
         });
-        this.add(new Label("Logs:"), 0, 0, 1, 1);
         TableColumn<Log,LocalDate> columnDatum = new TableColumn<>("Datum");
-        columnDatum.setMinWidth(100);
+        columnDatum.setMinWidth(140);
         columnDatum.setCellValueFactory(new PropertyValueFactory<>("datum"));
         TableColumn<Log,LocalTime> columnTijdstip = new TableColumn<>("Tijdtip");
-        columnTijdstip.setMinWidth(100);
+        columnTijdstip.setMinWidth(140);
         columnTijdstip.setCellValueFactory(new PropertyValueFactory<>("tijdtip"));
         TableColumn<Log,Double> columnTotaalBedrag = new TableColumn<>("Totaal");
-        columnTotaalBedrag.setMinWidth(50);
+        columnTotaalBedrag.setMinWidth(140);
         columnTotaalBedrag.setCellValueFactory(new PropertyValueFactory<>("totaalbedrag"));
         TableColumn<Log,Double> columnKorting = new TableColumn<>("Korting");
-        columnKorting.setMinWidth(50);
+        columnKorting.setMinWidth(140);
         columnKorting.setCellValueFactory(new PropertyValueFactory<>("korting"));
         TableColumn<Log,Double> columnTeBetalenMetKorting = new TableColumn<>("Betaald");
-        columnTeBetalenMetKorting.setMinWidth(50);
+        columnTeBetalenMetKorting.setMinWidth(140);
         columnTeBetalenMetKorting.setCellValueFactory(new PropertyValueFactory<>("tebetalenbedrag"));
 
         table.getColumns().addAll(columnDatum,columnTijdstip,columnTotaalBedrag,columnKorting,columnTeBetalenMetKorting);
