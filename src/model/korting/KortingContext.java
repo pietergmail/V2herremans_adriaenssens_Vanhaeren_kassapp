@@ -2,9 +2,6 @@ package model.korting;
 
 import javafx.collections.ObservableList;
 import model.Artikel;
-import model.database.StrategyLoadSave;
-
-import java.util.ArrayList;
 
 /**
  * @author Vanhaeren Corentin

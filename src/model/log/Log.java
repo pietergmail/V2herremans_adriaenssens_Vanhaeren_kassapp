@@ -1,9 +1,6 @@
 package model.log;
 
-import model.database.LoadSaveEnum;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 /**
@@ -26,27 +23,27 @@ public class Log {
         setTebetalenbedrag(tebetalenbedrag);
     }
 
-    public LocalDate getDatum() {
+    private LocalDate getDatum() {
         return datum;
     }
 
-    public void setDatum(LocalDate datum) {
+    private void setDatum(LocalDate datum) {
         this.datum = datum;
     }
 
-    public LocalTime getTijdtip() {
+    private LocalTime getTijdtip() {
         return tijdtip;
     }
 
-    public void setTijdtip(LocalTime tijdtip) {
+    private void setTijdtip(LocalTime tijdtip) {
         this.tijdtip = tijdtip;
     }
 
-    public double getTotaalbedrag() {
+    private double getTotaalbedrag() {
         return totaalbedrag;
     }
 
-    public void setTotaalbedrag(double totaalbedrag) {
+    private void setTotaalbedrag(double totaalbedrag) {
         this.totaalbedrag = totaalbedrag;
     }
 
@@ -58,16 +55,15 @@ public class Log {
         this.korting = korting;
     }
 
-    public double getTebetalenbedrag() {
+    private double getTebetalenbedrag() {
         return tebetalenbedrag;
     }
 
-    public void setTebetalenbedrag(double tebetalenbedrag) {
+    private void setTebetalenbedrag(double tebetalenbedrag) {
         this.tebetalenbedrag = tebetalenbedrag;
     }
 
     public String toString(){
-        String x = getDatum() + " " + getTijdtip() + " " + getTotaalbedrag() + " " + getKorting() + " " + getTebetalenbedrag();
-        return x;
+        return getDatum() + " " + getTijdtip() + " " + getTotaalbedrag() + " " + getKorting() + " " + getTebetalenbedrag();
     }
 }

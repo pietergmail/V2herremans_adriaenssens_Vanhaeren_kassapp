@@ -1,6 +1,5 @@
 package model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -14,17 +13,13 @@ public class ArtikelWinkelmand {
     private double prijs;
     private int aantal;
 
-    public ArtikelWinkelmand(String omschrijving, double prijs, int aantal){
+    private ArtikelWinkelmand(String omschrijving, double prijs, int aantal){
         setOmschrijving(omschrijving);
         setPrijs(prijs);
         setAantal(aantal);
     }
 
-    public String getOmschrijving() {
-        return omschrijving;
-    }
-
-    public void setOmschrijving(String omschrijving) {
+    private void setOmschrijving(String omschrijving) {
         this.omschrijving = omschrijving;
     }
 
@@ -36,15 +31,11 @@ public class ArtikelWinkelmand {
         this.prijs = prijs;
     }
 
-    public int getAantal() {
-        return aantal;
-    }
-
-    public void setAantal(int aantal) {
+    private void setAantal(int aantal) {
         this.aantal = aantal;
     }
 
-    public void addAantal(){this.aantal = aantal + 1;}
+    private void addAantal(){this.aantal = aantal + 1;}
 
     //necessary for the contains() function to work in ArtikelVoorKlant
     @Override

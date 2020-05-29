@@ -36,7 +36,7 @@ public class LoadsaveArtikeltekst implements StrategyLoadSave{
     }
 
     @Override
-    public void save(ArrayList<Artikel> artikelen) throws IOException, DomainException {
+    public void save(ArrayList<Artikel> artikelen) throws  DomainException {
         String path = "src" + File.separator + "bestanden" + File.separator + "artikel.txt";
         File file = new File(path);
         try {

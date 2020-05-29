@@ -1,7 +1,4 @@
 package model.korting;
-
-import model.ModelException;
-
 import java.util.ArrayList;
 
 /**

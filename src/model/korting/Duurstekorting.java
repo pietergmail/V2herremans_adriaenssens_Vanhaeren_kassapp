@@ -3,8 +3,6 @@ package model.korting;
 import javafx.collections.ObservableList;
 import model.Artikel;
 
-import java.util.ArrayList;
-
 /**
  * @author Pieter Herremans, Vanhaeren Corentin
  */
@@ -23,7 +21,7 @@ public class Duurstekorting implements KortingStrategy {
         return artikel.getPrijs() * percentage;
     }
 
-    public Duurstekorting(double percentage){
+    Duurstekorting(double percentage){
         this.percentage = percentage/100;
     }
 

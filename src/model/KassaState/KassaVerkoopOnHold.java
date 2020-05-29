@@ -9,7 +9,7 @@ import model.KassaVerkoop;
 public class KassaVerkoopOnHold implements KassaVerkoopState {
     private KassaVerkoop kassaVerkoop;
 
-    public KassaVerkoopOnHold(KassaVerkoop kassaVerkoop) {
+    KassaVerkoopOnHold(KassaVerkoop kassaVerkoop) {
         this.kassaVerkoop = kassaVerkoop;
     }
 

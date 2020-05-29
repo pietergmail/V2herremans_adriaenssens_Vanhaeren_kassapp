@@ -3,8 +3,6 @@ package model.korting;
 import javafx.collections.ObservableList;
 import model.Artikel;
 
-import java.util.ArrayList;
-
 /**
  * @author Pieter Herremans, Vanhaeren Corentin
  */
@@ -24,7 +22,7 @@ public class Groepkorting implements KortingStrategy{
         return korting;
     }
 
-    public Groepkorting(Double percentage, String groep){
+    Groepkorting(Double percentage, String groep){
         this.percentage = percentage/100;
         this.groep = groep;
     }

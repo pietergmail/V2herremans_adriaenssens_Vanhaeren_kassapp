@@ -9,7 +9,7 @@ public class KassabonDecorator implements Component {
     private Double totaal;
     private Double korting;
 
-    public KassabonDecorator(Component component){
+    KassabonDecorator(Component component){
         this.wrappee = component;
         this.totaal = component.getTotaal();
         this.korting = component.getKorting();

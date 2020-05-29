@@ -23,10 +23,8 @@ public class FooterAlgemeneBoodschap extends KassabonDecorator {
     @Override
     public String genereerKassabon() {
         String bon = "";
-        //bon += "***********************************" + "\n";
         bon += super.genereerKassabon();
         bon += boodschap + "\n";
-        //System.out.println(bon);
         return bon;
     }
 }

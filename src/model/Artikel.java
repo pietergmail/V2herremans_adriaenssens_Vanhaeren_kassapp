@@ -20,9 +20,7 @@ public class Artikel implements Comparable{
         this.setVoorraad(voorraad);
     }
 
-    public void verminderVoorraad(){this.verminderVoorraad(1);}
-
-    private void verminderVoorraad(int aantal) {this.setVoorraad(this.getVoorraad() - aantal); }
+    public void verminderVoorraad(){this.setVoorraad(this.getVoorraad() - 1);}
 
     @Override
     public int compareTo(Object o) {

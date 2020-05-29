@@ -15,19 +15,17 @@ import java.util.ArrayList;
 public class KassabonComponent implements Component {
     //private KassaVerkoop kassaVerkoop; corentin wtf is dees, ge moet binnen dit stuk van het model niet in de kassaverkoop zitten, geweet toch hoe mvc werkt?
     private ObservableList<Artikel> artikelObservableList;
-    private KortingStrategy kortingStrategy;
     private double totaal;
     private double korting;
 
     public KassabonComponent(ObservableList<Artikel> artikelObservableList, KortingStrategy kortingStrategy){
-        this.kortingStrategy = kortingStrategy;
         this.artikelObservableList = artikelObservableList;
 
         for (Artikel a: artikelObservableList) {
             totaal += a.getPrijs();
         }
 
-        this.korting = this.kortingStrategy.getKorting(artikelObservableList);
+        this.korting = kortingStrategy.getKorting(artikelObservableList);
 
     }
     @Override

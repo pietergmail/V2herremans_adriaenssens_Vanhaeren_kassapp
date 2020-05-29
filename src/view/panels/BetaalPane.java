@@ -24,7 +24,6 @@ import java.sql.SQLOutput;
 public class BetaalPane extends GridPane {
 
     private Stage stage = new Stage();
-    private KassaPane kassaPane;
     private KassaviewController controller;
     private TextField textfield;
     private Label tekst;

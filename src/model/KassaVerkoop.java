@@ -5,7 +5,6 @@ import javafx.collections.FXCollections;
 import model.KassaState.KassaVerkoopDone;
 import model.KassaState.KassaVerkoopNew;
 import model.KassaState.KassaVerkoopState;
-import model.korting.KortingContext;
 import model.korting.KortingStrategy;
 
 import java.math.BigDecimal;
@@ -43,10 +42,6 @@ public class KassaVerkoop implements Observable {
         System.out.println("Kortingstrategie: " + korting.toString());
     }
 
-    public void setWinkelmandje(ArrayList<Artikel> winkelmandje) {
-        getWinkelmandje();
-    }
-
     public double getTotalPrijs(){
         double total = 0;
         for(Artikel artikel : getWinkelmandje()){
@@ -55,12 +50,12 @@ public class KassaVerkoop implements Observable {
         return total;
     }
 
-    public void addArtikelWinkelkar(Artikel artikel){
+    private void addArtikelWinkelkar(Artikel artikel){
         this.winkelmandlist.add(artikel);
         System.out.println(winkelmandlist.toString());
     }
 
-    public void removeArtikelWinkelkar(int index){
+    private void removeArtikelWinkelkar(int index){
         this.winkelmandlist.remove(index);
     }
 
@@ -95,20 +90,6 @@ public class KassaVerkoop implements Observable {
         winkelmandlist.addAll(winkelmandbetaallist);
     }
 
-
-
-    /*public boolean artikelAlreadyAdded(Artikel artikel){
-        boolean containsArtikel = false;
-        for (ArtikelWinkelmand a: winkelmand) {
-            if (a.getCode().equals(artikel.getCode())){//code van a is null en geeft een error
-                containsArtikel = true;
-            }
-        }
-        //System.out.println(containsArtikel + " bevat?");
-        return containsArtikel;
-    }*/
-
-
     @Override
     public void removeObserver(Observer observer) {
         observers.remove(observer);
@@ -131,7 +112,7 @@ public class KassaVerkoop implements Observable {
         notifyObservers();
     }
 
-    public void notifyObservers() {
+    private void notifyObservers() {
         for (Observer observer : this.observers) {
             observer.update(this);
         }

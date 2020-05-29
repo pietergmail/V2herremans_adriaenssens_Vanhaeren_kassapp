@@ -25,7 +25,7 @@ public class Drempelkorting implements KortingStrategy {
         }else return 0;
     }
 
-    public Drempelkorting(double percentage, double kost){
+    Drempelkorting(double percentage, double kost){
         this.percentage = percentage/100;
         this.kost = kost;
     }

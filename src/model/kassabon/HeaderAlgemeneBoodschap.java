@@ -16,7 +16,7 @@ public class HeaderAlgemeneBoodschap extends KassabonDecorator{
         return boodschap;
     }
 
-    public void setBoodschap(String boodschap) {
+    private void setBoodschap(String boodschap) {
         this.boodschap = boodschap;
     }
 
