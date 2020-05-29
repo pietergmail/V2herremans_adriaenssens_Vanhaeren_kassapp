@@ -64,7 +64,7 @@ public class KassabonComponent implements Component {
             kassabon += xyz;
         }
         kassabon += "***********************************" + "\n";
-        kassabon += "Betaald (inclusief korting) : " + (totaal - korting) + " €" + "\n";
+        kassabon += "Betaald (inclusief korting) : " + (this.getTotaal() - this.getKorting()) + " €" + "\n";
         //System.out.println(kassabon);
         return kassabon;
     }
