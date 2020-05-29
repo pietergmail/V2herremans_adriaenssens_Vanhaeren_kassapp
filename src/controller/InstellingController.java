@@ -24,13 +24,7 @@ public class InstellingController {
 
     public InstellingController() {
         this.properties = new Properties();
-        File file = new File(path);
         setKortingStrategy();
-    }
-
-
-    public KortingContext getKortingContext() {
-        return kortingContext;
     }
 
     void setProperty(String key, String value){
@@ -53,12 +47,6 @@ public class InstellingController {
         return value;
     }
 
-    void setLoadSaveStrategy(LoadSaveEnum loadSaveEnum){
-        if(loadSaveEnum == null) throw new IllegalArgumentException("De loadsavekeuze is leeg");
-        System.out.println("Loadsavestrategy: " + loadSaveEnum.toString());
-        this.setProperty("property.filetype", loadSaveEnum.toString());
-    }
-
     StrategyLoadSave getLoadSaveStrategy(){
         LoadSaveEnum loadSaveEnum = LoadSaveEnum.valueOf(getProperty("property.filetype"));
         if (loadSaveEnum.equals(LoadSaveEnum.EXCEL)){
@@ -73,13 +61,13 @@ public class InstellingController {
         }
     }
 
-    public void setTypeKorting(KortingEnum kortingEnum){
+    void setTypeKorting(KortingEnum kortingEnum){
         if(kortingEnum == null) throw new IllegalArgumentException("Kortingenum is empty.");
         System.out.println("typekorting: " + kortingEnum);
         this.setProperty("property.typekorting", kortingEnum.toString());
     }
 
-    void setKortingStrategy(){
+    private void setKortingStrategy(){
         String key = "property.typekorting";
         ArrayList<Object> t = new ArrayList<>();
         //slot1: percentage korting, slot2: drempelbedrag korting, slot3: groep korting

@@ -40,17 +40,8 @@ public class ProductController {
         this.pane = pane;
     }
 
-    public ProductOverviewPane getPane() {
-        return pane;
-    }
-
-    public void setPane(ProductOverviewPane pane) {
-        this.pane = pane;
-    }
-
-    public void pasVoorraadAan(Artikel artikel) throws IOException, DatabaseException, BiffException, DomainException, WriteException {
-        ArrayList<Artikel> artikels = new ArrayList<>();
-        artikels.addAll(loadArtikels());
+    void pasVoorraadAan(Artikel artikel) throws IOException, DatabaseException, BiffException, DomainException, WriteException {
+        ArrayList<Artikel> artikels = new ArrayList<>(loadArtikels());
 
         for(Artikel a : artikels){
             if(a.getCode().equals(artikel.getCode())){
@@ -61,13 +52,7 @@ public class ProductController {
         loadSaveContext.save(artikels);
     }
 
-    public void updateProducts() throws DatabaseException, IOException, BiffException {
+    void updateProducts() throws DatabaseException, IOException, BiffException {
         pane.updateProducts();
     }
-
-    //unnecesary
-    /*
-    public void updateProductsInTabel(){
-        this.pane.updateProducts();
-    }*/
 }

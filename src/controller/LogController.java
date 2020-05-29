@@ -14,24 +14,16 @@ public class LogController {
 
     }
 
-    public void addLog(Log log){
+    void addLog(Log log){
         logs.add(log);
         logPane.updateLogTable();
     }
 
-    public ArrayList<Log> getLogs() {
+    ArrayList<Log> getLogs() {
         return logs;
     }
 
-    public void setLogs(ArrayList<Log> logs) {
-        this.logs = logs;
-    }
-
-    public LogPane getLogPane() {
-        return logPane;
-    }
-
-    public void setLogPane(LogPane logPane) {
+    void setLogPane(LogPane logPane) {
         this.logPane = logPane;
     }
 }

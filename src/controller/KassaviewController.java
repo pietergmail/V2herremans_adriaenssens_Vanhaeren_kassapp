@@ -11,7 +11,6 @@ import model.kassabon.*;
 import model.korting.KortingEnum;
 import model.korting.KortingStrategy;
 import model.log.Log;
-import view.KassaView;
 import view.panels.BetaalPane;
 import view.panels.KassaPane;
 import view.panels.LogPane;
@@ -19,7 +18,6 @@ import view.panels.ProductOverviewPane;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Properties;
 
 /**
  * @author Vanhaeren Corentin, Sateur Maxime
@@ -28,31 +26,22 @@ import java.util.Properties;
 
 public class KassaviewController implements Observer {
 
-    private KassaView kassaView;
     private KassaVerkoop kassaVerkoop;
-    private ArtikelWinkelmand artikelWinkelmand;
     private InstellingController instellingController;
-    private LoadSaveContext loadSaveContext;
     private ProductController productController;
     private LogController logController;
 
-    //private LoadsaveArtikeltekst loadsaveArtikeltekst;
     private KassaPane pane;
     private BetaalPane betaalPane;
     private boolean isHoldEmpty = true;
 
-    private Properties properties = new Properties();
-    private String path = "src" + File.separator + "bestanden" + File.separator + "KassaApp.properties";
-
-    public void setloadsaveStrategy(LoadSaveEnum loadSaveEnum){instellingController.setLoadSaveStrategy(loadSaveEnum);}
-
-    public KassaviewController(KassaVerkoop kassaVerkoop, InstellingController instellingController, ProductController productController, LogController logController ) throws DatabaseException, IOException, BiffException {
+    public KassaviewController(KassaVerkoop kassaVerkoop, InstellingController instellingController, ProductController productController, LogController logController ){
         this.kassaVerkoop = kassaVerkoop;
         kassaVerkoop.addObserver(this);
         this.productController = productController;
         this.instellingController = instellingController;
         this.logController = logController;
-        kassaVerkoop.setKorting(instellingController.getKortingStrategy());//needs re-writing
+        kassaVerkoop.setKorting(instellingController.getKortingStrategy());
     }
 
     public void setPane(KassaPane pane){this.pane = pane;}
@@ -111,10 +100,6 @@ public class KassaviewController implements Observer {
         isHoldEmpty = true;
     }
 
-    public void pasWinkelkarAan(){
-        kassaVerkoop.pasWinkelkarAan();
-    }
-
     public void setProperty(String key,String value){
         instellingController.setProperty(key,value);
     }
@@ -131,42 +116,8 @@ public class KassaviewController implements Observer {
         logController.setLogPane(logPane);
     }
 
-
-    public double totaalPrijs() {
-        return kassaVerkoop.getTotalPrijs();
-    }
-
-    public void setLoadStrategy(LoadSaveEnum loadSaveEnum){
-        instellingController.setLoadSaveStrategy(loadSaveEnum);
-    }
-
-    //should not be used, use the one in productcontroller, this one will still works, probably...
-    public ArrayList<Artikel> load() throws IOException, DatabaseException, BiffException {
-        return productController.loadArtikels();
-    }
-
-    public void setKortingStrategy(){
-        instellingController.setKortingStrategy();
-    }
-
     public ArrayList<Artikel> getWinkelmandje() {
         return kassaVerkoop.getWinkelmandje();
-    }
-
-    public ArrayList<ArtikelWinkelmand> getWinkelmandMetAantal() {
-        return kassaVerkoop.getWinkelmandMetAantal();
-    }
-
-    public KassaVerkoop getKassaVerkoop() {
-        return kassaVerkoop;
-    }
-
-    public void setKassaVerkoop(KassaVerkoop kassaVerkoop) {
-        this.kassaVerkoop = kassaVerkoop;
-    }
-
-    public double Kortingprijs(){
-        return kassaVerkoop.berekenKorting();
     }
 
     public double totalePrijsMetKorting(){
@@ -184,7 +135,6 @@ public class KassaviewController implements Observer {
         productController.updateProducts();
         kassaVerkoop.betaal();
         if(!isHoldEmpty) pane.setRestoreonholdDisabled(false);
-        //uitbereiding nodig in labo 10
     }
 
     public void setTypeKorting(KortingEnum kortingEnum){ instellingController.setTypeKorting(kortingEnum);}
